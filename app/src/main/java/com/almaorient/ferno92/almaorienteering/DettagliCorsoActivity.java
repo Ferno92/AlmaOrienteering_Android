@@ -3,9 +3,13 @@ package com.almaorient.ferno92.almaorienteering;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -128,8 +132,13 @@ public class DettagliCorsoActivity extends BaseActivity {
         TextView tipocorsoText = (TextView) findViewById(R.id.tipotxtview);
         TextView campuscorsoText = (TextView) findViewById(R.id.campustxtview);
         TextView accessoText = (TextView) findViewById(R.id.tipoaccessoview);
+        TextView durataText = (TextView) findViewById(R.id.duratatxtview);
+        TextView sededidatticaText = (TextView) findViewById(R.id.sedidatticatxtview);
+        TextView codiceText = (TextView) findViewById(R.id.codicetxtview);
+        TextView scuolaText = (TextView) findViewById(R.id.scuolatxtview);
         Button sitocorsobtn = (Button) findViewById(R.id.sitocorsobtn);
         Button recensioniCorsoButton = (Button) findViewById(R.id.button_recensioni);
+
 
         final String corso = getIntent().getExtras().getString("Vocecliccata");
         final String scuola = getIntent().getExtras().getString("Nomescuola");
@@ -139,33 +148,35 @@ public class DettagliCorsoActivity extends BaseActivity {
         String campus = getIntent().getExtras().getString("Campus");
         String accesso = getIntent().getExtras().getString("Accesso");
         final Long scuolaid = getIntent().getExtras().getLong("IdScuola");
-        final Long durata1=getIntent().getExtras().getLong("Durata");
+        final Long durata1 = getIntent().getExtras().getLong("Durata");
+        final String sededidattica = getIntent().getExtras().getString("Sededidattica");
 
         final Integer durata = (int) (long) durata1;
+
 
         final TabHost tab = (TabHost) findViewById(R.id.tab_host);
         tab.setup();
         TabHost.TabSpec spec;
 
         //Tab 1
-        spec=tab.newTabSpec("Tab 1");
+        spec = tab.newTabSpec("Tab 1");
         spec.setContent(R.id.tab1);
         spec.setIndicator("Info");
         tab.addTab(spec);
 
         //Tab 2
-        spec=tab.newTabSpec("Tab 3");
+        spec = tab.newTabSpec("Tab 3");
         spec.setContent(R.id.tab3);
         spec.setIndicator("Piano didattico");
         tab.addTab(spec);
 
         //Tab 3
-        spec=tab.newTabSpec("Tab 4");
+        spec = tab.newTabSpec("Tab 4");
         spec.setContent(R.id.tab4);
         spec.setIndicator("Sbocchi");
         tab.addTab(spec);
 
-        
+
         //FrameLayout layouttab = (FrameLayout) findViewById(R.id.)
 
 //        tab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -182,6 +193,11 @@ public class DettagliCorsoActivity extends BaseActivity {
         tipocorsoText.setText(tipo);
         campuscorsoText.setText(campus);
         accessoText.setText(accesso);
+        codiceText.setText(String.valueOf(corsocodice));
+        scuolaText.setText(String.valueOf(mScuolaadatt[(int) (long) scuolaid]));
+
+        durataText.setText(String.valueOf(durata) + " anni");
+        sededidatticaText.setText(sededidattica);
 
         sitocorsobtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +220,7 @@ public class DettagliCorsoActivity extends BaseActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference ref = database.getReference();
 
-        final Query posstats =  ref.child("statistiche/"+scuola).orderByChild("codice_corso").equalTo(Integer.parseInt(corsocodice));
+        final Query posstats = ref.child("statistiche/" + scuola).orderByChild("codice_corso").equalTo(Integer.parseInt(corsocodice));
 
         posstats.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -218,7 +234,7 @@ public class DettagliCorsoActivity extends BaseActivity {
                         @Override
                         public void onClick(View view) {
                             int a = Integer.parseInt(pos);
-                            statistiche(scuola, scuola, a , 0);
+                            statistiche(scuola, scuola, a, 0);
 
                         }
                     });
@@ -231,21 +247,6 @@ public class DettagliCorsoActivity extends BaseActivity {
             }
         });
 
-//        descrplus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (descrizione.getVisibility() == View.GONE) {
-//                    descrizione.setVisibility(view.VISIBLE);
-//                    descrplus.setImageResource(R.drawable.ic_expand_less);
-//
-//                } else {
-//                    descrizione.setVisibility(view.GONE);
-//                    descrplus.setImageResource(R.drawable.ic_expand_more);
-//                }
-//            }
-//
-//        });
-
         final Button maps = (Button) findViewById(R.id.mapsbutton);
 
         Query query4 = ref.child("corso/" + mScuolaadatt[(int) (long) scuolaid].getScuolaId()).orderByChild("corso_codice")
@@ -253,12 +254,9 @@ public class DettagliCorsoActivity extends BaseActivity {
         query4.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //int i = 0;
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     final Integer spinneridcorso = (Integer) Integer.parseInt(data.getKey());
-                    final Integer spinneridcorso2 = spinneridcorso+1;
-                    //Log.d("size lista aule", String.valueOf(mListaAule.size()));
-                    //initMap();
+                    final Integer spinneridcorso2 = spinneridcorso + 1;
                     maps.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -278,9 +276,9 @@ public class DettagliCorsoActivity extends BaseActivity {
         });
 
         //Piani studio
-        mSecondoTerzoLivello= new ArrayList<String>();
+        mSecondoTerzoLivello = new ArrayList<String>();
 
-        final ArrayList <NewPianoStudiModel> elencoinsegnamenti = new ArrayList<>();
+        final ArrayList<NewPianoStudiModel> elencoinsegnamenti = new ArrayList<>();
 
         final Query query6 = ref.child("piani_studio/").child(scuola).child(corsocodice).orderByKey();
         query6.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -324,66 +322,65 @@ public class DettagliCorsoActivity extends BaseActivity {
 
                 mSeconlevelmap = new HashMap<String, List<String>>();
                 mThirdlevelmap = new HashMap<String, List<String>>();
-                mSecondoLivelloElencoAnno=new ArrayList<String>();
-                mSecondoLivelloUrl=new ArrayList<String>();
+                mSecondoLivelloElencoAnno = new ArrayList<String>();
+                mSecondoLivelloUrl = new ArrayList<String>();
 
-                Integer d=0; //mi dice quanti insegnamenti mettere ogni anno
-                Integer numeroinsegnamenti =0;
-                mMapUrlSecondLevel=new HashMap<String, String>();
-                mMapUrlThirdLevel=new HashMap<String, String>();
-                for (int i=0; i<elencoinsegnamenti.size();i++) {
+                Integer d = 0; //mi dice quanti insegnamenti mettere ogni anno
+                Integer numeroinsegnamenti = 0;
+                mMapUrlSecondLevel = new HashMap<String, String>();
+                mMapUrlThirdLevel = new HashMap<String, String>();
+                for (int i = 0; i < elencoinsegnamenti.size(); i++) {
                     if (elencoinsegnamenti.get(i).getPadre() == 0) {
                         numeroinsegnamenti = numeroinsegnamenti + 1;
                         mSecondoLivelloElencoAnno.add(elencoinsegnamenti.get(i).getCorsoNome());
                         mSecondoLivelloUrl.add(elencoinsegnamenti.get(i).getUrl());
                         mMapUrlSecondLevel.put(elencoinsegnamenti.get(i).getCorsoNome(), elencoinsegnamenti.get(i).getUrl());
+                    } else {
+                        mMapUrlThirdLevel.put(elencoinsegnamenti.get(i).getCorsoNome(), elencoinsegnamenti.get(i).getUrl());
                     }
-                    else{
-                        mMapUrlThirdLevel.put(elencoinsegnamenti.get(i).getCorsoNome(),elencoinsegnamenti.get(i).getUrl());
-                    }
                 }
-                d=numeroinsegnamenti/durata;
-                Integer e=0;
+                d = numeroinsegnamenti / durata;
+                Integer e = 0;
 
-                if (numeroinsegnamenti>(d*durata)){
-                    e=numeroinsegnamenti-d*durata;
+                if (numeroinsegnamenti > (d * durata)) {
+                    e = numeroinsegnamenti - d * durata;
                 }
 
-                listDataHeader=new ArrayList<String>();
+                listDataHeader = new ArrayList<String>();
 
-                for (int i=1; i<=durata;i++) {
-                    listDataHeader.add(String.valueOf(i)+"° anno di corso");
+                for (int i = 1; i <= durata; i++) {
+                    listDataHeader.add(String.valueOf(i) + "° anno di corso");
                 }
 
-                switch (durata){
+                switch (durata) {
                     case 2:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0,d-1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d,2*d-1+e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1 + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
 
-                        threelevellistview(durata,elencoinsegnamenti);
+                        threelevellistview(durata, elencoinsegnamenti);
                         break;
 
                     case 3:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0,d-1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d,2*d-1));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2*d,3*d+e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
+                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
                         mSeconlevelmap.put(listDataHeader.get(2), mAnno3);
 
-                        threelevellistview(durata,elencoinsegnamenti);
+                        threelevellistview(durata, elencoinsegnamenti);
                         break;
 
                     case 5:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0,d-1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d,2*d-1));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2*d,3*d-1));
-                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3*d,4*d-1));
-                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4*d,5*d-1+e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
+                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d - 1));
+                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d - 1));
+                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d - 1 + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
@@ -391,16 +388,16 @@ public class DettagliCorsoActivity extends BaseActivity {
                         mSeconlevelmap.put(listDataHeader.get(3), mAnno4);
                         mSeconlevelmap.put(listDataHeader.get(4), mAnno5);
 
-                        threelevellistview(durata,elencoinsegnamenti);
+                        threelevellistview(durata, elencoinsegnamenti);
                         break;
 
                     case 6:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0,d-1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d,2*d-1));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2*d,3*d-1));
-                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3*d,4*d-1));
-                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4*d,5*d-1));
-                        mAnno6 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(5*d,6*d-1+e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
+                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d - 1));
+                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d - 1));
+                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d - 1));
+                        mAnno6 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(5 * d, 6 * d - 1 + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
@@ -409,7 +406,7 @@ public class DettagliCorsoActivity extends BaseActivity {
                         mSeconlevelmap.put(listDataHeader.get(4), mAnno5);
                         mSeconlevelmap.put(listDataHeader.get(5), mAnno6);
 
-                        threelevellistview(durata,elencoinsegnamenti);
+                        threelevellistview(durata, elencoinsegnamenti);
                         break;
 
                 }
@@ -419,8 +416,8 @@ public class DettagliCorsoActivity extends BaseActivity {
 
 
                 if (mExpandableListView != null) {
-                    final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView (getBaseContext(), listDataHeader,
-                            mSeconlevelmap,mThirdlevelmap,mMapUrlSecondLevel,mMapUrlThirdLevel);
+                    final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(getBaseContext(), listDataHeader,
+                            mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel);
                     mExpandableListView.setAdapter(parentLevelAdapter);
                     mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                         @Override
@@ -460,6 +457,82 @@ public class DettagliCorsoActivity extends BaseActivity {
             }
         });
 
+        final Button obiettivibtn = (Button) findViewById(R.id.obiettivibtn);
+        final TextView obiettivitextview = (TextView) findViewById(R.id.obiettivitxtview);
+        final Button sbocchibtn = (Button) findViewById(R.id.sbocchibtn);
+        final TextView sbocchitextview = (TextView) findViewById(R.id.sbocchitxtview);
+
+
+        final Query query7 = ref.child("info_corsi/").child(scuola).child(corsocodice).orderByKey();
+        query7.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String obiettivi="";
+                String sbocchi ="";
+                //for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    obiettivi = (String) dataSnapshot.child("obiettivi_formativi").getValue();
+                    sbocchi = (String) dataSnapshot.child("sbocchi").getValue();
+                //}
+
+                obiettivitextview.setText(obiettivi);
+                sbocchitextview.setText(sbocchi);
+
+                final ScrollView scrollview = (ScrollView) findViewById(R.id.scrollviewtab4);
+
+
+                obiettivibtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if((obiettivitextview.getLineCount())==8){
+                            obiettivitextview.setMaxLines(500);
+                            obiettivitextview.setEllipsize(null);
+                            obiettivibtn.setText("Visualizza meno");
+                            scrollview.fullScroll(ScrollView.FOCUS_UP);
+                        }
+                        else{
+                            obiettivitextview.setMaxLines(8);
+                            obiettivitextview.setEllipsize(TextUtils.TruncateAt.END);
+                            obiettivibtn.setText("Visualizza tutto");
+                        }
+                    }
+                });
+
+
+                sbocchibtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if((sbocchitextview.getLineCount())==8){
+                            sbocchitextview.setMaxLines(500);
+                            sbocchitextview.setEllipsize(null);
+                            sbocchibtn.setText("Visualizza meno");
+                            scrollview.fullScroll(ScrollView.FOCUS_UP);
+
+                        }
+                        else{
+                            sbocchitextview.setMaxLines(8);
+                            sbocchitextview.setEllipsize(TextUtils.TruncateAt.END);
+                            sbocchibtn.setText("Visualizza tutto");
+                        }
+                    }
+                });
+
+            }
+
+
+
+
+
+
+            @Override
+            public void onCancelled (DatabaseError databaseError){
+                if (databaseError != null) {
+
+
+                }
+
+            }
+
+        });
     }
 
 }

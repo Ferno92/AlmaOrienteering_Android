@@ -83,8 +83,9 @@ public class ElencoScuoleActivity extends BaseActivity {
                                                     String accesso = listaCorsi.get(i).getAccesso();
                                                     Long scuolaid = listaCorsi.get(i).getIdScuola();
                                                     Long durata = listaCorsi.get(i).getDurata();
+                                                    String sededidattica = listaCorsi.get(i).getSedeDidattica();
 
-                                                    richiamoPaginaInterna(titoloriga, codicecorsoagraria, url, key, tipo, campus, accesso,scuolaid,durata);
+                                                    richiamoPaginaInterna(titoloriga, codicecorsoagraria, url, key, tipo, campus, accesso,scuolaid,durata,sededidattica);
                                                     break;
                                                 }
                                             }
@@ -95,7 +96,8 @@ public class ElencoScuoleActivity extends BaseActivity {
                             });
     }
 
-    private void richiamoPaginaInterna(String nomecorso, String codicecorso, String url, String nomescuola, String tipo, String campus, String accesso,Long idscuola, Long durata) {
+    private void richiamoPaginaInterna(String nomecorso, String codicecorso, String url, String nomescuola,
+                                       String tipo, String campus, String accesso,Long idscuola, Long durata, String sededidattica) {
         Intent nuovapagina = new Intent(this, DettagliCorsoActivity.class);
         nuovapagina.putExtra("Vocecliccata", nomecorso);
         nuovapagina.putExtra("Codicecorso", codicecorso);
@@ -106,6 +108,7 @@ public class ElencoScuoleActivity extends BaseActivity {
         nuovapagina.putExtra("Accesso", accesso);
         nuovapagina.putExtra("IdScuola",idscuola);
         nuovapagina.putExtra("Durata",durata);
+        nuovapagina.putExtra("Sededidattica", sededidattica);
         startActivity(nuovapagina);
     }
 
@@ -178,6 +181,7 @@ public class ElencoScuoleActivity extends BaseActivity {
                         String accesso = "";
                         Long idscuola= null;
                         Long durata =null;
+                        String sededidattica="";
                         while (corsoIterator.hasNext()) {
                             String corsoKey = (String) corsoIterator.next();
 
@@ -206,9 +210,12 @@ public class ElencoScuoleActivity extends BaseActivity {
                                 case "durata":
                                     durata= (Long) corsoMap.get(corsoKey);
                                     break;
+                                case "sededidattica":
+                                    sededidattica=(String) corsoMap.get(corsoKey);
+                                    break;
                             }
                         }
-                        Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata);
+                        Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica);
                         tempCorsoList.add(corso);
                     }
                     //Switch loop

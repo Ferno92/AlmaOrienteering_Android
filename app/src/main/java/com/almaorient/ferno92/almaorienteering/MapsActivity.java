@@ -189,7 +189,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             mListaCorsi.clear();
-                            Corso vuoto = new Corso("","Seleziona un corso","","","","",null,null);
+                            Corso vuoto = new Corso("","Seleziona un corso","","","","",null,null,"");
                                 mListaCorsi.add(vuoto);
                                 initMap();
 
@@ -197,7 +197,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                                 String nome = (String) data.child("corso_descrizione").getValue();
                                 String codicecorso = String.valueOf(data.child("corso_codice").getValue());
 
-                                Corso corso = new Corso(codicecorso, nome, "", "", "", "",null,null);
+                                Corso corso = new Corso(codicecorso, nome, "", "", "", "",null,null,"");
                                 mListaCorsi.add(corso);
 
                             }

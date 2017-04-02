@@ -95,5 +95,16 @@
     ]]>
     </string>
 
+    <string name="TipoAccesso">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:18;">
+            Tipo Accesso:
+        </body>
+    </html>
+    ]]>
+    </string>
+
 
 </resources>

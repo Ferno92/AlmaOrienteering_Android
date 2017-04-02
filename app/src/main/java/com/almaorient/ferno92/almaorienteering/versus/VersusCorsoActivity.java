@@ -128,7 +128,7 @@ public class VersusCorsoActivity extends BaseActivity {
                     String nome = (String) data.child("corso").getValue();
                     String id = String.valueOf(i);
 
-                    Corso corso = new Corso(id, nome,"","","","",null,null);
+                    Corso corso = new Corso(id, nome,"","","","",null,null,"");
                     mListaCorsi1.add(corso);
                     i++;
                 }
@@ -171,7 +171,7 @@ public class VersusCorsoActivity extends BaseActivity {
                     String nome = (String) data.child("corso").getValue();
                     String id = String.valueOf(i);
 
-                    Corso corso = new Corso(id, nome,"","","","",null,null);
+                    Corso corso = new Corso(id, nome,"","","","",null,null,"");
                     mListaCorsi2.add(corso);
                     i++;
                 }

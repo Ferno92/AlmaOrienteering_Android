@@ -159,7 +159,7 @@ public class SignUpActivity extends BaseActivity {
                     String nome = (String) data.child("corso_descrizione").getValue();
                     String id = String.valueOf(data.child("corso_codice").getValue());
 
-                    Corso corso = new Corso(id, nome,"","","","",null,null);
+                    Corso corso = new Corso(id, nome,"","","","",null,null,"");
                     mListaCorsi.add(corso);
                 }
                 fillSpinner();
