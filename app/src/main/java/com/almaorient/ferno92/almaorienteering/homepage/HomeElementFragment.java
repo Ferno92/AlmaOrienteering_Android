@@ -32,8 +32,8 @@ public class HomeElementFragment extends Fragment {
     public static HomeElementModel[] mElementList = new HomeElementModel[]{
             new HomeElementModel(0, "L'unibo si presenta", "Informatevi sul funzionamento dell'ateneo e sui vari aspetti che lo caratterizzano.", "ic_unibo_big"),
             new HomeElementModel(1, "Offerta formativa", "Accedete alle 11 Scuole presenti all'interno dell'Università di Bologna", "ic_elenco_scuole_big"),
-            new HomeElementModel(2, "Mappa", "Prendete visione della posizione delle aule dell'Ateneo. Per evidenziare le aule di un corso specifico, utilizzate l'apposito filtro.", "ic_mappa_big"),
-            new HomeElementModel(3, "Modus", "Grazie alla collaborazione\n con l'associazione culturale Modus,\n potrete avere un contatto supplementare per eventuali domande irrisolte.", "ic_icona_chat_big"),
+            new HomeElementModel(2, "Mappa aule", "Prendete visione della posizione delle aule dell'Ateneo. Per evidenziare le aule di un corso specifico, utilizzate l'apposito filtro.", "ic_mappa_big"),
+            new HomeElementModel(3, "Fai una domanda", "Grazie alla collaborazione\n con l'associazione culturale Modus,\n potrete avere un contatto supplementare per eventuali domande irrisolte.", "ic_icona_chat_big"),
             new HomeElementModel(4, "Statistiche", "Mettete a confronto Scuole o Corsi per avere un riscontro immediato sulle statistiche raccolte dall'Unibo.", "ic_statistica_big"),
             new HomeElementModel(5, "Calendario", "Siate sempre aggiornati su eventuali incontri/orientamenti organizzati dalle 11 Scuole.", "ic_calendario_icona_big"),
             new HomeElementModel(6, "Guida applicazione", "Non sapete come funziona? Consultate la guida dettagliata su Almaorienteering", "ic_guida_big"),
