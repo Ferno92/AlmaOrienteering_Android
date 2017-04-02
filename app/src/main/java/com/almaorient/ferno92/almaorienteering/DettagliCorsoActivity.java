@@ -1,36 +1,14 @@
 package com.almaorient.ferno92.almaorienteering;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.database.DataSetObserver;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.almaorient.ferno92.almaorienteering.PianoStudi.ExpandableListAdapter1;
 import com.almaorient.ferno92.almaorienteering.PianoStudi.NewPianoStudiModel;
 import com.almaorient.ferno92.almaorienteering.PianoStudi.ThreeLevelExpandableListView;
 import com.almaorient.ferno92.almaorienteering.recensioni.ListaRecensioniActivity;
@@ -44,22 +22,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import static android.R.attr.breadCrumbShortTitle;
-import static android.R.attr.data;
-import static android.R.attr.logo;
-import static android.R.drawable.btn_minus;
-import static android.R.drawable.btn_plus;
-import static com.almaorient.ferno92.almaorienteering.R.id.agrariaplus;
-import static com.almaorient.ferno92.almaorienteering.R.id.all;
-import static com.almaorient.ferno92.almaorienteering.R.id.default_activity_button;
-import static com.almaorient.ferno92.almaorienteering.R.id.tab1;
-import static com.almaorient.ferno92.almaorienteering.R.id.tab_host;
-import static com.almaorient.ferno92.almaorienteering.R.id.window;
 import static java.lang.Math.round;
 
 public class DettagliCorsoActivity extends BaseActivity {
@@ -152,6 +118,7 @@ public class DettagliCorsoActivity extends BaseActivity {
     HashMap<String, String> mMapUrlThirdLevel;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,7 +143,7 @@ public class DettagliCorsoActivity extends BaseActivity {
 
         final Integer durata = (int) (long) durata1;
 
-        TabHost tab = (TabHost) findViewById(R.id.tab_host);
+        final TabHost tab = (TabHost) findViewById(R.id.tab_host);
         tab.setup();
         TabHost.TabSpec spec;
 
@@ -198,6 +165,8 @@ public class DettagliCorsoActivity extends BaseActivity {
         spec.setIndicator("Sbocchi");
         tab.addTab(spec);
 
+        
+        //FrameLayout layouttab = (FrameLayout) findViewById(R.id.)
 
 //        tab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 //            @Override
@@ -459,6 +428,14 @@ public class DettagliCorsoActivity extends BaseActivity {
                             parentLevelAdapter.notifyDataSetChanged();
 
                             return false;
+                        }
+                    });
+
+                    mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                        @Override
+                        public void onGroupExpand(int i) {
+                            parentLevelAdapter.getGroup(i);
+
                         }
                     });
                     // display only one expand item

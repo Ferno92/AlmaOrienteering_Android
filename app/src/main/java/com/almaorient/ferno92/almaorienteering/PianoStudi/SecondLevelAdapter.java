@@ -9,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.almaorient.ferno92.almaorienteering.R;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +23,18 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<String> mListDataHeader;
     private final Map<String, List<String>> mListDataChild;
+    private final Map<String,String>mUrlThirdlevel;
+    private final Map<String,String>mUrlSecondlevel;
 
-    public SecondLevelAdapter(Context mContext, List<String> mListDataHeader, Map<String, List<String>> mListDataChild) {
+
+    public SecondLevelAdapter(Context mContext, List<String> mListDataHeader, Map<String, List<String>> mListDataChild,
+                              Map<String,String>Urlthirdlevel, Map<String,String>Urlsecondlevel) {
         this.mContext = mContext;
         this.mListDataHeader = mListDataHeader;
         this.mListDataChild = mListDataChild;
+        this.mUrlThirdlevel = Urlthirdlevel;
+        this.mUrlSecondlevel = Urlsecondlevel;
+
     }
 
     @Override
@@ -53,6 +62,17 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
         txtListChild.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         txtListChild.setText(childText);
+
+        ImageView image = (ImageView) convertView
+                .findViewById(R.id.frecciathirdlevel);
+        image.setImageBitmap(null); //altrimenti in alcuni casi mette le icone sbagliate
+
+
+        if (mUrlThirdlevel.get(getChild(groupPosition,childPosition)).contains("http://")) {
+
+            image.setImageResource(R.drawable.ic_arrow_right_pianostudi);
+           //richiamoBrowser(mUrlTerzoLivello.get(((TextView) view).getText()));
+        }
 
         return convertView;
     }
@@ -94,17 +114,23 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(headerTitle);
 
-        if (!(getChildrenCount(groupPosition)==0)){
-            ImageView image = (ImageView) convertView
-                    .findViewById(R.id.frecciasecondlevel);
+        ImageView image = (ImageView) convertView
+                .findViewById(R.id.frecciasecondlevel);
 
-            if (isExpanded){
-                image.setImageResource(R.drawable.ic_arrow_down_2ndlevelpianistudio);
+        image.setImageBitmap(null); //altrimenti in alcuni casi mette le icone sbagliate
+
+        if (!(getChildrenCount(groupPosition)==0)){
+            if (isExpanded && !(getChildrenCount(groupPosition)==0)){
+                image.setImageResource(R.drawable.ic_arrow_up_2ndlevelpianostudi);
             }
             else {
-                image.setImageResource(R.drawable.ic_arrow_recensioni);
+                image.setImageResource(R.drawable.ic_arrow_down_2ndlevelpianistudio);
 
             }
+        }
+        else if (mUrlSecondlevel.get(getGroup(groupPosition)).contains("http://")){
+            image.setImageResource(R.drawable.ic_arrow_right_pianostudi);
+
         }
 
         return convertView;

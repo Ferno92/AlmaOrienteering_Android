@@ -1,11 +1,35 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lblListItem"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawablePadding="10dp"
-    android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:paddingLeft="40dp"
-    android:paddingRight="10dp"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@android:color/black" />
+    android:orientation="horizontal"
+    android:paddingRight="20dp"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/frecciathirdlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_weight="1.95"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_expand_more" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lblListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/frecciathirdlevel"
+        android:layout_toStartOf="@+id/frecciathirdlevel"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textColor="@android:color/black" />
+
+
+</RelativeLayout>

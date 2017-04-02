@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingLeft="5dp"
+    android:paddingRight="20dp"
     android:weightSum="1">
 
     <!--<ImageView xmlns:android="http://schemas.android.com/apk/res/android"-->
@@ -16,19 +18,20 @@
         android:id="@+id/lblListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false"
+        android:layout_toLeftOf="@+id/frecciasecondlevel"
+        android:layout_toStartOf="@+id/frecciasecondlevel"
         android:layout_weight="1.95"
         android:background="?android:attr/activatedBackgroundIndicator"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:paddingLeft="5dp"
+        android:text="                                      .  "
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/black"
-        android:textSize="17sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/frecciasecondlevel"
-        android:layout_toStartOf="@+id/frecciasecondlevel" />
+        android:textSize="17sp" />
 
     <ImageView
         android:id="@+id/frecciasecondlevel"
@@ -39,6 +42,6 @@
         android:layout_centerVertical="true"
         android:layout_weight="1.95"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_expand_more" />
+        app:srcCompat="@drawable/ic_arrow_up_2ndlevelpianostudi" />
 
 </RelativeLayout>
