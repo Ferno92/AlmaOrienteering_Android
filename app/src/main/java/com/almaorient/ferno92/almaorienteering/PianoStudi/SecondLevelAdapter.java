@@ -102,7 +102,7 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
                 image.setImageResource(R.drawable.ic_arrow_down_2ndlevelpianistudio);
             }
             else {
-                image.setImageResource(R.drawable.ic_expand_more);
+                image.setImageResource(R.drawable.ic_arrow_recensioni);
 
             }
         }
