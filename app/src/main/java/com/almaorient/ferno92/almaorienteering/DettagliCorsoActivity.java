@@ -12,6 +12,7 @@ import android.widget.ExpandableListView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.almaorient.ferno92.almaorienteering.PianoStudi.NewPianoStudiModel;
 import com.almaorient.ferno92.almaorienteering.PianoStudi.ThreeLevelExpandableListView;
@@ -487,16 +488,19 @@ public class DettagliCorsoActivity extends BaseActivity {
                             obiettivitextview.setMaxLines(500);
                             obiettivitextview.setEllipsize(null);
                             obiettivibtn.setText("Visualizza meno");
-                            scrollview.fullScroll(ScrollView.FOCUS_UP);
+                        }
+                        else if (obiettivitextview.getLineCount()<8){
+                            Toast.makeText(getApplicationContext(),"Non c'è altro da visualizzare",Toast.LENGTH_SHORT).show();
                         }
                         else{
                             obiettivitextview.setMaxLines(8);
                             obiettivitextview.setEllipsize(TextUtils.TruncateAt.END);
                             obiettivibtn.setText("Visualizza tutto");
+                            scrollview.fullScroll(ScrollView.FOCUS_UP);
+
                         }
                     }
                 });
-
 
                 sbocchibtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -505,23 +509,25 @@ public class DettagliCorsoActivity extends BaseActivity {
                             sbocchitextview.setMaxLines(500);
                             sbocchitextview.setEllipsize(null);
                             sbocchibtn.setText("Visualizza meno");
-                            scrollview.fullScroll(ScrollView.FOCUS_UP);
 
                         }
+
+                        else if (sbocchitextview.getLineCount()<8){
+                            Toast.makeText(getApplicationContext(),"Non c'è altro da visualizzare",Toast.LENGTH_SHORT).show();
+                        }
+
                         else{
                             sbocchitextview.setMaxLines(8);
                             sbocchitextview.setEllipsize(TextUtils.TruncateAt.END);
                             sbocchibtn.setText("Visualizza tutto");
+                            scrollview.fullScroll(ScrollView.FOCUS_UP);
+
                         }
                     }
                 });
 
+
             }
-
-
-
-
-
 
             @Override
             public void onCancelled (DatabaseError databaseError){
@@ -532,7 +538,9 @@ public class DettagliCorsoActivity extends BaseActivity {
 
             }
 
+
         });
+
     }
 
 }
