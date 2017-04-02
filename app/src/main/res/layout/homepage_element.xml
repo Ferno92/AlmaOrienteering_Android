@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="Voce di menu"
             android:textAllCaps="false"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView

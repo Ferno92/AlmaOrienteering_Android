@@ -150,7 +150,7 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
                 }
             });
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(15, 0, 15, 0);
+            lp.setMargins(8, 0, 8, 0);
             view.setLayoutParams(lp);
             mIconsLayout.addView(view);
         }
