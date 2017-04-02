@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <LinearLayout
@@ -21,10 +22,9 @@
                 android:id="@+id/Modusicon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_modus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                />
+                app:srcCompat="@drawable/ic_modus" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -37,9 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:background="@drawable/border_style"
                 android:text="Hai ancora delle domande irrisolte?\nScrivici"
-                android:textAlignment="center"
-                android:background="@drawable/border_style"/>
+                android:textAlignment="center" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -51,55 +51,57 @@
         android:orientation="vertical">
 
         <EditText
-    android:id="@+id/InsNomeCognome"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp"
+            android:id="@+id/nome_studente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-    android:hint="Nome Cognome" />
+            android:inputType="textCapSentences"
+            android:hint="Nome Cognome" />
 
-    <EditText
-    android:id="@+id/InsEmail"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-    android:hint="Inserisci la tua email" />
+        <!--<EditText-->
+        <!--android:id="@+id/InsEmail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:hint="Inserisci la tua email" />-->
 
-    <EditText
-    android:id="@+id/InsOggetto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-    android:hint="Oggetto" />
+        <EditText
+            android:id="@+id/oggetto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:hint="Oggetto"
+            android:inputType="textCapSentences"/>
 
 
         <EditText
-    android:id="@+id/InsContenuto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="textEmailAddress"
-    android:hint="Inserisci il contenuto"
+            android:id="@+id/body_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1000"
-        android:background="@drawable/border_style2"
-    />
+            android:background="@drawable/border_style2"
+            android:gravity="top|left"
+            android:hint="Inserisci il contenuto"
+            android:inputType="textCapSentences|textMultiLine" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/send_email"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="Invia" />
+                android:layout_marginTop="15dp"
+                android:background="@color/colorAccent"
+                android:text="Invia"
+                android:textColor="#FFFFFF" />
 
         </RelativeLayout>
 

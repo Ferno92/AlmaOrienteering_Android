@@ -34,39 +34,43 @@ class RecensioniBinder implements SimpleAdapter.ViewBinder {
             quotaText.setText(stringval);
             return true;
         }else if(view.getId() == R.id.rec_up){
-            final int resId = Integer.parseInt((String)data);
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    LinearLayout parentView = (LinearLayout) view.getParent();
-//                    TextView quotaText = (TextView) parentView.findViewById(R.id.quota);
-//
-//                    ImageView recUp = (ImageView)view;
-//                    ImageView recDown = (ImageView)parentView.findViewById(R.id.rec_up);
-//                    if(recUp.getTag() != resId && recDown.getTag() != resId){
-//                        quotaText.setText(String.valueOf(Integer.parseInt(quotaText.getText().toString()) + 1));
-//                        recUp.setImageResource(resId);
-//                    }
-//                }
-//            });
+            final int resId = Integer.parseInt(String.valueOf(data));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LinearLayout parentView = (LinearLayout) view.getParent();
+                    TextView quotaText = (TextView) parentView.findViewById(R.id.quota);
+
+                    ImageView recUp = (ImageView)view;
+                    ImageView recDown = (ImageView)parentView.findViewById(R.id.rec_down);
+                    if((Integer)(recUp.getTag() != null ? recUp.getTag() : 0) != resId &&
+                            (Integer)(recDown.getTag()!= null ? recDown.getTag() : 0) != resId){
+                        quotaText.setText(String.valueOf(Integer.parseInt(quotaText.getText().toString()) + 1));
+                        recUp.setImageResource(resId);
+                        recUp.setTag(resId);
+                    }
+                }
+            });
             return true;
 
         }else if(view.getId() == R.id.rec_down){
-            final int resId = Integer.parseInt((String)data);
-//            view.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    LinearLayout parentView = (LinearLayout) view.getParent();
-//                    TextView quotaText = (TextView) parentView.findViewById(R.id.quota);
-//                    ImageView recUp = (ImageView)parentView.findViewById(R.id.rec_up);
-//                    ImageView recDown = (ImageView)view;
-//                    if(Integer.parseInt(quotaText.getText().toString()) - 1 >= 0 &&
-//                            recUp.getTag() != resId && recDown.getTag() != resId){
-//                        quotaText.setText(String.valueOf(Integer.parseInt(quotaText.getText().toString()) - 1));
-//                        recDown.setImageResource(resId);
-//                    }
-//                }
-//            });
+            final int resId = Integer.parseInt(String.valueOf(data));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LinearLayout parentView = (LinearLayout) view.getParent();
+                    TextView quotaText = (TextView) parentView.findViewById(R.id.quota);
+                    ImageView recUp = (ImageView)parentView.findViewById(R.id.rec_up);
+                    ImageView recDown = (ImageView)view;
+                    if(Integer.parseInt(quotaText.getText().toString()) - 1 >= 0 &&
+                            (Integer)(recUp.getTag() != null ? recUp.getTag() : 0) != resId &&
+                            (Integer)(recDown.getTag()!= null ? recDown.getTag() : 0) != resId){
+                        quotaText.setText(String.valueOf(Integer.parseInt(quotaText.getText().toString()) - 1));
+                        recDown.setImageResource(resId);
+                        recDown.setTag(resId);
+                    }
+                }
+            });
             return true;
 
         }

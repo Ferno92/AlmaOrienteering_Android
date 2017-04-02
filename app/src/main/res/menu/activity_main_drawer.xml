@@ -4,11 +4,21 @@
     <item android:title="Facoltà">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:title="Share" />
+                android:id="@+id/nav_scuola"
+                android:title="" />
             <item
-                android:id="@+id/nav_send"
-                android:title="Send" />
+                android:id="@+id/nav_corso"
+                android:title="" />
+        </menu>
+    </item>
+    <item android:title="Badge recensioni">
+        <menu>
+            <item
+                android:id="@+id/nav_livello"
+                android:title="Lv. 5" />
+            <item
+                android:id="@+id/nav_badge_titolo"
+                android:title="Recensore esperto" />
         </menu>
     </item>
 

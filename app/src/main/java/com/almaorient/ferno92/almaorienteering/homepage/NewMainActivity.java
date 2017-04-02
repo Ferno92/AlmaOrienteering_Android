@@ -87,12 +87,12 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
             navigationView.setNavigationItemSelectedListener(this);
             navigationView.setVisibility(View.VISIBLE);
 
-            LinearLayout navigationHeader = (LinearLayout) navigationView.getHeaderView(0);
+            final LinearLayout navigationHeader = (LinearLayout) navigationView.getHeaderView(0);
             TextView mailText = (TextView) navigationHeader.findViewById(R.id.logged_user_email);
             mailText.setText(String.valueOf(this.mAuth.getCurrentUser().getEmail()));
             Menu navigationMenu = (Menu) navigationView.getMenu();
-            final MenuItem scuolaItem = (MenuItem) navigationMenu.findItem(R.id.nav_share);
-            final MenuItem corsoItem = (MenuItem) navigationMenu.findItem(R.id.nav_send);
+            final MenuItem scuolaItem = (MenuItem) navigationMenu.findItem(R.id.nav_scuola);
+            final MenuItem corsoItem = (MenuItem) navigationMenu.findItem(R.id.nav_corso);
 
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,6 +108,8 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
                                 mUserName = (String) data.child("nome").getValue();
                                 mUserSurname = (String) data.child("cognome").getValue();
                                 mScuola = (String) data.child("scuola").getValue();
+                                TextView nameUser = (TextView)navigationHeader.findViewById(R.id.logged_user_name);
+                                nameUser.setText(mUserName + " " +mUserSurname);
 
                                 scuolaItem.setTitle((String) data.child("scuola").getValue());
                                 HashMap corsoMap = (HashMap) data.child("corso").getValue();
@@ -219,9 +221,9 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
 //        } else if (id == R.id.nav_manage) {
 //
 //        } else
-        if (id == R.id.nav_share) {
+        if (id == R.id.nav_scuola) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_corso) {
 
         }
 

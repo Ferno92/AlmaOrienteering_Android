@@ -85,8 +85,8 @@ public class VersusActivity extends BaseActivity {
                     while(corsoIterator.hasNext()) {
                         String key=(String)corsoIterator.next();
                         String value=String.valueOf(meMap.get(key));
-                        value.replace("*", "N/D");
-                        value.replace("-", "N/D");
+                        value = value.replace("*", "N/D");
+                        value = value.replace("-", "N/D");
                         //Switch loop
                         switch(key){
                             case StatCorsoModel.CORSO:
@@ -161,6 +161,8 @@ public class VersusActivity extends BaseActivity {
                     while(corsoIterator.hasNext()) {
                         String key=(String)corsoIterator.next();
                         String value=String.valueOf(meMap.get(key));
+                        value = value.replace("*", "N/D");
+                        value = value.replace("-", "N/D");
                         //Switch loop
                         switch(key){
                             case StatCorsoModel.CORSO:

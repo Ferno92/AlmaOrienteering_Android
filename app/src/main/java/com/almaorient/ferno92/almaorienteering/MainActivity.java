@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity
             TextView mailText = (TextView) navigationHeader.findViewById(R.id.logged_user_email);
             mailText.setText(String.valueOf(this.mAuth.getCurrentUser().getEmail()));
             Menu navigationMenu = (Menu)navigationView.getMenu();
-            final MenuItem scuolaItem = (MenuItem) navigationMenu.findItem(R.id.nav_share);
-            final MenuItem corsoItem = (MenuItem) navigationMenu.findItem(R.id.nav_send);
+            final MenuItem scuolaItem = (MenuItem) navigationMenu.findItem(R.id.nav_scuola);
+            final MenuItem corsoItem = (MenuItem) navigationMenu.findItem(R.id.nav_corso);
 
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -302,9 +302,9 @@ public class MainActivity extends AppCompatActivity
 //        } else if (id == R.id.nav_manage) {
 //
 //        } else
-            if (id == R.id.nav_share) {
+            if (id == R.id.nav_scuola) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_corso) {
 
         }
 
