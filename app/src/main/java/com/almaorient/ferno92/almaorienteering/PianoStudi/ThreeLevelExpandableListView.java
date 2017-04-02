@@ -77,8 +77,10 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
                              boolean isLastChild, final View convertView, final ViewGroup parent) {
         final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
         final String parentNode = (String) getGroup(groupPosition);
-        final SecondLevelAdapter adapter = new SecondLevelAdapter(this.mContext,mListData_SecondLevel_Map.get(parentNode),mListData_ThirdLevel_Map);
-        secondLevelExpListView.setAdapter(new SecondLevelAdapter(this.mContext,mListData_SecondLevel_Map.get(parentNode),mListData_ThirdLevel_Map));
+        final SecondLevelAdapter adapter = new SecondLevelAdapter(this.mContext,mListData_SecondLevel_Map.get(parentNode),
+                mListData_ThirdLevel_Map,mUrlTerzoLivello,mUrlSecondoLivello);
+        secondLevelExpListView.setAdapter(new SecondLevelAdapter(this.mContext,mListData_SecondLevel_Map.get(parentNode),
+                mListData_ThirdLevel_Map,mUrlTerzoLivello,mUrlSecondoLivello));
         secondLevelExpListView.setGroupIndicator(null);
 //        secondLevelExpListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 //            int previousGroup = -1;
@@ -94,8 +96,9 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
         secondLevelExpListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                    if (mUrlTerzoLivello.get(((TextView) view).getText()).contains("http://")) {
-                        richiamoBrowser(mUrlTerzoLivello.get(((TextView) view).getText()));
+                    TextView text = (TextView) view.findViewById(R.id.lblListItem);
+                    if (mUrlTerzoLivello.get(((TextView) text).getText()).contains("http://")) {
+                        richiamoBrowser(mUrlTerzoLivello.get(((TextView) text).getText()));
                     }
                 return false;
             }
@@ -107,14 +110,10 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
                 if (expandableListView.getExpandableListAdapter().getChildrenCount(i)==0) {
                     if (mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)).contains("http://")) {
                         richiamoBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
+                        adapter.notifyDataSetChanged();
+
                     }
                 }
-
-
-//                final ImageButton arrowButton = (ImageButton) parent.findViewById(R.id.imageButton);
-
-//                float deg = arrowButton.getRotation() + 180F;
-//                arrowButton.animate().rotation(deg).setInterpolator(new AccelerateDecelerateInterpolator());
 
                 return false;
             }
