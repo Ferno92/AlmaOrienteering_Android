@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/splash_icon" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Benvenuti al Tutorial per comprendere al meglio le funzionalità di Alma Orienteering."
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/amu_bubble_mask"
+            android:layout_weight="0.91" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Questa è l'Homepage.\nDa qui potrete accedere a tutte le funzionalità previste:"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1) L'Unibo si presenta\nin questa sezione, potrete ottenere le informazioni base sul funzionamento dell'ateneo e sui vari aspetti che lo caratterizzano."
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2) Offerta Formativa\nIn questa sezione potrete accedere alle 11 Scuole presenti all'interno dell'Università di Bologna" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3) Mappa\nIn questa sezione avrete un'idea d'insieme sulla posizione delle aule in generale o per le singole Scuole se utilizzate l'apposito filtro." />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4) Modus\nGrazie alla collaborazione con l'associazione culturale Modus, potrete avere un contatto supplementare per eventuali domande che non riescano ad esser risolte tramite le informazioni fornite." />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5) Statistiche\nIn questa sezione potrete mettere a confronto Scuole o Corsi in modo tale da avere un riscontro immediato sulle statistiche raccolte dall'Unibo stessa." />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6) Calendario\nCon questa funzionalità potrete essere sempre aggiornati su eventuali incontri/orientamenti organizzati dalle 11 Scuole." />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7) Recensioni\nIn questa sezione potrete accedere alle valutazioni redatte dagli studenti iscritti per ottenere informazioni di gradimento su corsi o esami" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8) Guida all'Applicazione\nUna facile guida che vi spiega passo passo come utilizzare l'app" />
+    </LinearLayout>
+</ScrollView>

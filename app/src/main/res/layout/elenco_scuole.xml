@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/spider_loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="spider-loader.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+
+    <ScrollView
+        android:id="@+id/scuoleScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:id="@+id/agrarialayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top|start"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight"
+                app:layout_anchorGravity="top|start">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logoagraria"
+                    android:layout_toRightOf="@+id/logoagraria">
+
+                    <TextView
+                        android:id="@+id/titoloagraria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toLeftOf="@+id/agrariaplus"
+                        android:layout_toStartOf="@+id/agrariaplus"
+                        android:text="Agraria e Medicina Veterinaria"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/agrariaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logoagraria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_agraria" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listaagraria"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/economialayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logoeconomia"
+                    android:layout_toRightOf="@+id/logoeconomia">
+
+                    <TextView
+                        android:id="@+id/titoloeconomia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toLeftOf="@+id/economiaplus"
+                        android:layout_toStartOf="@+id/economiaplus"
+                        android:lines="2"
+                        android:text="Economia, Management e statistica"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/economiaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logoeconomia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_ems" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listaeconomia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/farmacialayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logofarmacia"
+                    android:layout_toRightOf="@+id/logofarmacia">
+
+                    <TextView
+                        android:id="@+id/titolofarmacia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_toLeftOf="@+id/farmaciaplus"
+                        android:layout_toStartOf="@+id/farmaciaplus"
+                        android:text="Farmacia, Biotecnologie e Scienze Motorie"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/farmaciaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logofarmacia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_farmacia" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listafarmacia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/giurisprudenzalayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logogiuri"
+                    android:layout_toRightOf="@+id/logogiuri">
+
+                    <TextView
+                        android:id="@+id/titologiuri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/giurisprudenzaplus"
+                        android:layout_toStartOf="@+id/giurisprudenzaplus"
+                        android:text="Giurisprudenza"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/giurisprudenzaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logogiuri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_icona_giurisprudenza" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listagiurisprudenza"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/ingegnerialayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top|start"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight"
+                app:layout_anchorGravity="top|start">
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/logoing"
+                    android:layout_toRightOf="@+id/logoing"
+                    android:background="@color/SfondoGrigioLight">
+
+                    <ImageButton
+                        android:id="@+id/ingegneriaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+
+                    <TextView
+                        android:id="@+id/titoloing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/ingegneriaplus"
+                        android:layout_toStartOf="@+id/ingegneriaplus"
+                        android:text="Ingegneria e Architettura"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_icona_ingegneria_e_architettura" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listaingegneria"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/letterelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1.24"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logolettere"
+                    android:layout_toRightOf="@+id/logolettere">
+
+                    <TextView
+                        android:id="@+id/titololettere"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/lettereplus"
+                        android:layout_toStartOf="@+id/lettereplus"
+                        android:text="Lettere e Beni culturali"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/lettereplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logolettere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_lettere_e_beni_culturali" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listalettere"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/linguelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logolingue"
+                    android:layout_toRightOf="@+id/logolingue">
+
+                    <TextView
+                        android:id="@+id/titololingue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/lingueplus"
+                        android:layout_toStartOf="@+id/lingueplus"
+                        android:text="Lingue e Letterature, Traduzione e Interpretazione"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/lingueplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logolingue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_icona_lingue_e_letterature_traduzione_e_interpretazione" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listalingue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/medicinalayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logomedicina"
+                    android:layout_toRightOf="@+id/logomedicina">
+
+                    <TextView
+                        android:id="@+id/titolomedicina"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/medicinaplus"
+                        android:layout_toStartOf="@+id/medicinaplus"
+                        android:text="Medicina e Chirurgia"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/medicinaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logomedicina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_medicina_e_chirurgia" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listamedicina"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/psicologialayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logopsico"
+                    android:layout_toRightOf="@+id/logopsico">
+
+                    <TextView
+                        android:id="@+id/titolopsicologia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/psicologiaplus"
+                        android:layout_toStartOf="@+id/psicologiaplus"
+                        android:text="Psicologia e Scienze della Formazione"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/psicologiaplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logopsico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_psicologia" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listapsicologia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/scienzelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logoscienze"
+                    android:layout_toRightOf="@+id/logoscienze">
+
+                    <TextView
+                        android:id="@+id/titoloscienze"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/scienzeplus"
+                        android:layout_toStartOf="@+id/scienzeplus"
+                        android:text="Scienze"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/scienzeplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logoscienze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_icona_scienze" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listascienze"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/scienze_politichelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/SfondoGrigioLight">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/logoscipol"
+                    android:layout_toRightOf="@+id/logoscipol">
+
+                    <TextView
+                        android:id="@+id/titoloscipol"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="11dp"
+                        android:layout_marginStart="11dp"
+                        android:layout_toLeftOf="@+id/scienze_politicheplus"
+                        android:layout_toStartOf="@+id/scienze_politicheplus"
+                        android:text="Scienze Politiche"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/scienze_politicheplus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="15dp"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/ic_expand_more" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logoscipol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_icona_scienze_politiche" />
+
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/listascienze_politiche"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

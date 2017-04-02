@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#bb2e29</color>
+    <color name="colorPrimaryDark">#999999</color>
+    <color name="colorAccent">#ee762c</color>
+    <color name="giallo_light">#fffb02</color>
+    <color name="unibo_red">#bb2e29</color>
+    <color name="unibo_white">#ffffff</color>
+    <color name="SfondoGrigioLight">#f4f4f4</color>
+</resources>

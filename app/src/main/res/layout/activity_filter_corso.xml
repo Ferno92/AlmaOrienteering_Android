@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo laurea"
+            android:textSize="22sp"
+            android:textStyle="bold|italic" />
+
+        <RadioGroup
+            android:id="@+id/tipo_laurea"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <RadioButton
+                android:id="@+id/tutte_le_lauree"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Tutte" />
+
+            <RadioButton
+                android:id="@+id/laurea"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Laurea" />
+
+            <RadioButton
+                android:id="@+id/laurea_magistrale"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Laurea Magistrale" />
+
+            <RadioButton
+                android:id="@+id/laurea_magistrale_ciclo_unico"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Laurea Magistrale a Ciclo Unico" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Campus"
+            android:textSize="22sp"
+            android:textStyle="bold|italic" />
+
+        <RadioGroup
+            android:id="@+id/campus"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <RadioButton
+                android:id="@+id/tutti_i_campus"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Tutti i Campus" />
+
+            <RadioButton
+                android:id="@+id/bologna"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Bologna" />
+
+            <RadioButton
+                android:id="@+id/cesena"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Cesena" />
+
+            <RadioButton
+                android:id="@+id/forli"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Forlì" />
+
+            <RadioButton
+                android:id="@+id/ravenna"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Ravenna" />
+
+            <RadioButton
+                android:id="@+id/rimini"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Rimini" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/nextbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_avanti" />
+
+    </LinearLayout>
+
+</LinearLayout>

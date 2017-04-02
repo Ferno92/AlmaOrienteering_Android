@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/studente"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/unibo_red"
+        android:text="studente unibo"
+        android:textColor="@color/unibo_white"
+        android:textSize="26dp"
+        android:drawableTop="@drawable/ic_laurea"
+        android:paddingTop="40dp"
+        />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/orientati"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/unibo_white"
+        android:text="Orientati"
+        android:textColor="@color/unibo_red"
+        android:textSize="26dp"
+        android:drawableTop="@drawable/ic_studente"
+        android:paddingTop="40dp"/>
+</LinearLayout>

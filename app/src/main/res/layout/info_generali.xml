@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.11"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relativelayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:layout_weight="0.11"
+                    android:text="Contatti"
+                    android:textAlignment="center"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/plusuno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_column="10"
+                    android:layout_row="0"
+                    android:layout_weight="0.11"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_expand_more" />
+
+            </RelativeLayout>
+
+            <WebView
+                android:id="@+id/webview1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/plusuno"
+                android:layout_weight="0.11"
+                android:textAlignment="center"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/relativelayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Internazionale"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/plusdue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_expand_more" />
+            </RelativeLayout>
+
+            <WebView
+                android:id="@+id/webview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/plusdue"
+                android:layout_weight="0.11"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/ulterioriinfo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                android:text="Ulteriori informazioni"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/relativelayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11">
+
+                <ImageButton
+                    android:id="@+id/plustre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/webview2"
+                    android:layout_weight="0.11"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_expand_more" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="0.11"
+                    android:text="Multicampus"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+            <WebView
+                android:id="@+id/webview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="0.11"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/relativelayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.11">
+
+                <ImageButton
+                    android:id="@+id/plusquattro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_expand_more" />
+
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Il Sistema Universitario"
+                    android:textSize="22sp" />
+
+            </RelativeLayout>
+
+
+            <WebView
+                android:id="@+id/webview4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.11"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/schema"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/schema" />
+
+
+            <WebView
+                android:id="@+id/webview44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="0.11"
+                android:visibility="gone"></WebView>
+
+            <Button
+                android:id="@+id/ulterioriinfo4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                android:text="Ulteriori informazioni"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

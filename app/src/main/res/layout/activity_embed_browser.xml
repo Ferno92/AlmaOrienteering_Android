@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/menubtn"
+                        android:layout_toStartOf="@+id/menubtn">
+
+                        <ImageButton
+                            android:id="@+id/closebutton"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:text="Button"
+                            app:srcCompat="@drawable/ic_action_browserclose" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/closebutton"
+                            android:layout_toEndOf="@+id/closebutton">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_toLeftOf="@+id/sharebtn"
+                                android:layout_toStartOf="@+id/sharebtn">
+
+                                <TextView
+                                    android:id="@+id/pagetitle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_toLeftOf="@+id/sharebtn"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:lines="1"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/unibo_white"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/urlcorrente"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:lines="1"
+                                    android:textColor="@color/unibo_white"
+                                    android:textSize="13sp" />
+
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/sharebtn"
+                                style="@style/Widget.AppCompat.ImageButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                app:srcCompat="@drawable/ic_share_browser" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <ImageButton
+                        android:id="@+id/menubtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="4dp"
+                        android:background="@android:color/transparent"
+                        android:onClick='"showPopup"'
+                        app:srcCompat="@drawable/ic_action_browsermenu" />
+                </RelativeLayout>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutprogressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/embedwebview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

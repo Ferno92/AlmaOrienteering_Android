@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Alma Orienteering</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="internazionale">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA;">
+            <p>L&#8217Università di Bologna è sempre più <b>internazionale</b>. Attualmente 42 corsi di laurea e laurea magistrale sono svolti parzialmente o totalmente in lingua inglese.</p>
+            <p>Numerose sono le possibilità di studio e tirocinio all&#8217estero, tramite i principali programmi internazionali quali Erasmus+ ed Overseas.</p>
+            <p><b>Erasmus+</b> è un programma di mobilità promosso dalla UE che consente di trascorrere da tre a dodici mesi presso un&#8217università europea.
+            Ti permette di frequentare i corsi, di sostenere gli esami e di ottenerne il riconoscimento.</p>
+            <p>Per aiutarti a sostenere le spese legate al soggiorno all&#8217estero, il programma Erasmus+ offre un <b>contributo finanziario</b>.</p>
+            Dove puoi andare?
+            <p>- nei 27 Stati membri dell&#8217Unione europea;</p>
+            <p>- nei 3 Paesi dello Spazio Economico Europeo: Islanda, Liechtenstein e Norvegia;</p>
+            <p>- nei Paesi candidati all&#8217adesione: Turchia, l&#8217ex Repubblica Iugoslava di Macedonia;</p>
+            <p>- in alcuni paesi extra UE partecipanti al programma Erasmus+.</p>
+            <p>Il programma <b>Overseas</b> è organizzato e finanziato interamente dall&#8217Università di Bologna e nasce da accordi di collaborazione che il nostro Ateneo ha sottoscritto con università di paesi non compresi nella Unione Europea.</p>
+            E la lingua sarà un grosso problema? Scopri i servizi offerti dal CLA (centro linguistico d’Ateneo) aprendo la voce “servizi”!
+
+        </body>
+    </html>
+    ]]>
+    </string>
+
+    <string name="sistemauniv">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+             <b><p>L&#8217organizzazione degli studi universitari si articola in tre cicli: </b></p>
+
+            <p> -  Corsi di Studio di primo ciclo e ciclo unico: Laurea, Laurea Magistrale a ciclo unico. </p>
+
+            <p> -  Corsi di studio di secondo ciclo: Laurea Magistrale. </p>
+
+            <p> -  Corsi di Studio di terzo ciclo: Dottorati di Ricerca e Scuole di Specializzazione. </p>
+        </body>
+    </html>
+    ]]>
+    </string>
+
+    <string name="sistemauniv2">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+             <b><p>Cosa sono i Crediti formativi universitari - CFU?</b></p>
+
+            <p> Un credito (CFU) corrisponde di norma a 25 ore di lavoro che comprendono lezioni, esercitazioni, etc., ma anche lo studio a casa. Per ogni anno accademico, ad uno studente impegnato a tempo pieno nello studio è richiesta una quantità media di lavoro fissata in 60 crediti, ossia 1500 ore. </p>
+
+            <p> I CFU si acquisiscono con il superamento dell’esame o altra prova di verifica. </p>
+
+            <p> I crediti sono un elemento che consente di comparare diversi corsi di studio delle università italiane ed europee attraverso una valutazione del carico di lavoro richiesto allo studente. </p>
+
+        </body>
+    </html>
+    ]]>
+    </string>
+    <string name="multicampus">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+             Scemo chi legge :-P
+        </body>
+    </html>
+    ]]>
+    </string>
+    <string name="contatti">
+    <![CDATA[
+    <html>
+        <head></head>
+        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+             <p><b>URP - Ufficio Relazioni con il Pubblico</b></p>
+             <p>Informazioni generali di carattere didattico e amministrativo, informazioni sui servizi offerti dall&#8217Ateneo e punto di ascolto per segnalazioni, suggerimenti e reclami.</p>
+
+                <p>Largo Trombetti, 1 40126 Bologna<br>
+                E-mail: urp@unibo.it<br>
+                Tel: +39.051.2099349<br>
+                Fax: +39.051.2086224</p>
+
+                <p>Orari</p>
+
+                Lunedì, Martedì, Mercoledì, Venerdì dalle 9:00 alle 12:30<br>
+                Martedì e Giovedì dalle 14:30 alle 16:30
+        </body>
+    </html>
+    ]]>
+    </string>
+
+
+</resources>

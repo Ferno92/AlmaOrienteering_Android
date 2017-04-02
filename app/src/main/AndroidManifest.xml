@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.almaorient.ferno92.almaorienteering">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChooseActivity"
+            android:label="Scegli"
+            android:theme="@style/NoTitleTheme" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="Login"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".login.SignUpActivity"
+            android:label="Registrazione"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".login.SettingsActivity"
+            android:label="Settings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Homepage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.NewMainActivity"
+            android:label="Homepage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="Map"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CalendarActivity"
+            android:label="Eventi AlmaOrienta"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".versus.VersusSelectorActivity"
+            android:label="Statistiche"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".versus.VersusCorsoActivity"
+            android:label="Statistiche"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".versus.VersusActivity"
+            android:label="Statistiche"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".recensioni.RecensioniActivity"
+            android:label="Recensioni"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".recensioni.ListaRecensioniActivity"
+            android:label="Recensioni"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ModusActivity"
+            android:label="Modus"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".InfoAppActivity"
+            android:label="InfoApp"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".InfoGeneraliActivity" />
+        <activity android:name=".ElencoScuoleActivity" />
+        <activity android:name=".DettagliCorsoActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCwOyJPW8aPkSwxseUdUa1qdPYTx6xIa5c" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".EmbedBrowser"
+            android:theme="@style/AppTheme.Browser" />
+        <activity android:name=".FilterCorsoActivity" />
+        <activity android:name=".DettagliCorsoTabs.Tab1Activity" />
+        <activity android:name=".DettagliCorsoTabs.Tab2Activity"></activity>
+    </application>
+
+</manifest>

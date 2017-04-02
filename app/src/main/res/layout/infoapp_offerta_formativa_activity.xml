@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="L'elenco delle Scuole, dei corsi e delle materie, è l'elemento più importante su cui farai affidamento nella scelta del tuo percorso.\nPer facilitare la comprensione e l'attività di ricerca, abbiamo implementato un servizio di ricerca intuitivo ed esaustivo:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_elencoscuolescreenshot1" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_below="@+id/imageView6"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:text="In quest'esempio abbiamo optato per una laurea breve nel campus di Forli'.\nQuelli visualizzati sono i corsi disponibili.\nA questo punto potrai cliccare su una delle Scuole disponibili e accedere ai singoli corsi messi a disposizione.\nOgni corso presenterà il proprio piano di studio con le singole materie che gli studenti dovranno affrontare durante la loro vita universitaria." />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:padding="10dp"
+                android:text="In questa schermata puoi selezionare la tipologia di laurea che vorrai perseguire. A questo punto seleziona il campus di riferimento.\n(Tipologia di laurea e campus sono spiegati nella sezione apposita 'L'unibo si presenta')"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_below="@+id/textView28"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_elencoscuolescreenshot2" />
+        </RelativeLayout>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
