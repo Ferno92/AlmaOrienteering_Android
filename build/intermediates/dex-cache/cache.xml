@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\projects\almaOrienteering_android\pagerIndicatorLibrary\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6dfb99ef88fa621a2b78158e6d1ab77977c1d063">
+        <dex dex="C:\projects\almaOrienteering_android\app\build\intermediates\pre-dexed\debug\classes_2c14bdf56e4baa5d5ac68049f6a2084627d30671.jar" />
+    </item>
+
+</items>

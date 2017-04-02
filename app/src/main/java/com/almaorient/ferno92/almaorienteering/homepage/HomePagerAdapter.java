@@ -5,14 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-//import com.viewpagerindicator.IconPagerAdapter;
+import com.viewpagerindicator.IconPagerAdapter;
 
 /**
  * Created by lucas on 28/03/2017.
  */
 
-//public class HomePagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
-public class HomePagerAdapter extends FragmentPagerAdapter{
+public class HomePagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
     private int mNumItems;
     private final FragmentManager mFragmentManager;
     private NewMainActivity mMainActivity;
@@ -29,12 +28,12 @@ public class HomePagerAdapter extends FragmentPagerAdapter{
         return HomeElementFragment.newInstance(position);
     }
 
-//    @Override
-//    public int getIconResId(int index) {
-//        int resourceId = mContext.getResources().getIdentifier(HomeElementFragment.mElementList[index].getImgSource().replace("_big", "") , "drawable", mContext.getPackageName());
-//
-//        return resourceId;
-//    }
+    @Override
+    public int getIconResId(int index) {
+        int resourceId = mContext.getResources().getIdentifier(HomeElementFragment.mElementList[index].getImgSource().replace("_big", "") , "drawable", mContext.getPackageName());
+
+        return resourceId;
+    }
 
     @Override
     public int getCount() {

@@ -17,6 +17,9 @@
 package com.viewpagerindicator;
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -25,6 +28,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -99,6 +103,7 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         }
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onPageSelected(int arg0) {
         setCurrentItem(arg0);
@@ -107,6 +112,7 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         }
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void setViewPager(ViewPager view) {
         if (mViewPager == view) {
@@ -124,6 +130,7 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         notifyDataSetChanged();
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     public void notifyDataSetChanged() {
         mIconsLayout.removeAllViews();
         IconPagerAdapter iconAdapter = (IconPagerAdapter) mViewPager.getAdapter();
@@ -131,6 +138,20 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         for (int i = 0; i < count; i++) {
             ImageView view = new ImageView(getContext(), null, R.attr.vpiIconPageIndicatorStyle);
             view.setImageResource(iconAdapter.getIconResId(i));
+            view.setTag("" + i);
+            view.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    int viewPosition = Integer.parseInt(v.getTag().toString());
+
+                    mViewPager.setCurrentItem(viewPosition);
+                }
+            });
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(15, 0, 15, 0);
+            view.setLayoutParams(lp);
             mIconsLayout.addView(view);
         }
         if (mSelectedIndex > count) {
@@ -140,12 +161,15 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         requestLayout();
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void setViewPager(ViewPager view, int initialPosition) {
         setViewPager(view);
         setCurrentItem(initialPosition);
     }
 
+
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void setCurrentItem(int item) {
         if (mViewPager == null) {
@@ -156,11 +180,20 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
 
         int tabCount = mIconsLayout.getChildCount();
         for (int i = 0; i < tabCount; i++) {
-            View child = mIconsLayout.getChildAt(i);
+            ImageView child =(ImageView) mIconsLayout.getChildAt(i);
             boolean isSelected = (i == item);
             child.setSelected(isSelected);
             if (isSelected) {
                 animateToIcon(item);
+                child.setColorFilter(null);
+                child.setImageAlpha(255);
+
+            }else{
+                ColorMatrix matrix = new ColorMatrix();
+                matrix.setSaturation(0);  //0 means grayscale
+                ColorMatrixColorFilter cf = new ColorMatrixColorFilter(matrix);
+                child.setColorFilter(cf);
+                child.setImageAlpha(128);
             }
         }
     }

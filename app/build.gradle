@@ -38,6 +38,6 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
 //    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
     testCompile 'junit:junit:4.12'
-//    compile project(path: ':pagerIndicatorLibrary')
+    compile project(path: ':pagerIndicatorLibrary')
 }
 apply plugin: 'com.google.gms.google-services'

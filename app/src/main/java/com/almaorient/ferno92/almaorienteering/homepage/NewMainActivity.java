@@ -37,7 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 //import com.pixelcan.inkpageindicator.InkPageIndicator;
-//import com.viewpagerindicator.IconPageIndicator;
+import com.viewpagerindicator.IconPageIndicator;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -165,8 +165,8 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
 //        inkPageIndicator.setViewPager(mViewPager);
 
 //Bind the title indicator to the adapter
-//        IconPageIndicator iconIndicator = (IconPageIndicator)findViewById(R.id.indicator);
-//        iconIndicator.setViewPager(mViewPager);
+        IconPageIndicator iconIndicator = (IconPageIndicator)findViewById(R.id.indicator);
+        iconIndicator.setViewPager(mViewPager);
 
     }
 
