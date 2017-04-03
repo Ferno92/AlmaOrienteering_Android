@@ -1,4 +1,4 @@
-package com.almaorient.ferno92.almaorienteering.PianoStudi;
+package com.almaorient.ferno92.almaorienteering.ElencoScuole;
 
 import android.widget.BaseExpandableListAdapter;
 
@@ -13,10 +13,8 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,16 +68,71 @@ import java.util.List;
         }
 
         @Override
-        public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+        public View getGroupView(int i, boolean isexpanded, View view, ViewGroup viewGroup) {
             String headerTitle = (String)getGroup(i);
             if(view == null)
             {
                 LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.list_group,null);
+                view = inflater.inflate(R.layout.list_group_elencoscuole,null);
             }
             TextView lblListHeader = (TextView)view.findViewById(R.id.lblListHeader);
             lblListHeader.setTypeface(null, Typeface.BOLD);
             lblListHeader.setText(headerTitle);
+
+
+
+            ImageView indicatore = (ImageView) view
+                    .findViewById(R.id.elencoscuolegroupimg);
+
+
+
+
+            if (isexpanded){
+                indicatore.setImageResource(R.drawable.ic_expand_less);
+            }
+            else{
+                indicatore.setImageResource(R.drawable.ic_expand_more);
+            }
+
+            ImageView ic_scuola = (ImageView) view
+                    .findViewById(R.id.ic_scuola);
+
+            switch (headerTitle){
+                case "Agraria e Medicina veterinaria":
+                    ic_scuola.setImageResource(R.drawable.ic_agraria);
+                    break;
+                case "Economia, Management e Statistica":
+                    ic_scuola.setImageResource(R.drawable.ic_ems);
+                    break;
+                case "Medicina e Chirurgia":
+                    ic_scuola.setImageResource(R.drawable.ic_medicina_e_chirurgia);
+                    break;
+                case "Farmacia, Biotecnologie e Scienze motorie":
+                    ic_scuola.setImageResource(R.drawable.ic_farmacia);
+                    break;
+                case "Ingegneria e Architettura":
+                    ic_scuola.setImageResource(R.drawable.ic_icona_ingegneria_e_architettura);
+                    break;
+                case "Scienze":
+                    ic_scuola.setImageResource(R.drawable.ic_icona_scienze);
+                    break;
+                case "Scienze Politiche":
+                    ic_scuola.setImageResource(R.drawable.ic_icona_scienze_politiche);
+                    break;
+                case "Giurisprudenza":
+                    ic_scuola.setImageResource(R.drawable.ic_icona_giurisprudenza);
+                    break;
+                case "Lingue e Letterature, Traduzione e Interpretazione":
+                    ic_scuola.setImageResource(R.drawable.ic_icona_lingue_e_letterature_traduzione_e_interpretazione);
+                    break;
+                case "Psicologia":
+                    ic_scuola.setImageResource(R.drawable.ic_psicologia);
+                    break;
+                case "Lettere e Beni culturali":
+                    ic_scuola.setImageResource(R.drawable.ic_lettere_e_beni_culturali);
+                    break;
+            }
+
             return view;
         }
 
@@ -89,11 +142,16 @@ import java.util.List;
             if(view == null)
             {
                 LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.list_item,null);
+                view = inflater.inflate(R.layout.list_item_elencoscuole,null);
             }
 
             TextView txtListChild = (TextView)view.findViewById(R.id.lblListItem);
             txtListChild.setText(childText);
+
+            ImageView indicatore = (ImageView) view
+                    .findViewById(R.id.indicatorcorsi);
+            indicatore.setImageResource(R.drawable.ic_arrow_right_pianostudi);
+
             return view;
         }
 

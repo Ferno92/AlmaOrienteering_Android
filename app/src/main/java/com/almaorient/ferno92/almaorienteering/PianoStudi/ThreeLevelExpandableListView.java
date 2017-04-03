@@ -100,6 +100,9 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
                     if (mUrlTerzoLivello.get(((TextView) text).getText()).contains("http://")) {
                         richiamoBrowser(mUrlTerzoLivello.get(((TextView) text).getText()));
                     }
+                    else if (mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)).contains("http://")){
+                        richiamoBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
+                    }
                 return false;
             }
         });

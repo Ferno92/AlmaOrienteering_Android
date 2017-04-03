@@ -68,7 +68,8 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
         image.setImageBitmap(null); //altrimenti in alcuni casi mette le icone sbagliate
 
 
-        if (mUrlThirdlevel.get(getChild(groupPosition,childPosition)).contains("http://")) {
+        if (mUrlThirdlevel.get(getChild(groupPosition,childPosition)).contains("http://") ||
+                mUrlSecondlevel.get(getGroup(groupPosition)).contains("http://")) {
 
             image.setImageResource(R.drawable.ic_arrow_right_pianostudi);
            //richiamoBrowser(mUrlTerzoLivello.get(((TextView) view).getText()));
@@ -120,7 +121,7 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
         image.setImageBitmap(null); //altrimenti in alcuni casi mette le icone sbagliate
 
         if (!(getChildrenCount(groupPosition)==0)){
-            if (isExpanded && !(getChildrenCount(groupPosition)==0)){
+            if (isExpanded){
                 image.setImageResource(R.drawable.ic_arrow_up_2ndlevelpianostudi);
             }
             else {

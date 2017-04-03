@@ -3,8 +3,6 @@ package com.almaorient.ferno92.almaorienteering;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -105,7 +103,6 @@ public class DettagliCorsoActivity extends BaseActivity {
 
     List<String> mSecondoLivelloElencoAnno;
 
-    List<String> mSecondoLivelloUrl;
     List<String> mSecondoTerzoLivello;
     HashMap<String, List<String>> mSeconlevelmap;
     HashMap<String, List<String>> mThirdlevelmap;
@@ -122,7 +119,9 @@ public class DettagliCorsoActivity extends BaseActivity {
     HashMap<String, String> mMapUrlSecondLevel;
     HashMap<String, String> mMapUrlThirdLevel;
 
+    private ViewPager mViewPager;
 
+    private TabHost mTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,27 +154,29 @@ public class DettagliCorsoActivity extends BaseActivity {
         final Integer durata = (int) (long) durata1;
 
 
-        final TabHost tab = (TabHost) findViewById(R.id.tab_host);
-        tab.setup();
+        mTabHost = (TabHost) findViewById(R.id.tab_host);
+        mTabHost.setup();
         TabHost.TabSpec spec;
 
         //Tab 1
-        spec = tab.newTabSpec("Tab 1");
+        spec = mTabHost.newTabSpec("Tab 1");
         spec.setContent(R.id.tab1);
         spec.setIndicator("Info");
-        tab.addTab(spec);
+        mTabHost.addTab(spec);
 
         //Tab 2
-        spec = tab.newTabSpec("Tab 3");
+        spec = mTabHost.newTabSpec("Tab 3");
         spec.setContent(R.id.tab3);
         spec.setIndicator("Piano didattico");
-        tab.addTab(spec);
+        mTabHost.addTab(spec);
 
         //Tab 3
-        spec = tab.newTabSpec("Tab 4");
+        spec = mTabHost.newTabSpec("Tab 4");
         spec.setContent(R.id.tab4);
         spec.setIndicator("Sbocchi");
-        tab.addTab(spec);
+        mTabHost.addTab(spec);
+
+
 
 
         //FrameLayout layouttab = (FrameLayout) findViewById(R.id.)
@@ -187,9 +188,13 @@ public class DettagliCorsoActivity extends BaseActivity {
 //            }
 //        });
 
-        tab.setCurrentTab(0);
+        mTabHost.setCurrentTab(0);
 
         setTitle(corso);
+
+        mViewPager = (ViewPager) findViewById(R.id.vpPager1);
+
+
 
         tipocorsoText.setText(tipo);
         campuscorsoText.setText(campus);
@@ -324,17 +329,17 @@ public class DettagliCorsoActivity extends BaseActivity {
                 mSeconlevelmap = new HashMap<String, List<String>>();
                 mThirdlevelmap = new HashMap<String, List<String>>();
                 mSecondoLivelloElencoAnno = new ArrayList<String>();
-                mSecondoLivelloUrl = new ArrayList<String>();
 
                 Integer d = 0; //mi dice quanti insegnamenti mettere ogni anno
                 Integer numeroinsegnamenti = 0;
                 mMapUrlSecondLevel = new HashMap<String, String>();
                 mMapUrlThirdLevel = new HashMap<String, String>();
                 for (int i = 0; i < elencoinsegnamenti.size(); i++) {
-                    if (elencoinsegnamenti.get(i).getPadre() == 0) {
+                    if (elencoinsegnamenti.get(i).getPadre() == 0 &&
+                            !mSecondoLivelloElencoAnno.contains(elencoinsegnamenti.get(i).getCorsoNome())) {
+                        //per evitare duplicati in caso di corsi con più curriculum
                         numeroinsegnamenti = numeroinsegnamenti + 1;
                         mSecondoLivelloElencoAnno.add(elencoinsegnamenti.get(i).getCorsoNome());
-                        mSecondoLivelloUrl.add(elencoinsegnamenti.get(i).getUrl());
                         mMapUrlSecondLevel.put(elencoinsegnamenti.get(i).getCorsoNome(), elencoinsegnamenti.get(i).getUrl());
                     } else {
                         mMapUrlThirdLevel.put(elencoinsegnamenti.get(i).getCorsoNome(), elencoinsegnamenti.get(i).getUrl());
@@ -413,7 +418,7 @@ public class DettagliCorsoActivity extends BaseActivity {
                 }
 
 
-                final ExpandableListView mExpandableListView = (ExpandableListView) findViewById(R.id.anno1);
+                final ExpandableListView mExpandableListView = (ExpandableListView) findViewById(R.id.pianistudioExpListView);
 
 
                 if (mExpandableListView != null) {

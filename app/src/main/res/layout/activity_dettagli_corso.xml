@@ -11,11 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpPager1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -396,7 +391,7 @@
                     android:scrollbars="none">
 
                     <ExpandableListView
-                        android:id="@+id/anno1"
+                        android:id="@+id/pianistudioExpListView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top|start"
@@ -474,7 +469,13 @@
                 </LinearLayout>
             </FrameLayout>
 
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpPager1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
         </LinearLayout>
+
     </TabHost>
 
 </LinearLayout>
