@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AlmaOrienteering_Android.iml" filepath="$PROJECT_DIR$/AlmaOrienteering_Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AlmaOrienteering_Android.iml" filepath="$PROJECT_DIR$/AlmaOrienteering_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pagerIndicatorLibrary/pagerIndicatorLibrary.iml" filepath="$PROJECT_DIR$/pagerIndicatorLibrary/pagerIndicatorLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/pagerIndicatorLibrary/pagerIndicatorLibrary.iml" filepath="$PROJECT_DIR$/pagerIndicatorLibrary/pagerIndicatorLibrary.iml" />
     </modules>
   </component>
