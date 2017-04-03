@@ -418,7 +418,7 @@ public class DettagliCorsoActivity extends BaseActivity {
                 }
 
 
-                final ExpandableListView mExpandableListView = (ExpandableListView) findViewById(R.id.anno1);
+                final ExpandableListView mExpandableListView = (ExpandableListView) findViewById(R.id.pianistudioExpListView);
 
 
                 if (mExpandableListView != null) {
