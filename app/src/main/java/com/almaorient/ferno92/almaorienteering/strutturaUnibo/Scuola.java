@@ -10,6 +10,7 @@ public class Scuola {
     public String mId;
     public String mNome;
     public ArrayList<Corso> mListaCorsi = new ArrayList<>();
+    public ArrayList<String>mElencoNomiCorsi = new ArrayList<>();
 
     public Scuola(String id, String nome){
         this.mId = id;
@@ -31,6 +32,13 @@ public class Scuola {
 
     public ArrayList getListaCorsi(){
         return this.mListaCorsi;
+    }
+
+    public ArrayList <String> getElencoCorsi (){
+        for (int i=0; i<mListaCorsi.size();i++){
+            mElencoNomiCorsi.add(mListaCorsi.get(i).getNome());
+        }
+        return mElencoNomiCorsi;
     }
 
     public String toString()

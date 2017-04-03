@@ -11,13 +11,17 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.almaorient.ferno92.almaorienteering.ElencoScuole.ExpandableListAdapter1;
 import com.almaorient.ferno92.almaorienteering.strutturaUnibo.Corso;
 import com.almaorient.ferno92.almaorienteering.strutturaUnibo.Scuola;
 import com.google.firebase.database.DataSnapshot;
@@ -30,8 +34,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import static android.R.attr.maxWidth;
+import static com.almaorient.ferno92.almaorienteering.R.id.expandableelencoscuole;
 import static com.almaorient.ferno92.almaorienteering.R.id.listaagraria;
 import static com.almaorient.ferno92.almaorienteering.R.id.wrap;
 import static com.almaorient.ferno92.almaorienteering.R.id.wrap_content;
@@ -41,6 +47,10 @@ public class ElencoScuoleActivity extends BaseActivity {
     //private int mPosition = 0;
     private ArrayList<Scuola> mListaScuole = new ArrayList<>();
     private ListView mElenco;
+    ArrayList<Corso> defCorsoList;
+    ArrayList<Corso> tempCorsoList;
+    ArrayList<Corso> completecorsolist;
+
 
     private void pressbutton(String key, final ListView listView) {
         String buttonIDname = key + "layout";
@@ -76,7 +86,7 @@ public class ElencoScuoleActivity extends BaseActivity {
                                             for (int i = 0; i < mListaScuole.get(j).getListaCorsi().size(); i++) {
                                                 ArrayList<Corso> listaCorsi = (ArrayList<Corso>) mListaScuole.get(j).getListaCorsi();
                                                 if (listaCorsi.get(i).getNome().equals(titoloriga)) {
-                                                    String codicecorsoagraria = listaCorsi.get(i).getScuolaId();
+                                                    String codicecorsoagraria = listaCorsi.get(i).getCorsoCodice();
                                                     String url = listaCorsi.get(i).getUrl();
                                                     String tipo = listaCorsi.get(i).getTipo();
                                                     String campus = listaCorsi.get(i).getCampus();
@@ -95,6 +105,21 @@ public class ElencoScuoleActivity extends BaseActivity {
                                 }
                             });
     }
+
+
+    public static final Scuola[] mElencoScuola1 = new Scuola[]{
+            new Scuola("agraria", "Agraria e Medicina veterinaria"),
+            new Scuola("economia", "Economia, Mangement e Statistica"),
+            new Scuola("farmacia", "Farmacia, Biotecnologie e Scienze motorie"),
+            new Scuola("giurisprudenza", "Giurisprudenza"),
+            new Scuola("ingegneria", "Ingegneria e architettura"),
+            new Scuola("lettere", "Lettere e Beni culturali"),
+            new Scuola("lingue", "Lingue e letterature, Traduzione e Interpretazione"),
+            new Scuola("medicina", "Medicina e Chirurgia"),
+            new Scuola("psicologia", "Psicologia e Scienze della formazione"),
+            new Scuola("scienze", "Scienze"),
+            new Scuola("scienze_politiche", "Scienze politiche")
+    };
 
     private void richiamoPaginaInterna(String nomecorso, String codicecorso, String url, String nomescuola,
                                        String tipo, String campus, String accesso,Long idscuola, Long durata, String sededidattica) {
@@ -131,6 +156,9 @@ public class ElencoScuoleActivity extends BaseActivity {
         listView.setLayoutParams(params);
     }
 
+    List <String> mDataHeader;
+    HashMap <String, List<String>> mMapelencocorsiscuola;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +185,7 @@ public class ElencoScuoleActivity extends BaseActivity {
 
 
 
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
         Query query = ref.child("corso");
@@ -165,11 +194,16 @@ public class ElencoScuoleActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap meMap = (HashMap) dataSnapshot.getValue();
                 Iterator scuolaIterator = meMap.keySet().iterator();
+
+                mDataHeader = new ArrayList<String>();
+                mMapelencocorsiscuola = new HashMap<String, List<String>>();
+                completecorsolist = new ArrayList<Corso>();
+
                 while (scuolaIterator.hasNext()) {
                     String key = (String) scuolaIterator.next();
                     ArrayList value = (ArrayList) meMap.get(key);
+                    tempCorsoList = new ArrayList<Corso>();
 
-                    ArrayList<Corso> tempCorsoList = new ArrayList<Corso>();
                     for (int i = 0; i < value.size(); i++) {
                         HashMap corsoMap = (HashMap) value.get(i);
                         Iterator corsoIterator = corsoMap.keySet().iterator();
@@ -182,6 +216,8 @@ public class ElencoScuoleActivity extends BaseActivity {
                         Long idscuola= null;
                         Long durata =null;
                         String sededidattica="";
+                        String abbreviazionescuola = "";
+
                         while (corsoIterator.hasNext()) {
                             String corsoKey = (String) corsoIterator.next();
 
@@ -215,12 +251,15 @@ public class ElencoScuoleActivity extends BaseActivity {
                                     break;
                             }
                         }
-                        Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica);
+                        Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica,key);
                         tempCorsoList.add(corso);
+                        completecorsolist.add(corso);
                     }
+
+
                     //Switch loop
                     ArrayList<Corso> tempCorsoList2 = new ArrayList<Corso>();
-                    ArrayList<Corso> defCorsoList = new ArrayList<Corso>();
+                    defCorsoList = new ArrayList<Corso>();
 
                     //Switch per dati passati dal filtro
 
@@ -296,9 +335,10 @@ public class ElencoScuoleActivity extends BaseActivity {
                             break;
                     }
 
+
                     switch (key) {
                         case "agraria":
-                            Scuola scuolaAgraria = new Scuola(key, "Scuola di Agraria", defCorsoList);
+                            Scuola scuolaAgraria = new Scuola(key, "Agraria e Medicina veterinaria", defCorsoList);
                             mListaScuole.add(scuolaAgraria);
                             mElenco = (ListView) findViewById(listaagraria);
                             // riempio la lista arrayadapter sua
@@ -310,6 +350,12 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter.isEmpty()){
                                 agrarialayout.setVisibility(View.GONE);
                             }
+
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Agraria e Medicina veterinaria");
+                                mMapelencocorsiscuola.put("Agraria e Medicina veterinaria", scuolaAgraria.getElencoCorsi());
+                            }
+
 
                             setListViewHeightBasedOnChildren(mElenco,adapter);
 
@@ -333,6 +379,10 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter2.isEmpty()){
                                 economialayout.setVisibility(View.GONE);
                             }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Economia, Management e Statistica");
+                                mMapelencocorsiscuola.put("Economia, Management e Statistica", scuolaEconomia.getElencoCorsi());
+                            }
 
                             pressbutton(key,mElenco);
 
@@ -353,6 +403,10 @@ public class ElencoScuoleActivity extends BaseActivity {
 
                             if (adapter3.isEmpty()){
                                 farmacialayout.setVisibility(View.GONE);
+                            }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Farmacia, Biotecnologie e Scienze motorie");
+                                mMapelencocorsiscuola.put("Farmacia, Biotecnologie e Scienze motorie", scuolaFarmacia.getElencoCorsi());
                             }
 
                             pressbutton(key,mElenco);
@@ -375,6 +429,11 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter4.isEmpty()){
                                 giurisprudenzalayout.setVisibility(View.GONE);
                             }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Giurisprudenza");
+                                mMapelencocorsiscuola.put("Giurisprudenza", scuolaGiurisprudenza.getElencoCorsi());
+                            }
+
 
                             pressbutton(key,mElenco);
 
@@ -395,6 +454,10 @@ public class ElencoScuoleActivity extends BaseActivity {
 
                             if (adapter5.isEmpty()){
                                 ingegnerialayout.setVisibility(View.GONE);
+                            }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Ingegneria e Architettura");
+                                mMapelencocorsiscuola.put("Ingegneria e Architettura", scuolaIngegneria.getElencoCorsi());
                             }
 
                             pressbutton(key,mElenco);
@@ -417,6 +480,10 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter6.isEmpty()){
                                 letterelayout.setVisibility(View.GONE);
                             }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Lettere e Beni culturali");
+                                mMapelencocorsiscuola.put("Lettere e Beni culturali", scuolaLettere.getElencoCorsi());
+                            }
 
                             pressbutton(key,mElenco);
 
@@ -437,6 +504,10 @@ public class ElencoScuoleActivity extends BaseActivity {
 
                             if (adapter7.isEmpty()){
                                 linguelayout.setVisibility(View.GONE);
+                            }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Lingue e Letterature, Traduzione e Interpretazione");
+                                mMapelencocorsiscuola.put("Lingue e Letterature, Traduzione e Interpretazione", scuolalingue.getElencoCorsi());
                             }
 
                             pressbutton(key,mElenco);
@@ -480,6 +551,11 @@ public class ElencoScuoleActivity extends BaseActivity {
                                 medicinalayout.setVisibility(View.GONE);
                             }
 
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Medicina e Chirurgia");
+                                mMapelencocorsiscuola.put("Medicina e Chirurgia", scuolaMedicina.getElencoCorsi());
+                            }
+
                             pressbutton(key,mElenco);
 
                             onItemClick(mElenco, key);
@@ -497,6 +573,11 @@ public class ElencoScuoleActivity extends BaseActivity {
 
                             if (adapter9.isEmpty()){
                                 psicologialayout.setVisibility(View.GONE);
+                            }
+
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Psicologia");
+                                mMapelencocorsiscuola.put("Psicologia", scuolaPsicologia.getElencoCorsi());
                             }
 
                             setListViewHeightBasedOnChildren(mElenco,adapter9);
@@ -521,6 +602,10 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter10.isEmpty()){
                                 scienzelayout.setVisibility(View.GONE);
                             }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Scienze");
+                                mMapelencocorsiscuola.put("Scienze", scuolaScienze.getElencoCorsi());
+                            }
 
                             pressbutton(key,mElenco);
 
@@ -542,6 +627,10 @@ public class ElencoScuoleActivity extends BaseActivity {
                             if (adapter11.isEmpty()){
                                 scienze_politichelayout.setVisibility(View.GONE);
                             }
+                            if (!defCorsoList.isEmpty()) {
+                                mDataHeader.add("Scienze Politiche");
+                                mMapelencocorsiscuola.put("Scienze Politiche", scuolaScienze_politiche.getElencoCorsi());
+                            }
 
                             pressbutton(key,mElenco);
 
@@ -550,14 +639,62 @@ public class ElencoScuoleActivity extends BaseActivity {
 
                         default:
                             break;
+
                     }
+
+
                 }
+
+                final ExpandableListView elencoscuole = (ExpandableListView) findViewById(R.id.expandableelencoscuole);
+
+                if (elencoscuole!=null) {
+                    final ExpandableListAdapter1 expadapter = new ExpandableListAdapter1(getApplicationContext(), mDataHeader, mMapelencocorsiscuola);
+                    elencoscuole.setAdapter(expadapter);
+
+
+                    elencoscuole.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                        @Override
+                        public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                            expadapter.notifyDataSetChanged();
+                            for (int b=0; b<completecorsolist.size();b++){
+                                //Toast.makeText(getApplicationContext(),(String)expadapter.getChild(i,i1),Toast.LENGTH_SHORT).show();
+
+                                if (completecorsolist.get(b).getNome().contains((CharSequence) expadapter.getChild(i,i1))){
+                                    Toast.makeText(getApplicationContext(),(String)expadapter.getChild(i,i1),Toast.LENGTH_LONG).show();
+
+                                    String codicecorso = completecorsolist.get(b).getCorsoCodice();
+                                    String url = completecorsolist.get(b).getUrl();
+                                    String tipo = completecorsolist.get(b).getTipo();
+                                    String campus = completecorsolist.get(b).getCampus();
+                                    String accesso = completecorsolist.get(b).getAccesso();
+                                    Long scuolaid = completecorsolist.get(b).getIdScuola();
+                                    Long durata = completecorsolist.get(b).getDurata();
+                                    String sededidattica = completecorsolist.get(b).getSedeDidattica();
+                                    String abbreviazionescuola = completecorsolist.get(b).getAbbreviazioneSCuola();
+
+
+                                    richiamoPaginaInterna((String)expadapter.getChild(i,i1), codicecorso, url, abbreviazionescuola,
+                                           tipo, campus, accesso, scuolaid, durata, sededidattica);
+                                    break;
+
+                                }
+                            }
+
+                            return false;
+                        }
+                    });
+                }
+
                 Log.d("scuole: ", String.valueOf(mListaScuole.size()));
                 LottieAnimationView spiderLoader = (LottieAnimationView)findViewById(R.id.spider_loader) ;
                 spiderLoader.setVisibility(View.GONE);
                 ScrollView scuoleScrollView = (ScrollView) findViewById(R.id.scuoleScrollView);
                 scuoleScrollView.setVisibility(View.VISIBLE);
+
+
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

@@ -93,7 +93,7 @@ public class SettingsActivity extends BaseActivity {
                         mRef.child("users/" + data.getKey() + "/nome").setValue(mNomeEdit.getText().toString());
                         mRef.child("users/" + data.getKey() + "/cognome").setValue(mCognomeEdit.getText().toString());
                         mRef.child("users/" + data.getKey() + "/scuola").setValue(mSelectedScuola.getNome());
-                        mRef.child("users/" + data.getKey() + "/corso/id").setValue(mSelectedCorso.getScuolaId());
+                        mRef.child("users/" + data.getKey() + "/corso/id").setValue(mSelectedCorso.getCorsoCodice());
                         mRef.child("users/" + data.getKey() + "/corso/nome").setValue(mSelectedCorso.getNome());
                         break;
                     }
@@ -160,7 +160,7 @@ public class SettingsActivity extends BaseActivity {
                     String nome = (String) data.child("corso_descrizione").getValue();
                     String id = String.valueOf(data.child("corso_codice").getValue());
 
-                    Corso corso = new Corso(id, nome,"","","","",null,null,"");
+                    Corso corso = new Corso(id, nome,"","","","",null,null,"","");
                     mListaCorsi.add(corso);
                 }
                 fillSpinner();

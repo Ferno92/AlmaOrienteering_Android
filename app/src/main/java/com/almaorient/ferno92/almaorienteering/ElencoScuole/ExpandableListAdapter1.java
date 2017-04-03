@@ -1,4 +1,4 @@
-package com.almaorient.ferno92.almaorienteering.PianoStudi;
+package com.almaorient.ferno92.almaorienteering.ElencoScuole;
 
 import android.widget.BaseExpandableListAdapter;
 
