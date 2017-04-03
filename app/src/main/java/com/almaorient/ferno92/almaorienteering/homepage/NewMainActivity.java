@@ -162,9 +162,6 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
         int pager_position = sp.getInt("pager_position", 0);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setCurrentItem(pager_position);
-//
-//        final InkPageIndicator inkPageIndicator = (InkPageIndicator) findViewById(R.id.indicator);
-//        inkPageIndicator.setViewPager(mViewPager);
 
 //Bind the title indicator to the adapter
         IconPageIndicator iconIndicator = (IconPageIndicator)findViewById(R.id.indicator);

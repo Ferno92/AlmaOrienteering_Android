@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.almaorient.ferno92.almaorienteering.tutorial.TutorialActivity;
+
 /**
  * Created by luca.fernandez on 06/03/2017.
  */
@@ -22,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run()
             {
-                Intent i = new Intent(SplashActivity.this, ChooseActivity.class);
+                Intent i = new Intent(SplashActivity.this, TutorialActivity.class);
                 startActivity(i);
                 finish();
             }

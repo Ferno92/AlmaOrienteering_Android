@@ -1,8 +1,9 @@
 package com.almaorient.ferno92.almaorienteering.tutorial;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,17 @@ public class TutorialFragment extends Fragment {
         this.mPosition = getArguments().getInt("pos");
         switch(this.mPosition){
             case 0:
-                this.mRootView = inflater.inflate(R.layout.homepage_element, container, false);
-                // ecc ecc
+                this.mRootView = inflater.inflate(R.layout.infoapp_homepage_activity, container, false);
+                break;
+            case 1:
+                this.mRootView = inflater.inflate(R.layout.infoapp_choose_activity, container, false);
+                break;
+            case 2:
+                this.mRootView = inflater.inflate(R.layout.infoapp_offerta_formativa_activity, container, false);
+                break;
+            case 3:
+                this.mRootView = inflater.inflate(R.layout.infoapp_statistiche_activity, container, false);
+                break;
         }
 
         return this.mRootView;

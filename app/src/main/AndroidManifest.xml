@@ -77,6 +77,9 @@
             android:label="Modus"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".tutorial.TutorialActivity"
+            android:theme="@style/NoTitleTheme" />
+        <activity
             android:name=".InfoAppActivity"
             android:label="InfoApp"
             android:theme="@style/AppTheme" />
