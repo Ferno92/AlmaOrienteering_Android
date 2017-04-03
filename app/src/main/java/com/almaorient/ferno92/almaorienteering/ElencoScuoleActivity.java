@@ -94,7 +94,6 @@ public class ElencoScuoleActivity extends BaseActivity {
                         Long idscuola= null;
                         Long durata =null;
                         String sededidattica="";
-                        String abbreviazionescuola = "";
 
                         while (corsoIterator.hasNext()) {
                             String corsoKey = (String) corsoIterator.next();

@@ -50,6 +50,8 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import static android.R.attr.fillType;
@@ -76,6 +78,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     Corso mSelectedCorso;
     Integer mCount;
     Integer mCountResetScuola;
+    List<IndirizziModel> mElencoIndirizziScuole=new ArrayList<>();
+    HashMap<String,List<IndirizziModel>> MapIndirizziScuole;
+
 
     public static final Scuola[] mScuolaadatt = new Scuola[]{
             new Scuola("", "Seleziona scuola"),
@@ -109,10 +114,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
         mCorsoSpinner = (Spinner) findViewById(R.id.spinnercorso);
 
+        MapIndirizziScuole=new HashMap<>();
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
-//
-        Query query2 = ref.child("aule").orderByKey();
+
+        Query query2 = ref.child("aule");
         query2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -139,6 +146,71 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 }
             }
         });
+
+        Query query8 = ref.child("mappe");
+        query8.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    HashMap MapIndirizziProvv=(HashMap) dataSnapshot.getValue();
+                    Iterator scuolaIterator = MapIndirizziProvv.keySet().iterator();
+
+                    while (scuolaIterator.hasNext()){
+                        String key = (String) scuolaIterator.next();
+                        ArrayList value = (ArrayList) MapIndirizziProvv.get(key);
+
+                        mElencoIndirizziScuole=new ArrayList<IndirizziModel>();
+
+                        for (int i = 0; i < value.size(); i++) {
+                            HashMap IndirizzoProvvMap = (HashMap) value.get(i);
+                            Iterator indirizzoIterator = IndirizzoProvvMap.keySet().iterator();
+
+                            String codicecorso = "";
+                            Double latitude = null;
+                            Double longitude = null;
+                            String corsolaurea = "";
+                            String indirizzo = "";
+
+                            while (indirizzoIterator.hasNext()) {
+                                String indirizzokey = (String) indirizzoIterator.next();
+                                switch (indirizzokey){
+                                    case "corso_codice":
+                                        codicecorso=String.valueOf(IndirizzoProvvMap.get(indirizzokey));
+                                        break;
+                                    case "latitude":
+                                        latitude=(Double) IndirizzoProvvMap.get(indirizzokey);
+                                        break;
+                                    case "longitude":
+                                        longitude=(Double) IndirizzoProvvMap.get(indirizzokey);
+                                        break;
+                                    case "Corso di laurea":
+                                        corsolaurea=(String) IndirizzoProvvMap.get(indirizzokey);
+                                        break;
+                                    case "indirizzo":
+                                        indirizzo=(String) IndirizzoProvvMap.get(indirizzokey);
+                                        break;
+                                }
+
+                            }
+                            IndirizziModel address = new IndirizziModel(codicecorso, latitude, longitude,corsolaurea,indirizzo);
+                            mElencoIndirizziScuole.add(address);
+                        }
+                        MapIndirizziScuole.put(key,mElencoIndirizziScuole);
+                    }
+
+                //}
+                initMap();
+                Toast.makeText(getApplicationContext(),String.valueOf(MapIndirizziScuole.get("ingegneria").size()),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                if (databaseError != null) {
+
+                }
+            }
+        });
+
 
     }
 
@@ -253,94 +325,66 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mSelectedCorso = (Corso) mCorsoSpinner.getSelectedItem();
-                if (mCorsoSpinner.getSelectedItemPosition()!=0) {
-                    String codicecorso = mSelectedCorso.getCorsoCodice();
+                mListaIndirizzi.clear();
 
+                if (callingactivity.equals("main") || mCountResetScuola != 1) {
+                    mClusterManager.clearItems();
+                    mClusterManager2.clearItems();
+                }
+                if (mMap != null) {
+                    mMap.clear();
+                }
+
+                if (mCorsoSpinner.getSelectedItemPosition() != 0) {
+                    String codicecorso = mSelectedCorso.getCorsoCodice();
                     setTitle("Sedi del corso selezionato");
 
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference();
+//                    mListaIndirizzi.clear();
 
-                    Query query2 = ref.child("mappe/" + mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId())
-                            .orderByChild("corso_codice").equalTo(Integer.parseInt(codicecorso));
-                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mListaIndirizzi.clear();
+//                    if (callingactivity.equals("main") || mCountResetScuola != 1) {
+//                        mClusterManager.clearItems();
+//                        mClusterManager2.clearItems();
+//                    }
+//                    if (mMap != null) {
+//                        mMap.clear();
+//                    }
 
-                            if (callingactivity.equals("main") || mCountResetScuola!=1) {
-                                mClusterManager.clearItems();
-                                mClusterManager2.clearItems();
-                            }
-                            if (mMap != null) {
-                                mMap.clear();
-                            }
-                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                final String codicecorso = String.valueOf(data.child("corso_codice").getValue());
+                    List<IndirizziModel> dettagliscuola = MapIndirizziScuole.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()]
+                            .getScuolaId());
 
-                                Double latitude = (Double) data.child("latitude").getValue();
-                                Double longitude = (Double) data.child("longitude").getValue();
-                                String corsolaurea = (String) data.child("Corso di laurea").getValue();
-                                String indirizzo = (String) data.child("indirizzo").getValue();
-
-                                IndirizziModel address = new IndirizziModel(codicecorso, latitude, longitude,corsolaurea,indirizzo);
-                                mListaIndirizzi.add(address);
-                            }
-                            initMap();
+                    for (int a = 0; a < dettagliscuola.size(); a++) {
+                        if (dettagliscuola.get(a).getCodice().equals(codicecorso)) {
+                            mListaIndirizzi.add(dettagliscuola.get(a));
                         }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            if (databaseError != null) {
-
-                            }
-                        }
-                    });
-
-                }
-                else {
-
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference();
-
-                    setTitle("Sedi della scuola");
-
-                    Query query2 = ref.child("mappe/" + mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId()).orderByKey();
-                    query2.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mListaIndirizzi.clear();
-
-                            if (callingactivity.equals("main") || mCountResetScuola != 1) {
-                                mClusterManager.clearItems();
-                            }
-                            if (mMap != null) {
-                                mMap.clear();
-                            }
-                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                final String codicecorso = String.valueOf(data.child("corso_codice").getValue());
-
-                                Double latitude = (Double) data.child("latitude").getValue();
-                                Double longitude = (Double) data.child("longitude").getValue();
-                                String corsolaurea = (String) data.child("Corso di laurea").getValue();
-                                String indirizzo = (String) data.child("indirizzo").getValue();
-
-                                IndirizziModel address = new IndirizziModel(codicecorso, latitude, longitude, corsolaurea, indirizzo);
-                                mListaIndirizzi.add(address);
-                            }
-                            Log.d("size lista indirizzi",String.valueOf(mListaIndirizzi.size()));
-                            initMap();
-
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                if (databaseError != null) {
-
-                                }
-                            }
-                        });
                     }
+
+                    initMap();
+
+                } else if (mScuolaSpinner.getSelectedItemPosition()!=0){
+//                    //tutte le sedi della scuola
+                    setTitle("Sedi della scuola");
+//                    mListaIndirizzi.clear();
+
+                    if (callingactivity.equals("main") || mCountResetScuola != 1) {
+                        mClusterManager.clearItems();
+                    }
+                    if (mMap != null) {
+                        mMap.clear();
+                    }
+                    List<IndirizziModel> dettagliscuola = MapIndirizziScuole.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()]
+                            .getScuolaId());
+
+                    for (int a = 0; a < dettagliscuola.size(); a++) {
+
+                            mListaIndirizzi.add(dettagliscuola.get(a));
+                    }
+
+                    initMap();
+
+
                 }
+
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
