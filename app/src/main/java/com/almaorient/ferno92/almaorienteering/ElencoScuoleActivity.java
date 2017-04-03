@@ -29,9 +29,10 @@ import java.util.List;
 public class ElencoScuoleActivity extends BaseActivity {
 
     private ArrayList<Scuola> mListaScuole = new ArrayList<>();
+    ArrayList<Corso> completecorsolist;
     ArrayList<Corso> defCorsoList;
     ArrayList<Corso> tempCorsoList;
-    ArrayList<Corso> completecorsolist;
+
 
     private void richiamoPaginaInterna(String nomecorso, String codicecorso, String url, String nomescuola,
                                        String tipo, String campus, String accesso,Long idscuola, Long durata, String sededidattica) {

@@ -99,10 +99,14 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     private List<Corso> mListaCorsi = new ArrayList<Corso>();
     private ArrayList<IndirizziModel> mListaIndirizzi = new ArrayList<IndirizziModel>();
+    HashMap <String, List<Corso>> mMapelencocorsiscuola;
+    List<Corso> corsilist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final long startTime = System.nanoTime();
+
         setContentView(R.layout.maps_activity);
 
         mCount=0;
@@ -137,6 +141,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 Log.d("size lista aule", String.valueOf(mListaAule.size()));
                 initMap();
                 mProgress.dismiss();
+                //long converter = 1000000000;
+                Double difference = (Double.longBitsToDouble(System.nanoTime() - startTime))/((Double.longBitsToDouble(1000000000)));
+                Toast.makeText(getApplicationContext(),String.valueOf(difference)+" secondi impiegati",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -200,7 +208,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                 //}
                 initMap();
-                Toast.makeText(getApplicationContext(),String.valueOf(MapIndirizziScuole.get("ingegneria").size()),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -208,6 +215,85 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 if (databaseError != null) {
 
                 }
+            }
+        });
+
+        Query query = ref.child("corso");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap meMap = (HashMap) dataSnapshot.getValue();
+                Iterator scuolaIterator = meMap.keySet().iterator();
+
+                mMapelencocorsiscuola = new HashMap<String, List<Corso>>();
+
+                while (scuolaIterator.hasNext()) {
+                    String key = (String) scuolaIterator.next();
+                    ArrayList value = (ArrayList) meMap.get(key);
+                    corsilist = new ArrayList<Corso>();
+                    Corso vuoto = new Corso("","Seleziona un corso","","","","",null,null,"","");
+                    corsilist.add(vuoto);
+
+                    for (int i = 0; i < value.size(); i++) {
+
+                        HashMap corsoMap = (HashMap) value.get(i);
+                        Iterator corsoIterator = corsoMap.keySet().iterator();
+                        String codicedelcorso = "";
+                        String nomecorso = "";
+                        String sito = "";
+                        String tipo = "";
+                        String campus = "";
+                        String accesso = "";
+                        Long idscuola= null;
+                        Long durata =null;
+                        String sededidattica="";
+
+                        while (corsoIterator.hasNext()) {
+                            String corsoKey = (String) corsoIterator.next();
+
+                            switch (corsoKey) {
+                                case "corso_codice":
+                                    codicedelcorso = String.valueOf(corsoMap.get(corsoKey));
+                                    break;
+                                case "corso_descrizione":
+                                    nomecorso = (String) corsoMap.get(corsoKey);
+                                    break;
+                                case "url":
+                                    sito = (String) corsoMap.get(corsoKey);
+                                    break;
+                                case "tipologia":
+                                    tipo = (String) corsoMap.get(corsoKey);
+                                    break;
+                                case "campus":
+                                    campus = (String) corsoMap.get(corsoKey);
+                                    break;
+                                case "accesso":
+                                    accesso = (String) corsoMap.get(corsoKey);
+                                    break;
+                                case "cod_scuola":
+                                    idscuola= (Long) corsoMap.get(corsoKey);
+                                    break;
+                                case "durata":
+                                    durata= (Long) corsoMap.get(corsoKey);
+                                    break;
+                                case "sededidattica":
+                                    sededidattica=(String) corsoMap.get(corsoKey);
+                                    break;
+                            }
+                        }
+                        Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica,key);
+//                        completecorsolist.add(corso);
+                        corsilist.add(corso);
+                    }
+                    mMapelencocorsiscuola.put(key,corsilist);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
@@ -245,9 +331,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mSelectedScuola = (Scuola) mScuolaSpinner.getSelectedItem();
 
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference ref = database.getReference();
-
                 mCount=mCount+1;
                 mCountResetScuola=mCountResetScuola+1;
                 setTitle("Tutte le aule Unibo");
@@ -256,34 +339,25 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                     mCorsoSpinner.setClickable(true);
 
-                    Query query = ref.child("corso/" + mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId());
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            mListaCorsi.clear();
-                            Corso vuoto = new Corso("","Seleziona un corso","","","","",null,null,"","");
-                                mListaCorsi.add(vuoto);
-                                initMap();
+                    if (!mMapelencocorsiscuola.isEmpty()){
+                        mListaCorsi = mMapelencocorsiscuola.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId());
+                    }
 
-                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                String nome = (String) data.child("corso_descrizione").getValue();
-                                String codicecorso = String.valueOf(data.child("corso_codice").getValue());
 
-                                Corso corso = new Corso(codicecorso, nome, "", "", "", "",null,null,"","");
-                                mListaCorsi.add(corso);
+//                    for (int c=0;
+//                         c<elencocorsiprovv.size();c++){
+//                        if (elencocorsiprovv.get(c).getAbbreviazioneSCuola().equals(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()])){
+//                            mListaCorsi.add(elencocorsiprovv.get(c));
+//                        }
+//                    }
+                    //mListaCorsi.add((Corso) ));
 
-                            }
-                            initCorsoArray();
-                            mCorsoSpinner.setVisibility(View.VISIBLE);
-                        }
+                    initMap();
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            if (databaseError != null) {
 
-                            }
-                        }
-                    });
+                    initCorsoArray();
+                    mCorsoSpinner.setVisibility(View.VISIBLE);
+
                 }
                 else if (mCount==1 ) {
                     mCorsoSpinner.setVisibility(View.GONE);
@@ -327,8 +401,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 mSelectedCorso = (Corso) mCorsoSpinner.getSelectedItem();
                 mListaIndirizzi.clear();
 
-                if (callingactivity.equals("main") || mCountResetScuola != 1) {
-                    mClusterManager.clearItems();
+                if (callingactivity.equals("main") || mCountResetScuola != 1 && mClusterManager2!=null) {
                     mClusterManager2.clearItems();
                 }
                 if (mMap != null) {
