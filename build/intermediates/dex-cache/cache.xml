@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\ale96\Documents\AlmaOrienteering_Android\pagerIndicatorLibrary\build\intermediates\bundles\default\classes.jar"
+        jar="/projects/AlmaOrienteering_Android/pagerIndicatorLibrary/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="9955aadce7dbc82d6f2cae7c378f2d50006c063c">
-        <dex dex="C:\Users\ale96\Documents\AlmaOrienteering_Android\app\build\intermediates\pre-dexed\debug\classes_615c878943e150c187f587571964767c2f9a29ba.jar" />
+        <dex dex="/projects/AlmaOrienteering_Android/app/build/intermediates/pre-dexed/debug/classes_2e39ed962ce1e7cc236efb34c5910d81a8a854d6.jar" />
     </item>
 
 </items>
