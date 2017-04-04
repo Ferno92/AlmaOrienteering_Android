@@ -49,7 +49,7 @@
             android:label="Map"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".CalendarActivity"
+            android:name=".calendar.CalendarActivity"
             android:label="Eventi AlmaOrienta"
             android:theme="@style/AppTheme" />
         <activity
