@@ -80,6 +80,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     Integer mCountResetScuola;
     List<IndirizziModel> mElencoIndirizziScuole=new ArrayList<>();
     HashMap<String,List<IndirizziModel>> MapIndirizziScuole;
+    boolean primaquery =false;
+    boolean secondaquery=false;
+    boolean terzaquery=false;
 
 
     public static final Scuola[] mScuolaadatt = new Scuola[]{
@@ -107,18 +110,28 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         final long startTime = System.nanoTime();
 
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading");
+        mProgress.setMessage("Stiamo caricando i dati");
+        mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        mProgress.show();
+
         setContentView(R.layout.maps_activity);
 
         mCount=0;
         mCountResetScuola=0;
 
+
+
         setTitle("Tutte le aule Unibo");
 
-        initScuolaArray();
+        //initScuolaArray();
 
         mCorsoSpinner = (Spinner) findViewById(R.id.spinnercorso);
 
         MapIndirizziScuole=new HashMap<>();
+        mMapelencocorsiscuola = new HashMap<String, List<Corso>>();
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
@@ -140,10 +153,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 }
                 Log.d("size lista aule", String.valueOf(mListaAule.size()));
                 initMap();
-                mProgress.dismiss();
-                //long converter = 1000000000;
-                Double difference = (Double.longBitsToDouble(System.nanoTime() - startTime))/((Double.longBitsToDouble(1000000000)));
-                Toast.makeText(getApplicationContext(),String.valueOf(difference)+" secondi impiegati",Toast.LENGTH_SHORT).show();
+                primaquery=true;
+
+//                Double difference = (Double.longBitsToDouble(System.nanoTime() - startTime))/((Double.longBitsToDouble(1000000000)));
+//                Toast.makeText(getApplicationContext(),String.valueOf(difference)+" secondi impiegati",Toast.LENGTH_SHORT).show();
 
             }
 
@@ -159,7 +172,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         query8.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //for (DataSnapshot data : dataSnapshot.getChildren()) {
                     HashMap MapIndirizziProvv=(HashMap) dataSnapshot.getValue();
                     Iterator scuolaIterator = MapIndirizziProvv.keySet().iterator();
 
@@ -204,10 +216,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                             mElencoIndirizziScuole.add(address);
                         }
                         MapIndirizziScuole.put(key,mElencoIndirizziScuole);
+                        secondaquery=true;
+                        initScuolaArray();
                     }
 
-                //}
-                initMap();
             }
 
             @Override
@@ -225,7 +237,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 HashMap meMap = (HashMap) dataSnapshot.getValue();
                 Iterator scuolaIterator = meMap.keySet().iterator();
 
-                mMapelencocorsiscuola = new HashMap<String, List<Corso>>();
 
                 while (scuolaIterator.hasNext()) {
                     String key = (String) scuolaIterator.next();
@@ -258,34 +269,17 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                                 case "corso_descrizione":
                                     nomecorso = (String) corsoMap.get(corsoKey);
                                     break;
-                                case "url":
-                                    sito = (String) corsoMap.get(corsoKey);
-                                    break;
-                                case "tipologia":
-                                    tipo = (String) corsoMap.get(corsoKey);
-                                    break;
-                                case "campus":
-                                    campus = (String) corsoMap.get(corsoKey);
-                                    break;
-                                case "accesso":
-                                    accesso = (String) corsoMap.get(corsoKey);
-                                    break;
-                                case "cod_scuola":
-                                    idscuola= (Long) corsoMap.get(corsoKey);
-                                    break;
-                                case "durata":
-                                    durata= (Long) corsoMap.get(corsoKey);
-                                    break;
-                                case "sededidattica":
-                                    sededidattica=(String) corsoMap.get(corsoKey);
-                                    break;
+
                             }
                         }
                         Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica,key);
-//                        completecorsolist.add(corso);
                         corsilist.add(corso);
                     }
                     mMapelencocorsiscuola.put(key,corsilist);
+                    terzaquery=true;
+                    initScuolaArray();
+//                    mProgress.dismiss();
+
 
                 }
 
@@ -300,87 +294,73 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     }
 
-    private void initScuolaArray(){
-        ArrayAdapter spinnerScuolaArrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, this.mScuolaadatt);
-        mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
-        mScuolaSpinner.setAdapter(spinnerScuolaArrayAdapter);
-        final String callingactivity = getIntent().getExtras().getString("CallingActivity");
-        if (callingactivity.equals("dettagliCorso")) {
-            final Long idscuola = getIntent().getExtras().getLong("idscuola");
-            mScuolaSpinner.setSelection((int) (long) idscuola);
-            mProgress = new ProgressDialog(this);
-            mProgress.setTitle("Loading");
-            mProgress.setMessage("Stiamo caricando i dati");
-            mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-            mProgress.show();
-        }
+    private void initScuolaArray() {
+        if (secondaquery && terzaquery) {
+            if (mCount==0){
+                mProgress.dismiss();
+            }
+            ArrayAdapter spinnerScuolaArrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, this.mScuolaadatt);
+            mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
+            mScuolaSpinner.setAdapter(spinnerScuolaArrayAdapter);
+            final String callingactivity = getIntent().getExtras().getString("CallingActivity");
+            if (callingactivity.equals("dettagliCorso")) {
+                final Long idscuola = getIntent().getExtras().getLong("idscuola");
+                mScuolaSpinner.setSelection((int) (long) idscuola);
 
-        if (callingactivity.equals("main")) {
-            mProgress = new ProgressDialog(this);
-            mProgress.setTitle("Loading");
-            mProgress.setMessage("Stiamo caricando i dati");
-            mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-            mProgress.show();
-        }
+            }
 
-        initMap();
+            mScuolaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-        mScuolaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    mSelectedScuola = (Scuola) mScuolaSpinner.getSelectedItem();
 
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mSelectedScuola = (Scuola) mScuolaSpinner.getSelectedItem();
-
-                mCount=mCount+1;
-                mCountResetScuola=mCountResetScuola+1;
-                setTitle("Tutte le aule Unibo");
-
-                if (mScuolaSpinner.getSelectedItemPosition()!=0) {
-
-                    mCorsoSpinner.setClickable(true);
-
-                    if (!mMapelencocorsiscuola.isEmpty()){
-                        mListaCorsi = mMapelencocorsiscuola.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId());
-                    }
-
-
-//                    for (int c=0;
-//                         c<elencocorsiprovv.size();c++){
-//                        if (elencocorsiprovv.get(c).getAbbreviazioneSCuola().equals(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()])){
-//                            mListaCorsi.add(elencocorsiprovv.get(c));
-//                        }
-//                    }
-                    //mListaCorsi.add((Corso) ));
-
-                    initMap();
-
-
-                    initCorsoArray();
-                    mCorsoSpinner.setVisibility(View.VISIBLE);
-
-                }
-                else if (mCount==1 ) {
-                    mCorsoSpinner.setVisibility(View.GONE);
-                    initMap();
-                    if (mClusterManager2!=null){
+                    mCount = mCount + 1;
+                    mCountResetScuola = mCountResetScuola + 1;
+                    setTitle("Tutte le aule Unibo");
+                    if (mClusterManager2!=null) {
                         mClusterManager2.clearItems();
-                    }
-                }
-                else {
-                    mCorsoSpinner.setSelection(0);
-                    mCorsoSpinner.setClickable(false);
-                    if (mClusterManager2 != null) {
                         mMap.clear();
                     }
-                    initMap();
+                    if (mMap!=null){
+                        mMap.clear();
+                    }
+
+                    if (mScuolaSpinner.getSelectedItemPosition() != 0) {
+                        if (mCorsoSpinner.getVisibility()==View.GONE){
+                            mCorsoSpinner.setVisibility(View.VISIBLE);
+                        }
+                        mCorsoSpinner.setClickable(true);
+
+                        mListaCorsi = mMapelencocorsiscuola.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId());
+
+                        initMap();
+
+                        initCorsoArray();
+                        mCorsoSpinner.setVisibility(View.VISIBLE);
+
+                    } else if (mScuolaSpinner.getSelectedItemPosition() ==0 && mCount == 1) {
+                        //mCorsoSpinner.setVisibility(View.GONE);
+                        if (mMap!=null){
+                            mMap.clear();
+                        }
+                        initMap();
+                    } else {
+                        mCorsoSpinner.setSelection(0);
+                        mCorsoSpinner.setClickable(false);
+                        if (mMap!=null){
+                            mMap.clear();
+                        }
+                        initMap();
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     private void initCorsoArray(){
@@ -392,8 +372,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         if (callingactivity.equals("dettagliCorso") && mCountResetScuola==1) {
             Integer codcorso = getIntent().getExtras().getInt("codcorso");
             mCorsoSpinner.setSelection(codcorso);
-            mProgress.dismiss();
         }
+
 
         mCorsoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -401,7 +381,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 mSelectedCorso = (Corso) mCorsoSpinner.getSelectedItem();
                 mListaIndirizzi.clear();
 
-                if (callingactivity.equals("main") || mCountResetScuola != 1 && mClusterManager2!=null) {
+                if (mClusterManager2!=null) {
                     mClusterManager2.clearItems();
                 }
                 if (mMap != null) {
@@ -411,16 +391,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 if (mCorsoSpinner.getSelectedItemPosition() != 0) {
                     String codicecorso = mSelectedCorso.getCorsoCodice();
                     setTitle("Sedi del corso selezionato");
-
-//                    mListaIndirizzi.clear();
-
-//                    if (callingactivity.equals("main") || mCountResetScuola != 1) {
-//                        mClusterManager.clearItems();
-//                        mClusterManager2.clearItems();
-//                    }
-//                    if (mMap != null) {
-//                        mMap.clear();
-//                    }
 
                     List<IndirizziModel> dettagliscuola = MapIndirizziScuole.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()]
                             .getScuolaId());
@@ -436,11 +406,14 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 } else if (mScuolaSpinner.getSelectedItemPosition()!=0){
 //                    //tutte le sedi della scuola
                     setTitle("Sedi della scuola");
-//                    mListaIndirizzi.clear();
 
-                    if (callingactivity.equals("main") || mCountResetScuola != 1) {
+                    if (callingactivity.equals("main") ) {
                         mClusterManager.clearItems();
                     }
+                    if(mClusterManager2!=null){
+                        mClusterManager2.clearItems();
+                    }
+
                     if (mMap != null) {
                         mMap.clear();
                     }
@@ -453,7 +426,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                     }
 
                     initMap();
-
 
                 }
 
@@ -520,8 +492,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
 
         mClusterManager = new ClusterManager<AulaMarker>(this, this.mMap);
-
-
+        mClusterManager.setRenderer(new CustomRenderer(getApplicationContext(),mMap,mClusterManager));
 
         // Point the map's listeners at the listeners implemented by the cluster
         // manager.
@@ -563,7 +534,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                                             // continue with delete
                                         }
                                     })
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setIcon(R.drawable.ic_mappa)
                                     .show();
                         }
 
@@ -594,8 +565,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 //        // To dismiss the dialog
 //        mProgress.dismiss();
 //
-//
-        this.mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(44.32, 11.78), 8.0f));
+        CameraUpdate center = CameraUpdateFactory.newLatLngZoom(new LatLng(44.32, 11.78),8.0f);
+        this.mMap.animateCamera(center, 800, null);
+
         // Initialize the manager with the context and the map.
         // (Activity extends context, so we can pass 'this' in the constructor.)
 
@@ -646,7 +618,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                                             // continue with delete
                                         }
                                     })
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setIcon(R.drawable.ic_mappa)
                                     .show();
                         }
 
@@ -698,6 +670,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
         }
     }
+
+
 
     //    https://developers.google.com/maps/documentation/android-api/config
 //    https://developers.google.com/maps/documentation/android-api/map

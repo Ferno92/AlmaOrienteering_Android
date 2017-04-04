@@ -12,19 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"
+        android:visibility="visible" />
 
     <Spinner
         android:id="@+id/spinnercorso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"
+        android:visibility="gone" />
 
     <fragment
         android:id="@+id/map"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        map:cameraTargetLat="44.32"
+        map:cameraTargetLng="11.78"
+        map:cameraZoom="7.5"/>
 
 </LinearLayout>
