@@ -128,6 +128,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         //initScuolaArray();
 
         mCorsoSpinner = (Spinner) findViewById(R.id.spinnercorso);
+        mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
+
 
         MapIndirizziScuole=new HashMap<>();
         mMapelencocorsiscuola = new HashMap<String, List<Corso>>();
@@ -300,7 +302,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 mProgress.dismiss();
             }
             ArrayAdapter spinnerScuolaArrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, this.mScuolaadatt);
-            mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
+            //mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
             mScuolaSpinner.setAdapter(spinnerScuolaArrayAdapter);
             final String callingactivity = getIntent().getExtras().getString("CallingActivity");
             if (callingactivity.equals("dettagliCorso")) {
@@ -320,17 +322,18 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                     setTitle("Tutte le aule Unibo");
                     if (mClusterManager2!=null) {
                         mClusterManager2.clearItems();
-                        mMap.clear();
+                        //mMap.clear();
                     }
-                    if (mMap!=null){
-                        mMap.clear();
-                    }
+//                    if (mMap!=null){
+//                        mMap.clear();
+//                    }
 
                     if (mScuolaSpinner.getSelectedItemPosition() != 0) {
                         if (mCorsoSpinner.getVisibility()==View.GONE){
                             mCorsoSpinner.setVisibility(View.VISIBLE);
                         }
                         mCorsoSpinner.setClickable(true);
+                        mCorsoSpinner.setSelection(0);
 
                         mListaCorsi = mMapelencocorsiscuola.get(mScuolaadatt[mScuolaSpinner.getSelectedItemPosition()].getScuolaId());
 
@@ -341,16 +344,16 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                     } else if (mScuolaSpinner.getSelectedItemPosition() ==0 && mCount == 1) {
                         //mCorsoSpinner.setVisibility(View.GONE);
-                        if (mMap!=null){
-                            mMap.clear();
-                        }
+//                        if (mMap!=null){
+//                            mMap.clear();
+//                        }
                         initMap();
                     } else {
                         mCorsoSpinner.setSelection(0);
                         mCorsoSpinner.setClickable(false);
-                        if (mMap!=null){
-                            mMap.clear();
-                        }
+//                        if (mMap!=null){
+//                            mMap.clear();
+//                        }
                         initMap();
                     }
                 }
@@ -383,10 +386,11 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                 if (mClusterManager2!=null) {
                     mClusterManager2.clearItems();
+
                 }
-                if (mMap != null) {
-                    mMap.clear();
-                }
+//                if (mMap != null) {
+//                    mMap.clear();
+//                }
 
                 if (mCorsoSpinner.getSelectedItemPosition() != 0) {
                     String codicecorso = mSelectedCorso.getCorsoCodice();
@@ -407,6 +411,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 //                    //tutte le sedi della scuola
                     setTitle("Sedi della scuola");
 
+
                     if (callingactivity.equals("main") ) {
                         mClusterManager.clearItems();
                     }
@@ -424,6 +429,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                             mListaIndirizzi.add(dettagliscuola.get(a));
                     }
+
 
                     initMap();
 
@@ -462,17 +468,24 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         }
 
         if (mCorsoSpinner.getSelectedItemPosition()==0 && mScuolaSpinner.getSelectedItemPosition()!=0){
+            if (mMap!=null){
+                mMap.clear();
+            }
             setUpClusterer2();
         }
-
-        if (mScuolaSpinner.getSelectedItemPosition()==0) {
-            setUpClusterer();
-            setTitle("Tutte le aule Unibo");
+        if (primaquery) {
+            if (mScuolaSpinner.getSelectedItemPosition() == 0) {
+                setUpClusterer();
+                setTitle("Tutte le aule Unibo");
+            }
         }
 
     }
 
     public void initMap(){
+        if (mMap!=null){
+            mMap.clear();
+        }
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(map);
