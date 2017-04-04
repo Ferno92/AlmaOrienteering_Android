@@ -16,11 +16,13 @@ public class TutorialPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return TutorialFragment.newInstance(position);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 4;
     }
+
+
 }

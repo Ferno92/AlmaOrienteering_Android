@@ -20,6 +20,7 @@ import com.almaorient.ferno92.almaorienteering.MapsActivity;
 import com.almaorient.ferno92.almaorienteering.ModusActivity;
 import com.almaorient.ferno92.almaorienteering.R;
 import com.almaorient.ferno92.almaorienteering.recensioni.RecensioniActivity;
+import com.almaorient.ferno92.almaorienteering.tutorial.TutorialActivity;
 import com.almaorient.ferno92.almaorienteering.versus.VersusSelectorActivity;
 
 /**
@@ -93,7 +94,8 @@ public class HomeElementFragment extends Fragment {
                         startActivity(i);
                         break;
                     case 6:
-                        i = new Intent(getContext(), InfoAppActivity.class);
+                        i = new Intent(getContext(), TutorialActivity.class);
+                        i.putExtra("fromHomepage", true);
                         startActivity(i);
                         break;
                     case 7:

@@ -2,53 +2,71 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark">
+
     <android.support.v4.view.ViewPager
         android:id="@+id/tutorial_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFFFFF"
-        android:layout_above="@+id/footer_tutorial"></View>
+        android:layout_above="@+id/footer_tutorial"
+        android:background="#FFFFFF"></View>
+
     <LinearLayout
         android:id="@+id/footer_tutorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="15dp">
+        android:layout_alignParentBottom="true">
+
         <TextView
+            android:id="@+id/skip"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Skip"
+            android:text="SKIP"
             android:textColor="#FFFFFF"
-            />
-        <com.viewpagerindicator.IcsLinearLayout
+            android:padding="15dp"
+            android:textStyle="bold"/>
+
+        <com.pixelcan.inkpageindicator.InkPageIndicator
             android:id="@+id/tutorial_indicator"
+            app:animationDuration="320"
+            app:currentPageIndicatorColor="@color/colorPrimary"
+            app:dotDiameter="10dp"
+            app:dotGap="8dp"
+            app:pageIndicatorColor="#FFFFFF"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            ></com.viewpagerindicator.IcsLinearLayout>
+            android:padding="20dp"
+            android:layout_alignParentBottom="true"/>
+
         <TextView
+            android:id="@+id/done"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Done"
             android:gravity="right"
+            android:text="DONE"
             android:textColor="#FFFFFF"
             android:visibility="gone"
+            android:padding="15dp"
+            android:textStyle="bold"
             />
+
         <TextView
+            android:id="@+id/next"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Next"
             android:gravity="right"
+            android:text="NEXT"
             android:textColor="#FFFFFF"
-            />
+            android:padding="15dp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
