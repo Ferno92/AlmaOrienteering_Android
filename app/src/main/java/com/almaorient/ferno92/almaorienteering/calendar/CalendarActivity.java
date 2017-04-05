@@ -1,19 +1,21 @@
 package com.almaorient.ferno92.almaorienteering.calendar;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CalendarView;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.almaorient.ferno92.almaorienteering.BaseActivity;
 import com.almaorient.ferno92.almaorienteering.R;
@@ -24,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,15 +39,17 @@ import java.util.Iterator;
  * Created by luca.fernandez on 13/03/2017.
  */
 
-public class CalendarActivity extends BaseActivity {
+public class CalendarActivity extends BaseActivity implements  ListEventiAdapter.Listener {
     private LinearLayout mRootView;
     private ArrayList<CalendarModel> mMonthList = new ArrayList<>();
     private ProgressDialog mProgress;
+    private int mId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Loading");
         mProgress.setMessage("Stiamo cercando gli eventi più interessanti");
@@ -58,6 +64,7 @@ public class CalendarActivity extends BaseActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                showEventNotification();
 
                 HashMap yearMap = (HashMap) dataSnapshot.getValue();
                 Iterator monthIterator = yearMap.keySet().iterator();
@@ -113,20 +120,97 @@ public class CalendarActivity extends BaseActivity {
 
     }
 
+    private void showEventNotification() {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("Nuovo evento AlmaOrienta!")
+                        .setContentText("E' ora disponibile un nuovo evento AlmaOrienta, controlla sull'app.");
+// Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(this, CalendarActivity.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(CalendarActivity.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(mId, mBuilder.build());
+    }
+
     private void insertMonthInView(ArrayList<HashMap> month, String nomeMese) {
         LayoutInflater inflater =
                 (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View newLayout = inflater.inflate(R.layout.mese_layout, mRootView, false);
         TextView meseText = (TextView) newLayout.findViewById(R.id.nome_mese);
-        meseText.setText(nomeMese);
+        meseText.setText(nomeMese + " 2017");
         CalendarListView eventiList = (CalendarListView) newLayout.findViewById(R.id.lista_eventi);
 
 
-        ListEventiAdapter listEventiAdapter = new ListEventiAdapter(this, month);
+        ListEventiAdapter listEventiAdapter = new ListEventiAdapter(this, month, this);
 
         eventiList.setAdapter(listEventiAdapter);
 
         mRootView.addView(newLayout, 0);
+    }
+
+    @Override
+    public void addEventToCalendar(HashMap evento, ViewGroup parent) {
+
+        // get startime and endTime
+        long startTime = getTime((String)evento.get("day"), (String)evento.get("start"), parent);
+        long endTime = getTime((String)evento.get("day"), (String)evento.get("end"), parent);
+
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
+//        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+        intent.putExtra(CalendarContract.Events.TITLE, (String)evento.get("title"));
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, (String)evento.get("description"));
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, (String)((String) evento.get("title")).replace("OPEN-DAY", ""));
+//        intent.putExtra(CalendarContract.Events.RRULE, "FREQ=YEARLY");
+        startActivity(intent);
+    }
+
+    private long getTime(String day, String hour, ViewGroup parent){
+        String nomeMese = ((TextView)((LinearLayout)parent.getParent()).findViewById(R.id.nome_mese)).getText().toString();
+        nomeMese = nomeMese.replace(" 2017", "");
+        int meseIndex = -1;
+
+        for(int i = 0; i < mMonthList.size(); i++){
+            if(mMonthList.get(i).getNomeMese().equals(nomeMese)){
+                meseIndex = mMonthList.get(i).getPosition();
+                break;
+            }
+        }
+        String input = String.format("%02d", Integer.parseInt(day)) + "-" + String.format("%02d", meseIndex) + "-2017 " + hour;
+        SimpleDateFormat inFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Date date = null;
+        try {
+            date = inFormat.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        return date.getTime();
+    }
+
+    public ArrayList getMonthList(){
+        return this.mMonthList;
     }
 
     class MonthComparator implements Comparator<CalendarModel> {
