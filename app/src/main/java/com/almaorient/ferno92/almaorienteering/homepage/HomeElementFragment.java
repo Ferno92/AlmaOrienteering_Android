@@ -30,14 +30,14 @@ public class HomeElementFragment extends Fragment {
     private View mRootView;
     private int mPosition;
     public static HomeElementModel[] mElementList = new HomeElementModel[]{
-            new HomeElementModel(0, "Come funziona UNIBO", "Informatevi sul funzionamento dell'ateneo e sui vari aspetti che lo caratterizzano.", "ic_unibo_big"),
-            new HomeElementModel(1, "Offerta formativa", "Accedete e informatevi sulle 11 Scuole presenti all'interno dell'Università di Bologna", "ic_elenco_scuole_big"),
-            new HomeElementModel(2, "Mappa aule", "Prendete visione della posizione delle aule dell'Ateneo, facendovi aiutare dai filtri.", "ic_mappa_big"),
-            new HomeElementModel(3, "Fai una domanda", "Grazie alla collaborazione\n con l'associazione culturale Modus,\n potrete avere un contatto supplementare per eventuali domande irrisolte.", "ic_icona_chat_big"),
-            new HomeElementModel(4, "Statistiche", "Mettete a confronto Scuole o Corsi per avere un riscontro immediato sulle statistiche raccolte dall'Unibo.", "ic_statistica_big"),
-            new HomeElementModel(5, "Calendario eventi", "Siate sempre aggiornati su eventuali incontri/orientamenti organizzati dalle 11 Scuole.", "ic_calendario_icona_big"),
-            new HomeElementModel(6, "Tutorial", "Non sapete da dove partire? Consultate nuovamente il tutorial di Almaorienteering", "ic_guida_big"),
-            new HomeElementModel(7, "Recensioni", "Accedete alle valutazioni redatte dagli studenti iscritti, per ottenere informazioni di gradimento su corsi o esami", "ic_recensioni_big")
+            new HomeElementModel(0, "Come funziona UNIBO", "Informati sul funzionamento dell'ateneo e sui servizi che offre.", "ic_unibo_big"),
+            new HomeElementModel(1, "Offerta formativa", "Visualizza tutte le informazioni sui corsi delle 11 Scuole dell'Università di Bologna.", "ic_elenco_scuole_big"),
+            new HomeElementModel(2, "Mappa aule", "Prendi visione della posizione delle aule dell'Ateneo e scopri dove si svolgono le lezioni dei vari corsi.", "ic_mappa_big"),
+            new HomeElementModel(3, "Fai una domanda", "Grazie alla collaborazione\n con l'associazione culturale Modus,\n potrai avere un contatto supplementare per eventuali domande irrisolte.", "ic_icona_chat_big"),
+            new HomeElementModel(4, "Statistiche", "Metti a confronto Scuole o Corsi per avere un riscontro immediato sulle statistiche Almalaurea.", "ic_statistica_big"),
+            new HomeElementModel(5, "Calendario eventi", "Rimani sempre aggiornato su eventuali incontri/orientamenti organizzati dalle Scuole.", "ic_calendario_icona_big"),
+            new HomeElementModel(6, "Tutorial", "Non sai da dove partire? Consulta nuovamente il tutorial di Almaorienteering", "ic_guida_big"),
+            new HomeElementModel(7, "Recensioni", "Rilascia qui la tua opinione sul corso di laurea che stai frequentando per aiutare i futuri studenti", "ic_recensioni_big")
     };
 
 

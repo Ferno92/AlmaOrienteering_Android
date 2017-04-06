@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -11,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,16 @@ public class CalendarActivity extends BaseActivity implements  ListEventiAdapter
         mProgress.setMessage("Stiamo cercando gli eventi più interessanti");
         mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
         mProgress.show();
+        mProgress.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+                if (i==keyEvent.KEYCODE_BACK){
+                    mProgress.dismiss();
+                    finish();
+                }
+                return false;
+            }
+        });
 
         this.mRootView = (LinearLayout) findViewById(R.id.main_calendar_layout);
 

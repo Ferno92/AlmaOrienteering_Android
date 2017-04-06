@@ -7,10 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.almaorient.ferno92.almaorienteering.ElencoScuole.ExpandableListAdapter1;
 import com.almaorient.ferno92.almaorienteering.login.LoginActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.R.drawable.btn_minus;
 import static android.R.drawable.btn_plus;
@@ -31,32 +37,38 @@ public class InfoGeneraliActivity extends BaseActivity {
         startActivity(browser);
     }
 
+    private void onPressButton(RelativeLayout relativeLayout, final ImageView imageView, final WebView webView){
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (webView.getVisibility() == View.GONE)
+                {
+                    webView.setVisibility(view.VISIBLE);
+                    imageView.setImageResource(R.drawable.ic_expand_less);
+
+                } else {
+                    webView.setVisibility(view.GONE);
+                    imageView.setImageResource(R.drawable.ic_expand_more);
+                }
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_generali);
+        setTitle("Come funziona?");
 
-
-
+///Contatti
         final WebView unoWebView = (WebView) findViewById(R.id.webview1);
         unoWebView.loadData(getString(R.string.contatti), "text/html; charset=utf-8", "utf-8");
-        final ImageButton primoplusImageButton = (ImageButton) findViewById(plusuno);
-        primoplusImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (unoWebView.getVisibility() == View.GONE)
-                {
-                    unoWebView.setVisibility(view.VISIBLE);
-                    primoplusImageButton.setImageResource(R.drawable.ic_expand_less);
+        final ImageView primoplusImageButton = (ImageView) findViewById(plusuno);
+        RelativeLayout relativeLayout1=(RelativeLayout) findViewById(R.id.relativelayout1);
+        onPressButton(relativeLayout1,primoplusImageButton,unoWebView);
 
-                } else {
-                    unoWebView.setVisibility(view.GONE);
-                    primoplusImageButton.setImageResource(R.drawable.ic_expand_more);
-                }
+//Internazionale
 
-            }
-
-        });
         final Button ulterioriinfo2Button = (Button) findViewById(R.id.ulterioriinfo2);
         ulterioriinfo2Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +78,9 @@ public class InfoGeneraliActivity extends BaseActivity {
         });
         final WebView dueWebView = (WebView) findViewById(R.id.webview2);
         dueWebView.loadData(getString(R.string.internazionale), "text/html; charset=utf-8", "utf-8");
-        final ImageButton secondoplusImageButton = (ImageButton) findViewById(plusdue);
-        secondoplusImageButton.setOnClickListener(new View.OnClickListener() {
+        final ImageView secondoplusImageButton = (ImageView) findViewById(plusdue);
+        RelativeLayout relativeLayout2=(RelativeLayout) findViewById(R.id.relativelayout2);
+        relativeLayout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (dueWebView.getVisibility() == View.GONE)
@@ -88,8 +101,9 @@ public class InfoGeneraliActivity extends BaseActivity {
 
         final WebView treWebView = (WebView) findViewById(R.id.webview3);
         treWebView.loadData(getString(R.string.multicampus), "text/html; charset=utf-8", "utf-8");
-        final ImageButton terzoplusImageButton = (ImageButton) findViewById(plustre);
-        terzoplusImageButton.setOnClickListener(new View.OnClickListener() {
+        final ImageView terzoplusImageButton = (ImageView) findViewById(plustre);
+        RelativeLayout relativeLayout3=(RelativeLayout) findViewById(R.id.relativelayout3);
+        relativeLayout3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (treWebView.getVisibility() == View.GONE)
@@ -111,6 +125,8 @@ public class InfoGeneraliActivity extends BaseActivity {
         final ImageView schemaImageView = (ImageView) findViewById(R.id.schema);
         final WebView quattro4WebView = (WebView) findViewById(R.id.webview44);
         final Button ulterioriinfo4Button = (Button) findViewById(R.id.ulterioriinfo4);
+        RelativeLayout relativeLayout4=(RelativeLayout) findViewById(R.id.relativelayout4);
+
 
         ulterioriinfo4Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +138,8 @@ public class InfoGeneraliActivity extends BaseActivity {
 
 
         quattro4WebView.loadData(getString(R.string.sistemauniv2), "text/html; charset=utf-8", "utf-8");
-        final ImageButton quartoplusImageButton = (ImageButton) findViewById(plusquattro);
-        quartoplusImageButton.setOnClickListener(new View.OnClickListener() {
+        final ImageView quartoplusImageButton = (ImageView) findViewById(plusquattro);
+        relativeLayout4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (quattroWebView.getVisibility() == View.GONE)
@@ -147,4 +163,5 @@ public class InfoGeneraliActivity extends BaseActivity {
 
         });
     }
+
 }

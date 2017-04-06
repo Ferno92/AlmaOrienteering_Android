@@ -21,7 +21,8 @@
                 android:id="@+id/relativelayout1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.11">
+                android:layout_weight="0.11"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:id="@+id/textView1"
@@ -29,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:layout_column="1"
                     android:layout_row="0"
                     android:layout_weight="0.11"
@@ -37,10 +38,10 @@
                     android:textAlignment="center"
                     android:textSize="22sp" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plusuno"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
@@ -63,26 +64,35 @@
                 android:textAlignment="center"
                 android:visibility="gone" />
 
+            <ImageView
+                android:id="@+id/imageView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                app:srcCompat="@color/elencoscuoletitle" />
+
             <RelativeLayout
                 android:id="@+id/relativelayout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.11">
+                android:layout_weight="0.11"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:text="Internazionale"
                     android:textSize="22sp" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plusdue"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
@@ -105,19 +115,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.11"
+                android:background="@color/colorAccent"
                 android:text="Ulteriori informazioni"
                 android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imageView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                app:srcCompat="@color/elencoscuoletitle" />
 
             <RelativeLayout
                 android:id="@+id/relativelayout3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.11">
+                android:layout_weight="0.11"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plustre"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/webview2"
@@ -131,7 +151,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:layout_weight="0.11"
                     android:text="Multicampus"
                     android:textSize="22sp" />
@@ -148,16 +168,25 @@
                 android:layout_weight="0.11"
                 android:visibility="gone" />
 
+            <ImageView
+                android:id="@+id/imageView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                app:srcCompat="@color/elencoscuoletitle" />
+
             <RelativeLayout
                 android:id="@+id/relativelayout4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.11">
+                android:layout_weight="0.11"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plusquattro"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
@@ -171,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:text="Il Sistema Universitario"
                     android:textSize="22sp" />
 
@@ -209,8 +238,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.11"
+                android:background="@color/colorAccent"
                 android:text="Ulteriori informazioni"
                 android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imageView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                app:srcCompat="@color/elencoscuoletitle" />
 
 
         </LinearLayout>

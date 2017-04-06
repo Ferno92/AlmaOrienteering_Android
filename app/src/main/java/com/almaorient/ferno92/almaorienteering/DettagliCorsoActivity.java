@@ -1,6 +1,8 @@
 package com.almaorient.ferno92.almaorienteering;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -128,16 +130,35 @@ public class DettagliCorsoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dettagli_corso);
 
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(mSecondoTerzoLivello.isEmpty()){
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },10000);
+
         //TextView nomecorsoText = (TextView) findViewById(R.id.nomecorso);
         TextView tipocorsoText = (TextView) findViewById(R.id.tipotxtview);
         TextView campuscorsoText = (TextView) findViewById(R.id.campustxtview);
-        TextView accessoText = (TextView) findViewById(R.id.tipoaccessoview);
+        final TextView accessoText = (TextView) findViewById(R.id.tipoaccessoview);
         TextView durataText = (TextView) findViewById(R.id.duratatxtview);
         TextView sededidatticaText = (TextView) findViewById(R.id.sedidatticatxtview);
         TextView codiceText = (TextView) findViewById(R.id.codicetxtview);
         TextView scuolaText = (TextView) findViewById(R.id.scuolatxtview);
         Button sitocorsobtn = (Button) findViewById(R.id.sitocorsobtn);
         Button recensioniCorsoButton = (Button) findViewById(R.id.button_recensioni);
+
+        accessoText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),accessoText.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         final String corso = getIntent().getExtras().getString("Vocecliccata");
@@ -173,27 +194,16 @@ public class DettagliCorsoActivity extends BaseActivity {
         //Tab 3
         spec = mTabHost.newTabSpec("Tab 4");
         spec.setContent(R.id.tab4);
-        spec.setIndicator("Sbocchi");
+        spec.setIndicator("Obiettivi");
         mTabHost.addTab(spec);
 
-
-
-
-        //FrameLayout layouttab = (FrameLayout) findViewById(R.id.)
-
-//        tab.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-//            @Override
-//            public void onTabChanged(String s) {
-//
-//            }
-//        });
+//        AnimatedTabHostListener nuovo = new AnimatedTabHostListener(this,mTabHost);
+//        mTabHost.setOnTabChangedListener(nuovo);
+        mViewPager = (ViewPager) findViewById(R.id.vpPager1);
 
         mTabHost.setCurrentTab(0);
 
         setTitle(corso);
-
-        mViewPager = (ViewPager) findViewById(R.id.vpPager1);
-
 
 
         tipocorsoText.setText(tipo);

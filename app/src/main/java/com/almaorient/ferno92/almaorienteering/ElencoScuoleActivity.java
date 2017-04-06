@@ -2,6 +2,7 @@ package com.almaorient.ferno92.almaorienteering;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
+import java.util.Timer;
 import java.util.TreeSet;
 
 
@@ -34,6 +36,7 @@ public class ElencoScuoleActivity extends BaseActivity {
     ArrayList<Corso> completecorsolist;
     ArrayList<Corso> defCorsoList;
     ArrayList<Corso> tempCorsoList;
+    boolean queryok=false;
 
 
     private void richiamoPaginaInterna(String nomecorso, String codicecorso, String url, String nomescuola,
@@ -62,7 +65,17 @@ public class ElencoScuoleActivity extends BaseActivity {
 
         setTitle("Scuole");
 
-        final Integer a = 0;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(!queryok){
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },10000);
+
 
         final String tipo_laurea = getIntent().getExtras().getString("tipo_laurea");
         final String campus_selezionato = getIntent().getExtras().getString("campus");
@@ -132,6 +145,7 @@ public class ElencoScuoleActivity extends BaseActivity {
                                     break;
                             }
                         }
+                        queryok=true;
                         Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica,key);
                         tempCorsoList.add(corso);
                         completecorsolist.add(corso);
