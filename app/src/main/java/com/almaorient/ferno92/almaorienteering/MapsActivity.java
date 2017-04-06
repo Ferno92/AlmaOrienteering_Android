@@ -14,6 +14,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +65,7 @@ import static android.R.attr.fillType;
 import static android.R.attr.padding;
 import static com.almaorient.ferno92.almaorienteering.R.id.all;
 import static com.almaorient.ferno92.almaorienteering.R.id.center;
+import static com.almaorient.ferno92.almaorienteering.R.id.layoutprogressbar;
 import static com.almaorient.ferno92.almaorienteering.R.id.map;
 
 /**
@@ -72,7 +77,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
     private ClusterManager<AulaMarker> mClusterManager;
     private ClusterManager<ScuoleMarker>mClusterManager2;
-    ProgressDialog mProgress;
+    View mProgress;
     GoogleMap mMap;
 
     Spinner mScuolaSpinner;
@@ -86,6 +91,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     boolean primaquery =false;
     boolean secondaquery=false;
     boolean terzaquery=false;
+    RelativeLayout progressbarlayout;
 
 
     public static final Scuola[] mScuolaadatt = new Scuola[]{
@@ -108,44 +114,23 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     HashMap <String, List<Corso>> mMapelencocorsiscuola;
     List<Corso> corsilist;
 
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        mProgress.dismiss();
-
-        final String callingactivity = getIntent().getExtras().getString("CallingActivity");
-        switch (callingactivity){
-
-            case "dettaglicorso":
-                mProgress.dismiss();
-                finish();
-                break;
-            case "main":
-                mProgress.dismiss();
-                finish();
-                break;
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final long startTime = System.nanoTime();
 
-
-
-        mProgress = new ProgressDialog(this);
-        mProgress.setTitle("Loading");
-        mProgress.setMessage("Stiamo caricando i dati");
-        mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-        mProgress.show();
+//        mProgress = new ProgressDialog(this);
+//        mProgress.setTitle("Loading");
+//        mProgress.setMessage("Stiamo caricando i dati");
 
         setContentView(R.layout.maps_activity);
+        progressbarlayout = (RelativeLayout) findViewById(R.id.progressbar54);
+        mProgress=  findViewById(R.id.progressbar3);
 
         mCount=0;
         mCountResetScuola=0;
+
 
 
 
@@ -154,6 +139,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         mCorsoSpinner = (Spinner) findViewById(R.id.spinnercorso);
         mScuolaSpinner = (Spinner) findViewById(R.id.spinnerscuola);
 
+        //progressbarlayout = findViewById(R.id.layoutprogressbar);
+        progressbarlayout.bringToFront();
 
         MapIndirizziScuole=new HashMap<>();
         mMapelencocorsiscuola = new HashMap<String, List<Corso>>();
@@ -319,7 +306,11 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     private void initScuolaArray() {
         if (secondaquery && terzaquery) {
             if (mCount==0){
-                mProgress.dismiss();
+//                mProgress.dismiss();
+                progressbarlayout.setVisibility(View.GONE);
+                LinearLayout layoutmap = (LinearLayout) findViewById(R.id.layoutmap);
+                layoutmap.setAlpha((float) 1.0);
+
             }
             ArrayAdapter spinnerScuolaArrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, this.mScuolaadatt);
             mScuolaSpinner.setAdapter(spinnerScuolaArrayAdapter);
@@ -339,7 +330,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
 
                     mCount = mCount + 1;
                     mCountResetScuola = mCountResetScuola + 1;
-                    mListaCorsi.clear();
                     mListaIndirizzi.clear();
                     setTitle("Tutte le aule Unibo");
 
