@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 public class ElencoScuoleActivity extends BaseActivity {
@@ -72,7 +74,8 @@ public class ElencoScuoleActivity extends BaseActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap meMap = (HashMap) dataSnapshot.getValue();
-                Iterator scuolaIterator = meMap.keySet().iterator();
+                SortedSet<String> keys = new TreeSet<String>(meMap.keySet());
+                Iterator scuolaIterator = keys.iterator();
 
                 mDataHeader = new ArrayList<String>();
                 mMapelencocorsiscuola = new HashMap<String, List<String>>();
