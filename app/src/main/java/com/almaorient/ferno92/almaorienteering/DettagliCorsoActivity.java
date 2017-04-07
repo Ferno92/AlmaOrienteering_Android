@@ -1,7 +1,10 @@
 package com.almaorient.ferno92.almaorienteering;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -125,22 +128,50 @@ public class DettagliCorsoActivity extends BaseActivity {
 
     private TabHost mTabHost;
 
+    private boolean haveNetworkConnection() {
+        boolean haveConnection = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnection = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnection = true;
+        }
+        return haveConnection;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dettagli_corso);
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!haveNetworkConnection()){
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare i server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },1500);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(mSecondoTerzoLivello.isEmpty()){
+                if(mSecondoTerzoLivello.isEmpty()&&haveNetworkConnection()){
                     finish();
                     Toast.makeText(getApplicationContext(),
                             "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
                 }
             }
         },10000);
+
+
 
         //TextView nomecorsoText = (TextView) findViewById(R.id.nomecorso);
         TextView tipocorsoText = (TextView) findViewById(R.id.tipotxtview);

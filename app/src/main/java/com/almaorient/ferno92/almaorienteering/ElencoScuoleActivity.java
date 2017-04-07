@@ -1,6 +1,7 @@
 package com.almaorient.ferno92.almaorienteering;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.almaorient.ferno92.almaorienteering.ElencoScuole.ExpandableListAdapter1;
@@ -55,6 +58,22 @@ public class ElencoScuoleActivity extends BaseActivity {
         startActivity(nuovapagina);
     }
 
+    private boolean haveNetworkConnection() {
+        boolean haveConnection = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnection = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnection = true;
+        }
+        return haveConnection;
+    }
+
     List <String> mDataHeader;
     HashMap <String, List<String>> mMapelencocorsiscuola;
 
@@ -68,7 +87,18 @@ public class ElencoScuoleActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!queryok){
+                if (!haveNetworkConnection()){
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },1500);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(!queryok && haveNetworkConnection()){
                     finish();
                     Toast.makeText(getApplicationContext(),
                             "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();

@@ -22,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.almaorient.ferno92.almaorienteering.firebaseDB.AulaMarker;
 import com.almaorient.ferno92.almaorienteering.firebaseDB.AulaModel;
@@ -80,6 +82,22 @@ import static com.almaorient.ferno92.almaorienteering.R.id.time;
 public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     List<AulaModel> mListaAule = new ArrayList<AulaModel>();
 
+    private boolean haveNetworkConnection() {
+        boolean haveConnection = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnection = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnection = true;
+        }
+        return haveConnection;
+    }
+
     private ClusterManager<AulaMarker> mClusterManager;
     private ClusterManager<ScuoleMarker>mClusterManager2;
     ProgressDialog mProgress;
@@ -119,10 +137,24 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     List<Corso> corsilist;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final long startTime = System.nanoTime();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!haveNetworkConnection()){
+                    mProgress.dismiss();
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },1500);
+
+
 
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Loading");
@@ -148,7 +180,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(mCount==0){
+                if(mCount==0 && haveNetworkConnection()){
                     mProgress.dismiss();
                     finish();
                     Toast.makeText(getApplicationContext(),

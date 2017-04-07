@@ -1,11 +1,16 @@
 package com.almaorient.ferno92.almaorienteering;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.almaorient.ferno92.almaorienteering.homepage.NewMainActivity;
 import com.almaorient.ferno92.almaorienteering.login.LoginActivity;
@@ -20,9 +25,35 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class ChooseActivity extends AppCompatActivity {
 
+    private boolean haveNetworkConnection() {
+        boolean haveConnection = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnection = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnection = true;
+        }
+        return haveConnection;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!haveNetworkConnection()){
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare i server, verifica la tua connessione o le funzionalità risulteranno limitate",Toast.LENGTH_LONG).show();
+                }
+            }
+        },1500);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

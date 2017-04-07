@@ -1,18 +1,25 @@
 package com.almaorient.ferno92.almaorienteering.versus;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.almaorient.ferno92.almaorienteering.BaseActivity;
 import com.almaorient.ferno92.almaorienteering.R;
@@ -35,6 +42,22 @@ import java.util.List;
 
 public class VersusCorsoActivity extends BaseActivity {
 
+    private boolean haveNetworkConnection() {
+        boolean haveConnection = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnection = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnection = true;
+        }
+        return haveConnection;
+    }
+
     private String mScuola1;
     private String mScuola2;
     private Spinner mCorso1Spinner;
@@ -47,16 +70,52 @@ public class VersusCorsoActivity extends BaseActivity {
     ProgressDialog mProgress;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.versus_corso_activity);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!haveNetworkConnection()){
+                    mProgress.dismiss();
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },1500);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if((mListaCorsi1.isEmpty() || mListaCorsi2.isEmpty())&&haveNetworkConnection()){
+                    mProgress.dismiss();
+                    finish();
+                    Toast.makeText(getApplicationContext(),
+                            "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
+                }
+            }
+        },10000);
 
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Loading");
         mProgress.setMessage("Stiamo cercando i corsi...");
         mProgress.setCancelable(false); // disable dismiss by tapping outside of the dialog
         mProgress.show();
+
+        mProgress.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+                if (i==keyEvent.KEYCODE_BACK){
+                    mProgress.dismiss();
+                    finish();
+                }
+                return false;
+            }
+        });
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         this.mRef = database.getReference();
