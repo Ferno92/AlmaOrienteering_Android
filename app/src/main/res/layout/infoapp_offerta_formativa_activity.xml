@@ -26,7 +26,7 @@
             android:orientation="vertical"
             android:weightSum="2">
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -56,9 +56,9 @@
                     android:layout_alignParentTop="true"
                     app:srcCompat="@drawable/ic_elencoscuolescreenshot1" />
 
-            </FrameLayout>
+            </RelativeLayout>
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -84,7 +84,7 @@
                     android:layout_below="@+id/textView28"
                     android:layout_gravity="right"
                     app:srcCompat="@drawable/ic_elencoscuolescreenshot2" />
-            </FrameLayout>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

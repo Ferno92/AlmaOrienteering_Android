@@ -1,6 +1,7 @@
 package com.almaorient.ferno92.almaorienteering;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -115,7 +116,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
     boolean secondaquery=false;
     boolean terzaquery=false;
 
-
     public static final Scuola[] mScuolaadatt = new Scuola[]{
             new Scuola("", "Seleziona scuola"),
             new Scuola("agraria", "Agraria e Medicina veterinaria"),
@@ -153,7 +153,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback {
                 }
             }
         },1500);
-
 
 
         mProgress = new ProgressDialog(this);

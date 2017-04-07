@@ -308,8 +308,7 @@
                                         android:layout_marginBottom="5dp"
                                         android:layout_toEndOf="@+id/imageView11"
                                         android:background="#EE762C"
-                                        android:padding="5dp"
-                                        android:text="Mappa aule, scopri dove si svologono le lezioni!"
+                                        android:text="Mappa, scopri dove si svologono le lezioni!"
                                         android:textAppearance="@style/TextAppearance.AppCompat" />
                                 </RelativeLayout>
 
@@ -336,7 +335,6 @@
                                         android:layout_toEndOf="@+id/imageView12"
                                         android:layout_toRightOf="@+id/imageView12"
                                         android:background="#EE762C"
-                                        android:padding="5dp"
                                         android:text="Il corso in numeri: statistiche da Almalaurea"
                                         android:textAppearance="@style/TextAppearance.AppCompat"
                                         android:textColor="@android:color/black" />
@@ -365,7 +363,6 @@
                                         android:layout_toEndOf="@+id/imageView13"
                                         android:layout_toRightOf="@+id/imageView13"
                                         android:background="#EE762C"
-                                        android:padding="5dp"
                                         android:text="Cosa ne pensano gli studenti"
                                         android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -384,7 +381,8 @@
                                         android:layout_alignBottom="@+id/sitocorsobtn"
                                         android:layout_alignParentTop="true"
                                         android:layout_centerInParent="false"
-                                        android:layout_marginRight="13dp"
+                                        android:layout_marginLeft="3dp"
+                                        android:layout_marginRight="10dp"
                                         app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
                                     <Button
@@ -394,7 +392,6 @@
                                         android:layout_marginBottom="5dp"
                                         android:layout_toEndOf="@+id/imageView14"
                                         android:background="#EE762C"
-                                        android:padding="5dp"
                                         android:text="Pagina dedicata"
                                         android:textAppearance="@style/TextAppearance.AppCompat" />
                                 </RelativeLayout>

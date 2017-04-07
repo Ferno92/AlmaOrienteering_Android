@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -103,6 +104,56 @@ public class DettagliCorsoActivity extends BaseActivity {
             }
         }
     }
+    float lastX;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent touchevent) {
+        switch (touchevent.getAction()) {
+            // when user first touches the screen to swap
+            case MotionEvent.ACTION_DOWN: {
+                lastX = touchevent.getX();
+                break;
+            }
+            case MotionEvent.ACTION_UP: {
+                float currentX = touchevent.getX();
+
+                // da dex a sx
+                if (lastX-currentX >150) {
+
+                    switchTabs(false); //+1
+                }
+
+                // if right to left swipe on screen
+                if (currentX - lastX>150) {//-1
+                    switchTabs(true);
+                }
+
+                break;
+            }
+        }
+        return false;
+    }
+
+    public void switchTabs(boolean direction) {
+        if (direction) // true = move right
+        {
+            if (mTabHost.getCurrentTab() == 0)
+                mTabHost.setCurrentTab(mTabHost.getTabWidget().getTabCount());
+            else
+                mTabHost.setCurrentTab(mTabHost.getCurrentTab() - 1);
+        } else
+        // move left
+        {
+            //mTabHost.setCurrentTab(mTabHost.getCurrentTab() -1 );
+
+            if (mTabHost.getCurrentTab() != (mTabHost.getTabWidget()
+                    .getTabCount()))
+                mTabHost.setCurrentTab(mTabHost.getCurrentTab() + 1);
+            else
+                mTabHost.setCurrentTab(0);
+        }
+    }
+    //verso sx aumento di 1
 
     List<String> listDataHeader;
 

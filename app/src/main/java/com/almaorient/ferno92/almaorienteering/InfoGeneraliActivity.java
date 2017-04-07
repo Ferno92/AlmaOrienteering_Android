@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.almaorient.ferno92.almaorienteering.ElencoScuole.ExpandableListAdapter1;
 import com.almaorient.ferno92.almaorienteering.login.LoginActivity;
@@ -32,6 +33,7 @@ import static com.almaorient.ferno92.almaorienteering.R.id.plusquattro;
 import static com.almaorient.ferno92.almaorienteering.R.id.plussei;
 import static com.almaorient.ferno92.almaorienteering.R.id.plustre;
 import static com.almaorient.ferno92.almaorienteering.R.id.plusuno;
+import static com.almaorient.ferno92.almaorienteering.R.id.textView;
 import static com.almaorient.ferno92.almaorienteering.R.id.ulterioriinfo4;
 import static com.almaorient.ferno92.almaorienteering.R.id.webview2;
 
@@ -52,6 +54,8 @@ public class InfoGeneraliActivity extends BaseActivity {
 
         int totalHeight = 0;
         for (int i = 0; i < listAdapter.getCount(); i++) {
+//            TextView textView = (TextView) listView.findViewById(R.id.lblListItem);
+//            listAdapter.getView(i,null,listView);
             View listItem = listAdapter.getView(i,null, listView);
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
