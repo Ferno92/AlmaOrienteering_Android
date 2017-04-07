@@ -63,16 +63,6 @@
     </html>
     ]]>
     </string>
-    <string name="multicampus">
-    <![CDATA[
-    <html>
-        <head></head>
-        <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
-             Scemo chi legge :-P
-        </body>
-    </html>
-    ]]>
-    </string>
     <string name="contatti">
     <![CDATA[
     <html>
@@ -95,13 +85,31 @@
     ]]>
     </string>
 
-    <string name="TipoAccesso">
+
+    <string name="Multicampus">
     <![CDATA[
     <html>
-        <head></head>
-        <body style="text-align:justify;color:black;font-size:18;">
-            Tipo Accesso:
-        </body>
+          <head></head>
+          <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+                L&#8217Università di Bologna ha adottato una struttura Multicampus per permettere la diffusione dell&#8217offerta
+                formativa e l&#8217attivazione di una stabile attività di ricerca sul territorio, nell&#8217intento di migliorare
+                il funzionamento e la qualità della vita della comunità universitaria. A tale scopo sono stati costituiti
+                i Campus di Cesena, Forlì, Ravenna e Rimini. Oltre ai Campus della Romagna, l&#8217Università di Bologna ha anche
+                una sede a Buenos Aires che offre in particolar modo master e corsi di alta formazione.
+          </body>
+    </html>
+    ]]>
+    </string>
+
+    <string name="Scuole">
+    <![CDATA[
+    <html>
+          <head></head>
+          <body style="text-align:justify;color:black;font-size:16;background-color:#FAFAFA">
+                L&#8217Università di Bologna si compone di 11 scuole che coordinano le attività didattiche.
+                I Dipartimenti sono invece le articolazioni organizzative dell&#8217Ateneo per lo svolgimento delle
+                funzioni relative alla ricerca scientifica e alle attività didattiche e formative.
+          </body>
     </html>
     ]]>
     </string>
