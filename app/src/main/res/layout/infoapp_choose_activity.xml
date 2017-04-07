@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_above="@+id/linearLayout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,10 +35,13 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_weight="2"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="60dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -39,13 +52,12 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Ottieni le informazioni necessarie per scegliere la Scuola che vorrai intraprendere"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:layout_below="@+id/textView11"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView11"
+                    android:text="Consulta tutte le informazioni per poter scegliere al meglio il tuo corso di studi"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -54,7 +66,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Accedi in Orièntati"
+                    android:text='Accedi in "Orientati"'
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -71,8 +84,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textView16"
-                    android:padding="5dp"
-                    android:text="Sfrutta la funzionalità aggiuntiva 'Recensioni' per esprimere giudizi su corsi o esami affrontati"
+                    android:text="Sfrutta la funzionalità aggiuntiva 'Recensioni' per esprimere giudizi sul tuo corso"
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
@@ -83,9 +95,13 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Accedi come matricola"
+                    android:text='Accedi come "studente"'
+                    android:textAlignment="center"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
+
+    </RelativeLayout>
+
 </LinearLayout>
