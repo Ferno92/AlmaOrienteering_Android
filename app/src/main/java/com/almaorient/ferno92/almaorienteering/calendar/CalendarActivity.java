@@ -1,5 +1,6 @@
 package com.almaorient.ferno92.almaorienteering.calendar;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -19,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -233,12 +235,20 @@ public class CalendarActivity extends BaseActivity implements  ListEventiAdapter
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
-//        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
         intent.putExtra(CalendarContract.Events.TITLE, (String)evento.get("title"));
         intent.putExtra(CalendarContract.Events.DESCRIPTION, (String)evento.get("description"));
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, (String)((String) evento.get("title")).replace("OPEN-DAY", ""));
-//        intent.putExtra(CalendarContract.Events.RRULE, "FREQ=YEARLY");
         startActivity(intent);
+    }
+
+    @Override
+    public void showEventDetail(HashMap evento) {
+        Dialog dialog;
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.calendar_event_dialog);
+        dialog.show();
+
     }
 
     private long getTime(String day, String hour, ViewGroup parent){
