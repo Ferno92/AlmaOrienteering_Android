@@ -7,8 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrandoti potrai sia informarti su altre facoltà che potrebbero interessarti, sia partecipare al nostro super gioco votando e valutando la tua facoltà e i tuoi corsi"
-        />
+        android:text="Registrandoti, oltre ad accedere alle normali funzionalità dell’app, potrai condividere la tua opinione sul corso che stai frequentando in modo da aiutare i futuri studenti." />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -43,14 +43,15 @@
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Così facendo, potrai scegliere la dimora più comoda per seguire tutte le lezioni del corso!"
-                    android:textAlignment="center"
-                    android:textSize="16sp" />
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:text="Oppure selezionare un corso e vedere dove si svolgono le lezioni, in modo da decidere in quale zona della città prendere casa."
+                android:textAlignment="center"
+                android:textSize="16sp" />
         </LinearLayout>
 </LinearLayout>
