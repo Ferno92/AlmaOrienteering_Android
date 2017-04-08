@@ -31,6 +31,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -93,6 +95,15 @@ public class DettagliCorsoActivity extends BaseActivity {
                     }
                     if (!k.equals(f)) {
                         mTerzoLivello2sublist = new ArrayList<String>(mSecondoTerzoLivello.subList(k, f));
+
+                        Collections.sort(mTerzoLivello2sublist, new Comparator<String>(){
+                            @Override
+                            public int compare(String esame1, String esame2)
+                            {
+
+                                return  esame1.compareTo(esame2);
+                            }
+                        });
                         mThirdlevelmap.put(elencoinsegnamenti.get(c).getCorsoNome(), mTerzoLivello2sublist);
                     } else {
                         List<String> vuoto = new ArrayList<String>();
