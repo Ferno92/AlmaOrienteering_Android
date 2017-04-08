@@ -21,7 +21,7 @@
                 android:id="@+id/imageView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_elenco_scuole"
+                app:srcCompat="@drawable/ic_sceltalaurea"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -91,7 +91,7 @@
                 android:id="@+id/imageView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_mappa" />
+                app:srcCompat="@drawable/ic_campus" />
 
             <TextView
                 android:id="@+id/textView12"

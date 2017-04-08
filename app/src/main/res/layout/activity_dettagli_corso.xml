@@ -299,7 +299,7 @@
                                         android:layout_alignParentStart="true"
                                         android:layout_alignParentTop="true"
                                         android:layout_marginRight="5dp"
-                                        app:srcCompat="@drawable/ic_mappa" />
+                                        app:srcCompat="@drawable/ic_puntatore_mappa" />
 
                                     <Button
                                         android:id="@+id/mapsbutton"
@@ -381,9 +381,8 @@
                                         android:layout_alignBottom="@+id/sitocorsobtn"
                                         android:layout_alignParentTop="true"
                                         android:layout_centerInParent="false"
-                                        android:layout_marginLeft="3dp"
-                                        android:layout_marginRight="10dp"
-                                        app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+                                        android:layout_marginRight="3dp"
+                                        app:srcCompat="@drawable/ic_pagina_dedicata" />
 
                                     <Button
                                         android:id="@+id/sitocorsobtn"
