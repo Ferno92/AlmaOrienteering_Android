@@ -18,8 +18,10 @@ import com.almaorient.ferno92.almaorienteering.BaseActivity;
 import com.almaorient.ferno92.almaorienteering.homepage.NewMainActivity;
 import com.almaorient.ferno92.almaorienteering.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
@@ -35,6 +37,8 @@ public class LoginActivity extends BaseActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String TAG = "Sign in";
     private static String MAIL_END = "@studio.unibo.it";
+
+    //autocompletetextview
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +71,16 @@ public class LoginActivity extends BaseActivity {
                 String email = mEmailEdit.getText().toString();
                 String password = mPwdEdit.getText().toString();
                 if(!email.isEmpty() && !password.isEmpty()){
-                    mAuth.signInWithEmailAndPassword(email + MAIL_END, password);
+                    mAuth.signInWithEmailAndPassword(email + MAIL_END, password).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            if (e instanceof FirebaseAuthException) {
+                                ((FirebaseAuthException) e).getErrorCode();
+                                Toast.makeText(LoginActivity.this, e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }else{
                     Toast.makeText(LoginActivity.this, "Mancano alcuni dati!",
                             Toast.LENGTH_SHORT).show();

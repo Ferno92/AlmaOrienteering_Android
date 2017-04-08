@@ -290,7 +290,7 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
         final AlertDialog.Builder builder = new AlertDialog.Builder(NewMainActivity.this);
         String message = "Non hai ancora verificato la tua email, alcune funzionalità dell'app non saranno accessibili fino ad avvenuta conferma! \n ";
         message += "Se invece hai già confermato allora premi Logout e loggati nuovamente per poter accedere ai contenuti esclusivi ;)";
-        builder.setTitle("Recupera password");
+        builder.setTitle("Verifica email UNIBO");
         builder.setMessage(message);
         builder.setPositiveButton("Invia di nuovo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

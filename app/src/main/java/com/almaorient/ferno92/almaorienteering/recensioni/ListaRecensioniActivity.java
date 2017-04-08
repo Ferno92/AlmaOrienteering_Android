@@ -104,21 +104,21 @@ public class ListaRecensioniActivity extends BaseActivity {
 
         RecensioniModel[] recensioni = {
                 new RecensioniModel("luca.fernandez@studio.unibo.it", "4.5", "Proprio bello questo corso, ho veramente scelto bene!", 15),
-                new RecensioniModel("tizio.caio@studio.unibo.it", "1", "Ma chi me l'ha fatto fare", 14),
-                new RecensioniModel("super.pippo@studio.unibo.it", "3", "Poteva andarmi meglio ma non mi lamento.. Yuk!!", 13),
+//                new RecensioniModel("tizio.caio@studio.unibo.it", "1", "Ma chi me l'ha fatto fare", 14),
+//                new RecensioniModel("super.pippo@studio.unibo.it", "3", "Poteva andarmi meglio ma non mi lamento.. Yuk!!", 13),
                 new RecensioniModel("paolo.rossi@studio.unibo.it", "4.5", "Bella", 12),
                 new RecensioniModel("ale.lotti@studio.unibo.it", "5", "Sono super entusiasta, mi sto divertendo un sacco! I professori sono fantastici e ci seguono molto! Abbiamo anche dei tutor meravigliosi e starei ore e ore e ore a parlare di questo fantastico corso! Si, lo so sono un po' logorrroico ma che ci vuoi fare ;)", 15),
                 new RecensioniModel("marco.mariotti@studio.unibo.it", "2", "Mah, niente di speciale..", 11),
-                new RecensioniModel("donald.duck@studio.unibo.it", "2", "Io speravo ci fossero più donne..", 10),
-                new RecensioniModel("son.goku@studio.unibo.it", "0.5", "Pessimo, se continua così mi ritiro!", 9),
+//                new RecensioniModel("donald.duck@studio.unibo.it", "2", "Io speravo ci fossero più donne..", 10),
+                new RecensioniModel("son.goku@studio.unibo.it", "0.5", "Pessimo, se continua così mi ritiro!", 9)
         };
         //riempimento casuale della lista delle persone
-        Random r=new Random();
-        for(int i=0;i<5;i++){
-            mRecensioniList.add(recensioni[r.nextInt(recensioni.length)]);
+//        Random r=new Random();
+        for(int i=0;i<recensioni.length;i++){
+            mRecensioniList.add(recensioni[i]);
         }
         float sum = 0;
-        //TODO: magari ordiniamo la lista di recensioni che arrivano dalla query per quota
+
         for(int i = 0; i < mRecensioniList.size(); i++){
             sum += Float.parseFloat(mRecensioniList.get(i).getVoto());
         }
