@@ -71,7 +71,7 @@ public class ListEventiAdapter extends ArrayAdapter<HashMap> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.showEventDetail(evento);
+                mListener.showEventDetail(evento, parent);
             }
         });
 
@@ -108,7 +108,7 @@ public class ListEventiAdapter extends ArrayAdapter<HashMap> {
 
     public interface  Listener{
         void addEventToCalendar(HashMap evento, ViewGroup parent);
-        void showEventDetail(HashMap evento);
+        void showEventDetail(HashMap evento, ViewGroup parent);
     }
 
 

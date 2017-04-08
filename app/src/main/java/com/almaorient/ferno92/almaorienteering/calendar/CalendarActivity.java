@@ -1,5 +1,6 @@
 package com.almaorient.ferno92.almaorienteering.calendar;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,6 +16,7 @@ import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -242,13 +246,33 @@ public class CalendarActivity extends BaseActivity implements  ListEventiAdapter
     }
 
     @Override
-    public void showEventDetail(HashMap evento) {
-        Dialog dialog;
-        dialog = new Dialog(this);
+    public void showEventDetail(HashMap evento, ViewGroup parent) {
+        AlertDialog.Builder dialogBuilder;
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View main_view = LayoutInflater.from(this).inflate(R.layout.calendar_event_dialog, null);
+        dialogBuilder.setView(main_view);
+        final Dialog dialog = dialogBuilder.create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.calendar_event_dialog);
-        dialog.show();
 
+        TextView nomeEvento = (TextView) main_view.findViewById(R.id.nome_evento);
+        nomeEvento.setText((String)evento.get("title"));
+        TextView dataEvento = (TextView) main_view.findViewById(R.id.data);
+        String data = (String)evento.get("day") + " ";
+        data +=  ((TextView)((LinearLayout)parent.getParent()).findViewById(R.id.nome_mese)).getText().toString();
+        dataEvento.setText(data);
+        TextView oraText = (TextView)main_view.findViewById(R.id.ora);
+        oraText.setText((String)evento.get("start") + " - " + (String)evento.get("end"));
+        TextView descrizione = (TextView)main_view.findViewById(R.id.descrizione);
+        descrizione.setText((String)evento.get("description"));
+        AppCompatButton okButton = (AppCompatButton)main_view.findViewById(R.id.ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     private long getTime(String day, String hour, ViewGroup parent){
