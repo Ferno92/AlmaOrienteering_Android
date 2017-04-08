@@ -25,6 +25,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -178,6 +180,16 @@ public class ElencoScuoleActivity extends BaseActivity {
                         queryok=true;
                         Corso corso = new Corso(codicedelcorso, nomecorso, sito, tipo, campus, accesso, idscuola,durata,sededidattica,key);
                         tempCorsoList.add(corso);
+
+                        //Corsi in ordine alfabetico:
+                        Collections.sort(tempCorsoList, new Comparator<Corso>(){
+                            @Override
+                            public int compare(Corso corso1, Corso corso2)
+                            {
+
+                                return  corso1.getNome().compareTo(corso2.getNome());
+                            }
+                        });
                         completecorsolist.add(corso);
                     }
 
