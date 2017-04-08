@@ -298,7 +298,7 @@
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentStart="true"
                                         android:layout_alignParentTop="true"
-                                        android:layout_marginRight="5dp"
+                                        android:layout_marginRight="3dp"
                                         app:srcCompat="@drawable/ic_puntatore_mappa" />
 
                                     <Button
@@ -309,7 +309,8 @@
                                         android:layout_toEndOf="@+id/imageView11"
                                         android:background="#EE762C"
                                         android:text="Mappa, scopri dove si svologono le lezioni!"
-                                        android:textAppearance="@style/TextAppearance.AppCompat" />
+                                        android:textAppearance="@style/TextAppearance.AppCompat"
+                                        android:layout_toRightOf="@+id/imageView11" />
                                 </RelativeLayout>
 
                                 <RelativeLayout
