@@ -4,99 +4,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView30"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="10dp"-->
-        <!--android:text="La sezione 'statistiche' è nata per fornire un confronto tra i dati tangibili ottenuti tramite i sondaggi effettuati dall'Unibo stessa riguardo tematiche particolari:" />-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1">-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView8"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--app:srcCompat="@drawable/ic_statistiche1" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView32"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_below="@+id/imageView8"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:padding="10dp"-->
-                <!--android:text="Dopodichè potrai selezionare il corso o potrai semplicemente confrontare la media generale della Scuola precedentemente selezionata." />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView10"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_below="@+id/textView32"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--app:srcCompat="@drawable/ic_statistiche3" />-->
-        <!--</RelativeLayout>-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView31"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_alignParentTop="true"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:padding="10dp"-->
-                <!--android:text="Inizialmente ti sarà richiesto di selezione due Scuole da paragonare." />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView9"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_below="@+id/textView31"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--app:srcCompat="@drawable/ic_statistiche2" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/textView40"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_below="@+id/imageView9"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:padding="10dp"-->
-                <!--android:text="Questo è un esempio di confronto.\nIl simbolo '*' indica che il valore richiesto non può essere visualizzato poichè è il raggruppamento di valori non omogenei (ex. fare una media tra la durata di una laurea triennale e una laurea magistrale);\nIl simbolo '-' indica che il valore non è disponibile poichè non si è riusciti a raccogliere sufficiente evidenza per creare un valore significativo.\nA fine pagina, troverete un pulsante che vi indirizzerà direttamente alla pagina dell'Unibo per ottenere una spiegazione dettagliata sui vari campi"/>-->
-
-        <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
-
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/gifImageView"
@@ -105,42 +16,40 @@
                     android:layout_weight="1"
                     android:src="@drawable/statistiche" />
 
-            </LinearLayout>
-
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1.8">
 
                 <TextView
                     android:id="@+id/textView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="Consulta i dati raccolti da Almalaurea"
                     android:textAlignment="center"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView23"
-                    android:padding="3dp"
                     android:text="Avrai uno strumento preciso con cui confrontare tramite parametri oggettivi due corsi della stessa Scuola o di Scuole diverse."
                     android:textAlignment="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/textView23"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
             </RelativeLayout>
-        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.3">
+
+    </RelativeLayout>
 </LinearLayout>

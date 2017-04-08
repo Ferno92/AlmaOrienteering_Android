@@ -25,33 +25,42 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.8"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView23"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:padding="5dp"
+            android:text="Potrai accertarti della posizione di tutte le aule utilizzate dall'Unibo"
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Potrai accertarti della posizione di tutte le aule utilizzate dall'Unibo"
-                    android:textAlignment="center"
-                    android:textSize="16sp" />
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oppure selezionare un corso e vedere dove si svolgono le lezioni, in modo da decidere in quale zona della città prendere casa."
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:layout_below="@+id/textView23"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:padding="5dp"
-                android:text="Oppure selezionare un corso e vedere dove si svolgono le lezioni, in modo da decidere in quale zona della città prendere casa."
-                android:textAlignment="center"
-                android:textSize="16sp" />
-        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.3" >
+
+    </RelativeLayout>
+
 </LinearLayout>
