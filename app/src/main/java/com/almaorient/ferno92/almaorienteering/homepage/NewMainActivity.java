@@ -104,6 +104,7 @@ public class NewMainActivity extends AppCompatActivity implements NavigationView
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         String id = (String) data.child("userId").getValue();
                         if (mAuth.getCurrentUser() != null) {
+                            id = id.indexOf("@studio.unibo.it") == -1 ? id + "@studio.unibo.it" : id;
                             if (id.equals(String.valueOf(mAuth.getCurrentUser().getEmail()))) {
                                 mUserName = (String) data.child("nome").getValue();
                                 mUserSurname = (String) data.child("cognome").getValue();
