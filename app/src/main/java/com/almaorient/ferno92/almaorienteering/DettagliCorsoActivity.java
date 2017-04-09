@@ -114,7 +114,48 @@ public class DettagliCorsoActivity extends BaseActivity {
 
             }
         }
+        richiamoexpandablelistview();
     }
+
+    private void richiamoexpandablelistview() {
+        mExpandableListView = (ExpandableListView) findViewById(R.id.pianistudioExpListView);
+
+
+        if (mExpandableListView != null) {
+            final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(getBaseContext(), listDataHeader,
+                    mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel);
+            mExpandableListView.setAdapter(parentLevelAdapter);
+            mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                    parentLevelAdapter.notifyDataSetChanged();
+
+                    return false;
+                }
+            });
+
+            mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                @Override
+                public void onGroupExpand(int i) {
+                    parentLevelAdapter.getGroup(i);
+
+                }
+            });
+            // display only one expand item
+//            mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+//                int previousGroup = -1;
+//                @Override
+//                public void onGroupExpand(int groupPosition) {
+//                    if (groupPosition != previousGroup)
+//                        mExpandableListView.collapseGroup(previousGroup);
+//                    previousGroup = groupPosition;
+//                }
+//            });
+        }
+    }
+
+
+
     float lastX;
 
     @Override
@@ -190,6 +231,8 @@ public class DettagliCorsoActivity extends BaseActivity {
 
     private TabHost mTabHost;
 
+    ExpandableListView mExpandableListView;
+    
     private boolean haveNetworkConnection() {
         boolean haveConnection = false;
 
@@ -518,42 +561,6 @@ public class DettagliCorsoActivity extends BaseActivity {
                         threelevellistview(durata, elencoinsegnamenti);
                         break;
 
-                }
-
-
-                final ExpandableListView mExpandableListView = (ExpandableListView) findViewById(R.id.pianistudioExpListView);
-
-
-                if (mExpandableListView != null) {
-                    final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(getBaseContext(), listDataHeader,
-                            mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel);
-                    mExpandableListView.setAdapter(parentLevelAdapter);
-                    mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                        @Override
-                        public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                            parentLevelAdapter.notifyDataSetChanged();
-
-                            return false;
-                        }
-                    });
-
-                    mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                        @Override
-                        public void onGroupExpand(int i) {
-                            parentLevelAdapter.getGroup(i);
-
-                        }
-                    });
-                    // display only one expand item
-//            mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//                int previousGroup = -1;
-//                @Override
-//                public void onGroupExpand(int groupPosition) {
-//                    if (groupPosition != previousGroup)
-//                        mExpandableListView.collapseGroup(previousGroup);
-//                    previousGroup = groupPosition;
-//                }
-//            });
                 }
 
             }
