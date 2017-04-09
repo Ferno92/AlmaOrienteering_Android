@@ -1,16 +1,22 @@
 package com.almaorient.ferno92.almaorienteering.login;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageButton;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +29,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
@@ -37,6 +49,8 @@ public class LoginActivity extends BaseActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String TAG = "Sign in";
     private static String MAIL_END = "@studio.unibo.it";
+    private Set<String> mSuggestions;
+    private SharedPreferences mSharedPreferences;
 
     //autocompletetextview
 
@@ -46,6 +60,53 @@ public class LoginActivity extends BaseActivity {
         mAuth = FirebaseAuth.getInstance();
 
         setContentView(R.layout.login_activity);
+        initView();
+
+        mSharedPreferences = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        Set<String> fakeSet = new TreeSet<>();
+        mSuggestions = mSharedPreferences.getStringSet("login_suggestions", fakeSet);
+
+        String[] suggestionList = new String[mSuggestions.size()];
+        Iterator it=mSuggestions.iterator();
+        int i = 0;
+        while(it.hasNext())
+        {
+            String value = (String)it.next();
+            if(value.indexOf("|") != -1) {
+                String user = value.substring(0, value.indexOf("|"));
+                suggestionList[i] = user;
+            }else{
+                suggestionList[i] = value;
+            }
+            i++;
+        }
+
+        AutoCompleteTextView autocompleteUser = (AutoCompleteTextView) findViewById(R.id.email);
+        ArrayAdapter<String> adapterUser = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                suggestionList
+        );
+        autocompleteUser.setAdapter(adapterUser);
+
+        autocompleteUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int pos,long id) {
+                String selected = (String)adapter.getItemAtPosition(pos);
+                Iterator it=mSuggestions.iterator();
+                while(it.hasNext())
+                {
+                    String value = (String)it.next();
+                    String user = value.substring(0, value.indexOf("|"));
+                    String pwd = value.substring(value.indexOf("|") + 1, value.length());
+                    if(user.equals(selected)){
+                        mPwdEdit.setText(pwd);
+                        break;
+                    }
+                }
+            }
+        });
+
         AppCompatButton signupButton = (AppCompatButton) findViewById(R.id.signup);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +142,8 @@ public class LoginActivity extends BaseActivity {
                             }
                         }
                     });
+                    mSuggestions.add(email + "|" + password);
+                    mSharedPreferences.edit().putStringSet("login_suggestions", mSuggestions).commit();
                 }else{
                     Toast.makeText(LoginActivity.this, "Mancano alcuni dati!",
                             Toast.LENGTH_SHORT).show();
@@ -107,7 +170,6 @@ public class LoginActivity extends BaseActivity {
             }
         };
 
-        initView();
     }
 
     private void showRecoverPWDAlert() {
