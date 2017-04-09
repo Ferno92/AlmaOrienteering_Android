@@ -6,7 +6,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_weight="1"
-    android:background="?android:attr/colorBackground"
+    android:background="#FAFAFA"
     android:orientation="vertical"
     android:paddingBottom="6dp">
 

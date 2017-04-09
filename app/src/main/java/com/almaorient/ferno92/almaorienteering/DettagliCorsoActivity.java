@@ -122,7 +122,7 @@ public class DettagliCorsoActivity extends BaseActivity {
 
 
         if (mExpandableListView != null) {
-            final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(getBaseContext(), listDataHeader,
+            final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(DettagliCorsoActivity.this, listDataHeader,
                     mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel);
             mExpandableListView.setAdapter(parentLevelAdapter);
             mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -232,7 +232,7 @@ public class DettagliCorsoActivity extends BaseActivity {
     private TabHost mTabHost;
 
     ExpandableListView mExpandableListView;
-    
+
     private boolean haveNetworkConnection() {
         boolean haveConnection = false;
 
