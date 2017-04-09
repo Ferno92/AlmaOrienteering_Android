@@ -32,6 +32,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_toLeftOf="@+id/elencoscuolegroupimg"
                 android:layout_toStartOf="@+id/elencoscuolegroupimg"
+                android:textColor="@color/elencoscuoletitle"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
