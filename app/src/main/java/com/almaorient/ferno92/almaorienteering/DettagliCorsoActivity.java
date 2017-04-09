@@ -39,7 +39,7 @@ import java.util.List;
 
 import static java.lang.Math.round;
 
-public class DettagliCorsoActivity extends BaseActivity {
+public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExpandableListView.Listener {
 
     public static final Scuola[] mScuolaadatt = new Scuola[]{
             new Scuola("", "Seleziona scuola"),
@@ -123,7 +123,7 @@ public class DettagliCorsoActivity extends BaseActivity {
 
         if (mExpandableListView != null) {
             final ThreeLevelExpandableListView parentLevelAdapter = new ThreeLevelExpandableListView(DettagliCorsoActivity.this, listDataHeader,
-                    mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel);
+                    mSeconlevelmap, mThirdlevelmap, mMapUrlSecondLevel, mMapUrlThirdLevel, this);
             mExpandableListView.setAdapter(parentLevelAdapter);
             mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
@@ -658,4 +658,10 @@ public class DettagliCorsoActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void openBrowser(String url) {
+        Intent browser = new Intent(this, EmbedBrowser.class);
+        browser.putExtra("url", url);
+        this.startActivity(browser);
+    }
 }

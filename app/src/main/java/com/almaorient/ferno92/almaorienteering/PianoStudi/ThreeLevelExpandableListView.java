@@ -27,16 +27,12 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
     private final Map<String,String> mUrlTerzoLivello;
     private final Map<String, List<String>> mListData_SecondLevel_Map;
     private final Map<String, List<String>> mListData_ThirdLevel_Map;
-
-    private void richiamoBrowser(String url) {
-        Intent browser = new Intent(mContext, EmbedBrowser.class);
-        browser.putExtra("url", url);
-        mContext.startActivity(browser);
-    }
+    private Listener mListener;
 
     public ThreeLevelExpandableListView(Context mContext, List<String> mListDataHeader, HashMap<String, List<String>> second_level_map, HashMap<String,
-            List<String>> third_level_map, HashMap<String,String> urlsecondolivello, HashMap<String,String>urlterzolivello) {
+            List<String>> third_level_map, HashMap<String,String> urlsecondolivello, HashMap<String,String>urlterzolivello, Listener listener) {
         this.mContext = mContext;
+        this.mListener = listener;
         this.mListDataHeader = mListDataHeader;
 
 
@@ -98,10 +94,10 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
                     TextView text = (TextView) view.findViewById(R.id.lblListItem);
                     if (mUrlTerzoLivello.get(text.getText()).contains("http://")) {
-                        richiamoBrowser(mUrlTerzoLivello.get(((TextView) text).getText()));
+                        mListener.openBrowser(mUrlTerzoLivello.get(((TextView) text).getText()));
                     }
                     else if (mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)).contains("http://")){
-                        richiamoBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
+                        mListener.openBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
                     }
                 return false;
             }
@@ -112,7 +108,7 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
                 if (expandableListView.getExpandableListAdapter().getChildrenCount(i)==0) {
                     if (mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)).contains("http://")) {
-                        richiamoBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
+                        mListener.openBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));
                         adapter.notifyDataSetChanged();
 
                     }
@@ -225,6 +221,8 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
         return 0;
     }
 
-
+    public interface  Listener{
+        void openBrowser(String url);
+    }
 
 }
