@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -133,8 +134,10 @@ public class ListaRecensioniActivity extends BaseActivity {
         //ogni elemento è una mappa(chiave->valore)
         ArrayList<HashMap<String, Object>> data=new ArrayList<HashMap<String,Object>>();
         int resourceId = getResources().getIdentifier("ic_recensione_success" , "drawable", getPackageName());
-
-
+        int defaultResourceId = getResources().getIdentifier("ic_arrow_recensioni" , "drawable", getPackageName());
+        HashMap<String, Integer> resMap = new HashMap<>();
+        resMap.put("resourceId", resourceId);
+        resMap.put("defaultResourceId", defaultResourceId);
 
         for(int i=0;i<mRecensioniList.size();i++){
             RecensioniModel p = mRecensioniList.get(i);
@@ -144,8 +147,8 @@ public class ListaRecensioniActivity extends BaseActivity {
             recMap.put("voto", p.getVoto());
             recMap.put("recensione", p.getRecensione());
             recMap.put("quota", p.getQuota());
-            recMap.put("up", resourceId);
-            recMap.put("down", resourceId);
+            recMap.put("up", resMap);
+            recMap.put("down", resMap);
             data.add(recMap);  //aggiungiamo la mappa di valori alla sorgente dati
         }
 
