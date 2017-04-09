@@ -23,6 +23,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -163,6 +165,8 @@ public class SettingsActivity extends BaseActivity {
                     Corso corso = new Corso(id, nome,"","","","",null,null,"","");
                     mListaCorsi.add(corso);
                 }
+
+                Collections.sort(mListaCorsi, new CorsoComparator());
                 fillSpinner();
             }
 
@@ -194,5 +198,11 @@ public class SettingsActivity extends BaseActivity {
 
             }
         });
+    }
+    class CorsoComparator implements Comparator<Corso> {
+        @Override
+        public int compare(Corso a, Corso b) {
+            return a.getNome().compareTo(b.getNome());
+        }
     }
 }

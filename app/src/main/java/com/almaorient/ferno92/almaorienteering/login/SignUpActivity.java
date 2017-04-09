@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.almaorient.ferno92.almaorienteering.BaseActivity;
+import com.almaorient.ferno92.almaorienteering.calendar.CalendarModel;
 import com.almaorient.ferno92.almaorienteering.homepage.NewMainActivity;
 import com.almaorient.ferno92.almaorienteering.R;
 import com.almaorient.ferno92.almaorienteering.strutturaUnibo.Corso;
@@ -31,6 +32,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,6 +165,7 @@ public class SignUpActivity extends BaseActivity {
                     Corso corso = new Corso(id, nome,"","","","",null,null,"","");
                     mListaCorsi.add(corso);
                 }
+                Collections.sort(mListaCorsi, new CorsoComparator());
                 fillSpinner();
             }
 
@@ -243,6 +247,13 @@ public class SignUpActivity extends BaseActivity {
 
             }
         });
+    }
+
+    class CorsoComparator implements Comparator<Corso> {
+        @Override
+        public int compare(Corso a, Corso b) {
+            return a.getNome().compareTo(b.getNome());
+        }
     }
 }
 
