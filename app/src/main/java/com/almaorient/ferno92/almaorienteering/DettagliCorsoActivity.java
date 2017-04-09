@@ -583,11 +583,13 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
         query7.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String obiettivi="";
+                String obiettivi="prova";
                 String sbocchi ="";
                 //for (DataSnapshot data : dataSnapshot.getChildren()) {
+                if (dataSnapshot.getValue()!=null) {
                     obiettivi = (String) dataSnapshot.child("obiettivi_formativi").getValue();
                     sbocchi = (String) dataSnapshot.child("sbocchi").getValue();
+                }
                 //}
 
                 obiettivitextview.setText(obiettivi);
