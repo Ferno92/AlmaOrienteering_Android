@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,69 +25,113 @@
         <activity
             android:name=".ChooseActivity"
             android:label="Scegli"
-            android:theme="@style/NoTitleTheme" />
+            android:theme="@style/NoTitleTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".login.LoginActivity"
             android:label="Login"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".login.SignUpActivity"
             android:label="Registrazione"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".login.SettingsActivity"
             android:label="Settings"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name=".MainActivity"
             android:label="Homepage"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".homepage.NewMainActivity"
             android:label="Homepage"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".MapsActivity"
             android:label="Map"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".calendar.CalendarActivity"
             android:label="Eventi AlmaOrienta"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".versus.VersusSelectorActivity"
             android:label="Statistiche"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".versus.VersusCorsoActivity"
             android:label="Statistiche"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".versus.VersusActivity"
             android:label="Statistiche"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".recensioni.RecensioniActivity"
             android:label="Recensioni"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".recensioni.ListaRecensioniActivity"
             android:label="Recensioni"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".ModusActivity"
             android:label="Modus"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".tutorial.TutorialActivity"
-            android:theme="@style/NoTitleTheme" />
+            android:theme="@style/NoTitleTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".InfoAppActivity"
             android:label="InfoApp"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".InfoGeneraliActivity" />
-        <activity android:name=".ElencoScuoleActivity" />
-        <activity android:name=".DettagliCorsoActivity" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".InfoGeneraliActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".ElencoScuoleActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".DettagliCorsoActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name=".EmbedBrowser"
+            android:theme="@style/AppTheme.Browser" />
+        <activity android:name=".FilterCorsoActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -93,13 +139,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".EmbedBrowser"
-            android:theme="@style/AppTheme.Browser" />
-        <activity android:name=".FilterCorsoActivity" />
-        <activity android:name=".DettagliCorsoTabs.Tab1Activity" />
-        <activity android:name=".DettagliCorsoTabs.Tab2Activity"></activity>
+        <!--<activity android:name=".DettagliCorsoTabs.Tab1Activity" />-->
+        <!--<activity android:name=".DettagliCorsoTabs.Tab2Activity"></activity>-->
     </application>
 
 </manifest>
