@@ -63,6 +63,7 @@ public class RecensioniActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String id = (String) data.child("userId").getValue();
+                    id = id.indexOf("@studio.unibo.it") == -1 ? id + "@studio.unibo.it" : id;
                     if (id.equals(String.valueOf(mAuth.getCurrentUser().getEmail()))) {
                         HashMap corsoMap = (HashMap) data.child("corso").getValue();
                         Iterator corsoIterator = corsoMap.keySet().iterator();
