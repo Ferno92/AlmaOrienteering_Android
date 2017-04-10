@@ -61,28 +61,6 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
             new Scuola("scienze_politiche", "Scienze politiche")
     };
 
-    private void richiamoBrowser(String url) {
-        Intent browser = new Intent(this, EmbedBrowser.class);
-        browser.putExtra("url", url);
-        startActivity(browser);
-    }
-
-    private void statistiche(String scuola1, String scuola2, int corso1, int corso2) {
-        Intent statistiche = new Intent(this, VersusActivity.class);
-        statistiche.putExtra("scuola1", scuola1);
-        statistiche.putExtra("scuola2", scuola2);
-        statistiche.putExtra("pos1", corso1);
-        statistiche.putExtra("pos2", corso2);
-        startActivity(statistiche);
-    }
-
-    private void mappe(Long idscuola, Integer codcorso, String Activity) {
-        Intent maps = new Intent(this, MapsActivity.class);
-        maps.putExtra("idscuola", idscuola);
-        maps.putExtra("codcorso", codcorso);
-        maps.putExtra("CallingActivity",Activity);
-        startActivity(maps);
-    }
 
     public void threelevellistview(Integer durata, ArrayList<NewPianoStudiModel> elencoinsegnamenti) {
         Integer b=-1;
@@ -146,71 +124,10 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
 
                 }
             });
-            // display only one expand item
-//            mExpandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//                int previousGroup = -1;
-//                @Override
-//                public void onGroupExpand(int groupPosition) {
-//                    if (groupPosition != previousGroup)
-//                        mExpandableListView.collapseGroup(previousGroup);
-//                    previousGroup = groupPosition;
-//                }
-//            });
+
         }
     }
 
-
-
-    float lastX;
-
-    @Override
-    public boolean onTouchEvent(MotionEvent touchevent) {
-        switch (touchevent.getAction()) {
-            // when user first touches the screen to swap
-            case MotionEvent.ACTION_DOWN: {
-                lastX = touchevent.getX();
-                break;
-            }
-            case MotionEvent.ACTION_UP: {
-                float currentX = touchevent.getX();
-
-                // da dex a sx
-                if (lastX-currentX >150) {
-
-                    switchTabs(false); //+1
-                }
-
-                // if right to left swipe on screen
-                if (currentX - lastX>150) {//-1
-                    switchTabs(true);
-                }
-
-                break;
-            }
-        }
-        return false;
-    }
-
-    public void switchTabs(boolean direction) {
-//        if (direction) // true = move right
-//        {
-//            if (mTabHost.getCurrentTab() == 0)
-//                mTabHost.setCurrentTab(mTabHost.getTabWidget().getTabCount());
-//            else
-//                mTabHost.setCurrentTab(mTabHost.getCurrentTab() - 1);
-//        } else
-//        // move left
-//        {
-//            //mTabHost.setCurrentTab(mTabHost.getCurrentTab() -1 );
-//
-//            if (mTabHost.getCurrentTab() != (mTabHost.getTabWidget()
-//                    .getTabCount()))
-//                mTabHost.setCurrentTab(mTabHost.getCurrentTab() + 1);
-//            else
-//                mTabHost.setCurrentTab(0);
-//        }
-    }
-    //verso sx aumento di 1
 
     List<String> listDataHeader;
 
@@ -235,8 +152,6 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
     private ViewPager mViewPager;
     private DettaglioCorsoPagerAdapter mPagerAdapter;
     private int mSpinneridcorso2;
-
-    private TabHost mTabHost;
 
     ExpandableListView mExpandableListView;
 
@@ -283,31 +198,6 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
             }
         },10000);
 
-//
-//        mTabHost = (TabHost) findViewById(R.id.tab_host);
-//        mTabHost.setup();
-//        TabHost.TabSpec spec;
-//
-//        //Tab 1
-//        spec = mTabHost.newTabSpec("Tab 1");
-//        spec.setContent(R.id.tab1);
-//        spec.setIndicator("Info");
-//        mTabHost.addTab(spec);
-//
-//        //Tab 2
-//        spec = mTabHost.newTabSpec("Tab 3");
-//        spec.setContent(R.id.tab3);
-//        spec.setIndicator("Piano didattico");
-//        mTabHost.addTab(spec);
-//
-//        //Tab 3
-//        spec = mTabHost.newTabSpec("Tab 4");
-//        spec.setContent(R.id.tab4);
-//        spec.setIndicator("Obiettivi");
-//        mTabHost.addTab(spec);
-
-//        AnimatedTabHostListener nuovo = new AnimatedTabHostListener(this,mTabHost);
-//        mTabHost.setOnTabChangedListener(nuovo);
         mViewPager = (ViewPager) findViewById(R.id.view_pager_corsi);
         mPagerAdapter = new DettaglioCorsoPagerAdapter(getSupportFragmentManager(), getIntent().getExtras(), this);
         mViewPager.setAdapter(mPagerAdapter);
@@ -315,34 +205,12 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
         titlePageIndicator.setViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
 
-//        titlePageIndicator.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(view != null){
-//
-//                }
-//            }
-//        });
-
-
-//        mTabHost.setCurrentTab(0);
-
-
-        //TextView nomecorsoText = (TextView) findViewById(R.id.nomecorso);
-
-
-
 
         final String corso = getIntent().getExtras().getString("Vocecliccata");
         final String scuola = getIntent().getExtras().getString("Nomescuola");
         final String corsocodice = getIntent().getExtras().getString("Codicecorso");
-        final String urlcorso = getIntent().getExtras().getString("Sitocorso");
-        final String tipo = getIntent().getExtras().getString("Tipocorso");
-        String campus = getIntent().getExtras().getString("Campus");
-        String accesso = getIntent().getExtras().getString("Accesso");
         final Long scuolaid = getIntent().getExtras().getLong("IdScuola");
         final Long durata1 = getIntent().getExtras().getLong("Durata");
-        final String sededidattica = getIntent().getExtras().getString("Sededidattica");
 
         final Integer durata = (int) (long) durata1;
 
