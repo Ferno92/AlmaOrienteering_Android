@@ -2,13 +2,13 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\ale96\Documents\AlmaOrienteering_Android\pagerIndicatorLibrary\build\intermediates\bundles\default\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\Marco\Documents\Marco\Projects\Almaorienteering new version\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="9955aadce7dbc82d6f2cae7c378f2d50006c063c">
-        <dex dex="C:\Users\ale96\Documents\AlmaOrienteering_Android\app\build\intermediates\pre-dexed\debug\classes_615c878943e150c187f587571964767c2f9a29ba.jar" />
+        sha1="e0ab9c3f37a1f942b3794d7e060b06ad3aa3eb02">
+        <dex dex="C:\Users\Marco\Documents\Marco\Projects\Almaorienteering new version\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_60be917007c608dc2c40eaabab464583131e1e19\classes.dex" />
     </item>
 
 </items>
