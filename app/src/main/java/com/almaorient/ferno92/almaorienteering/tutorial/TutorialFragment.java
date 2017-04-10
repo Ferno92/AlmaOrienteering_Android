@@ -38,6 +38,9 @@ public class TutorialFragment extends Fragment {
                 this.mRootView = inflater.inflate(R.layout.infoapp_offerta_formativa_activity, container, false);
                 break;
             case 3:
+                this.mRootView = inflater.inflate(R.layout.infoapp_mappe_activity, container, false);
+                break;
+            case 4:
                 this.mRootView = inflater.inflate(R.layout.infoapp_statistiche_activity, container, false);
                 break;
         }
