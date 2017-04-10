@@ -327,9 +327,17 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
                         break;
 
                     case 3:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d + e));
+                        //Corso prototipo ing meccanica forlì, sistemato in questo modo in assenza di dati corretti per DB
+                        if (corsocodice.equals("949")){
+                            mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, 8));
+                            mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(8, 15));
+                            mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(15, 22));
+                        }
+                        else{
+                            mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d));
+                            mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d));
+                            mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d + e));
+                        }
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
