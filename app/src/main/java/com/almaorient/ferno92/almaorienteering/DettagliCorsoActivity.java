@@ -449,8 +449,8 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
 
                 switch (durata) {
                     case 2:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1 + e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
@@ -459,8 +459,8 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
                         break;
 
                     case 3:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d));
                         mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
@@ -471,11 +471,11 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
                         break;
 
                     case 5:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d - 1));
-                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d - 1));
-                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d - 1 + e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d));
+                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d));
+                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d));
+                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
@@ -487,12 +487,12 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
                         break;
 
                     case 6:
-                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d - 1));
-                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d - 1));
-                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d - 1));
-                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d - 1));
-                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d - 1));
-                        mAnno6 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(5 * d, 6 * d - 1 + e));
+                        mAnno1 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(0, d ));
+                        mAnno2 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(d, 2 * d));
+                        mAnno3 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(2 * d, 3 * d));
+                        mAnno4 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(3 * d, 4 * d ));
+                        mAnno5 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(4 * d, 5 * d));
+                        mAnno6 = new ArrayList<String>(mSecondoLivelloElencoAnno.subList(5 * d, 6 * d + e));
 
                         mSeconlevelmap.put(listDataHeader.get(0), mAnno1);
                         mSeconlevelmap.put(listDataHeader.get(1), mAnno2);
