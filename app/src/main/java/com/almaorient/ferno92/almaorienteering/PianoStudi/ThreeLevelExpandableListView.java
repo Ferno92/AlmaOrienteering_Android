@@ -92,9 +92,9 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
         secondLevelExpListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                    TextView text = (TextView) view.findViewById(R.id.lblListItem);
-                    if (mUrlTerzoLivello.get(text.getText()).contains("http://")) {
-                        mListener.openBrowser(mUrlTerzoLivello.get(((TextView) text).getText()));
+                    expandableListView.getExpandableListAdapter().getChild(i,i1);
+                    if (mUrlTerzoLivello.get(expandableListView.getExpandableListAdapter().getChild(i,i1)).contains("http://")) {
+                        mListener.openBrowser(mUrlTerzoLivello.get(expandableListView.getExpandableListAdapter().getChild(i,i1)));
                     }
                     else if (mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)).contains("http://")){
                         mListener.openBrowser(mUrlSecondoLivello.get((String)expandableListView.getExpandableListAdapter().getGroup(i)));

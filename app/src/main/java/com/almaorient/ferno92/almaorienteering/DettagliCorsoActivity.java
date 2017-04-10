@@ -268,7 +268,7 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(mSecondoTerzoLivello.isEmpty()&&haveNetworkConnection()){
+                if(mSeconlevelmap.isEmpty()&&haveNetworkConnection()){
                     finish();
                     Toast.makeText(getApplicationContext(),
                             "Impossibile contattare il server, verifica la tua connessione ad internet e riprova",Toast.LENGTH_LONG).show();
