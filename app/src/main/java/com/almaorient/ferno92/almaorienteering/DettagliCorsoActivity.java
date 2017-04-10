@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.almaorient.ferno92.almaorienteering.PianoStudi.DettaglioCorsoPagerAdapter;
 import com.almaorient.ferno92.almaorienteering.PianoStudi.NewPianoStudiModel;
 import com.almaorient.ferno92.almaorienteering.PianoStudi.ThreeLevelExpandableListView;
 import com.almaorient.ferno92.almaorienteering.recensioni.ListaRecensioniActivity;
@@ -29,6 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.pixelcan.inkpageindicator.InkPageIndicator;
+import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -187,23 +192,23 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
     }
 
     public void switchTabs(boolean direction) {
-        if (direction) // true = move right
-        {
-            if (mTabHost.getCurrentTab() == 0)
-                mTabHost.setCurrentTab(mTabHost.getTabWidget().getTabCount());
-            else
-                mTabHost.setCurrentTab(mTabHost.getCurrentTab() - 1);
-        } else
-        // move left
-        {
-            //mTabHost.setCurrentTab(mTabHost.getCurrentTab() -1 );
-
-            if (mTabHost.getCurrentTab() != (mTabHost.getTabWidget()
-                    .getTabCount()))
-                mTabHost.setCurrentTab(mTabHost.getCurrentTab() + 1);
-            else
-                mTabHost.setCurrentTab(0);
-        }
+//        if (direction) // true = move right
+//        {
+//            if (mTabHost.getCurrentTab() == 0)
+//                mTabHost.setCurrentTab(mTabHost.getTabWidget().getTabCount());
+//            else
+//                mTabHost.setCurrentTab(mTabHost.getCurrentTab() - 1);
+//        } else
+//        // move left
+//        {
+//            //mTabHost.setCurrentTab(mTabHost.getCurrentTab() -1 );
+//
+//            if (mTabHost.getCurrentTab() != (mTabHost.getTabWidget()
+//                    .getTabCount()))
+//                mTabHost.setCurrentTab(mTabHost.getCurrentTab() + 1);
+//            else
+//                mTabHost.setCurrentTab(0);
+//        }
     }
     //verso sx aumento di 1
 
@@ -228,6 +233,8 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
     HashMap<String, String> mMapUrlThirdLevel;
 
     private ViewPager mViewPager;
+    private DettaglioCorsoPagerAdapter mPagerAdapter;
+    private int mSpinneridcorso2;
 
     private TabHost mTabHost;
 
@@ -276,25 +283,54 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
             }
         },10000);
 
+//
+//        mTabHost = (TabHost) findViewById(R.id.tab_host);
+//        mTabHost.setup();
+//        TabHost.TabSpec spec;
+//
+//        //Tab 1
+//        spec = mTabHost.newTabSpec("Tab 1");
+//        spec.setContent(R.id.tab1);
+//        spec.setIndicator("Info");
+//        mTabHost.addTab(spec);
+//
+//        //Tab 2
+//        spec = mTabHost.newTabSpec("Tab 3");
+//        spec.setContent(R.id.tab3);
+//        spec.setIndicator("Piano didattico");
+//        mTabHost.addTab(spec);
+//
+//        //Tab 3
+//        spec = mTabHost.newTabSpec("Tab 4");
+//        spec.setContent(R.id.tab4);
+//        spec.setIndicator("Obiettivi");
+//        mTabHost.addTab(spec);
+
+//        AnimatedTabHostListener nuovo = new AnimatedTabHostListener(this,mTabHost);
+//        mTabHost.setOnTabChangedListener(nuovo);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager_corsi);
+        mPagerAdapter = new DettaglioCorsoPagerAdapter(getSupportFragmentManager(), getIntent().getExtras(), this);
+        mViewPager.setAdapter(mPagerAdapter);
+        final TabPageIndicator titlePageIndicator = (TabPageIndicator) findViewById(R.id.title_indicator);
+        titlePageIndicator.setViewPager(mViewPager);
+        mViewPager.setCurrentItem(0);
+
+//        titlePageIndicator.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(view != null){
+//
+//                }
+//            }
+//        });
+
+
+//        mTabHost.setCurrentTab(0);
 
 
         //TextView nomecorsoText = (TextView) findViewById(R.id.nomecorso);
-        TextView tipocorsoText = (TextView) findViewById(R.id.tipotxtview);
-        TextView campuscorsoText = (TextView) findViewById(R.id.campustxtview);
-        final TextView accessoText = (TextView) findViewById(R.id.tipoaccessoview);
-        TextView durataText = (TextView) findViewById(R.id.duratatxtview);
-        TextView sededidatticaText = (TextView) findViewById(R.id.sedidatticatxtview);
-        TextView codiceText = (TextView) findViewById(R.id.codicetxtview);
-        TextView scuolaText = (TextView) findViewById(R.id.scuolatxtview);
-        Button sitocorsobtn = (Button) findViewById(R.id.sitocorsobtn);
-        Button recensioniCorsoButton = (Button) findViewById(R.id.button_recensioni);
 
-        accessoText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),accessoText.getText(),Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
 
         final String corso = getIntent().getExtras().getString("Vocecliccata");
@@ -310,97 +346,11 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
 
         final Integer durata = (int) (long) durata1;
 
-
-        mTabHost = (TabHost) findViewById(R.id.tab_host);
-        mTabHost.setup();
-        TabHost.TabSpec spec;
-
-        //Tab 1
-        spec = mTabHost.newTabSpec("Tab 1");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Info");
-        mTabHost.addTab(spec);
-
-        //Tab 2
-        spec = mTabHost.newTabSpec("Tab 3");
-        spec.setContent(R.id.tab3);
-        spec.setIndicator("Piano didattico");
-        mTabHost.addTab(spec);
-
-        //Tab 3
-        spec = mTabHost.newTabSpec("Tab 4");
-        spec.setContent(R.id.tab4);
-        spec.setIndicator("Obiettivi");
-        mTabHost.addTab(spec);
-
-//        AnimatedTabHostListener nuovo = new AnimatedTabHostListener(this,mTabHost);
-//        mTabHost.setOnTabChangedListener(nuovo);
-        mViewPager = (ViewPager) findViewById(R.id.vpPager1);
-
-        mTabHost.setCurrentTab(0);
-
         setTitle(corso);
 
 
-        tipocorsoText.setText(tipo);
-        campuscorsoText.setText(campus);
-        accessoText.setText(accesso);
-        codiceText.setText(String.valueOf(corsocodice));
-        scuolaText.setText(String.valueOf(mScuolaadatt[(int) (long) scuolaid]));
-
-        durataText.setText(String.valueOf(durata) + " anni");
-        sededidatticaText.setText(sededidattica);
-
-        sitocorsobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                richiamoBrowser(urlcorso);
-            }
-        });
-
-        recensioniCorsoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent recensioniIntent = new Intent(getApplicationContext(), ListaRecensioniActivity.class);
-                recensioniIntent.putExtra("nome_corso", corso);
-                recensioniIntent.putExtra("scuola", scuola);
-                recensioniIntent.putExtra("codice_corso", corsocodice);
-                startActivity(recensioniIntent);
-            }
-        });
-
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference ref = database.getReference();
-
-        final Query posstats = ref.child("statistiche/" + scuola).orderByChild("codice_corso").equalTo(Integer.parseInt(corsocodice));
-
-        posstats.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data1 : dataSnapshot.getChildren()) {
-                    final String pos = (String) String.valueOf(data1.getKey());
-
-                    final Button buttonstats = (Button) findViewById(R.id.buttonstats);
-
-                    buttonstats.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int a = Integer.parseInt(pos);
-                            statistiche(scuola, scuola, a, 0);
-
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-        final Button maps = (Button) findViewById(R.id.mapsbutton);
-
         Query query4 = ref.child("corso/" + mScuolaadatt[(int) (long) scuolaid].getScuolaId()).orderByChild("corso_codice")
                 .equalTo(Integer.parseInt(corsocodice));
         query4.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -408,14 +358,7 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     final Integer spinneridcorso = (Integer) Integer.parseInt(data.getKey());
-                    final Integer spinneridcorso2 = spinneridcorso + 1;
-                    maps.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mappe(scuolaid, spinneridcorso2, "dettagliCorso");
-                        }
-
-                    });
+                    mSpinneridcorso2 = spinneridcorso + 1;
                 }
             }
 
@@ -573,88 +516,6 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
             }
         });
 
-        final Button obiettivibtn = (Button) findViewById(R.id.obiettivibtn);
-        final TextView obiettivitextview = (TextView) findViewById(R.id.obiettivitxtview);
-        final Button sbocchibtn = (Button) findViewById(R.id.sbocchibtn);
-        final TextView sbocchitextview = (TextView) findViewById(R.id.sbocchitxtview);
-
-
-        final Query query7 = ref.child("info_corsi/").child(scuola).child(corsocodice).orderByKey();
-        query7.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String obiettivi="";
-                String sbocchi ="";
-                //for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    obiettivi = (String) dataSnapshot.child("obiettivi_formativi").getValue();
-                    sbocchi = (String) dataSnapshot.child("sbocchi").getValue();
-                //}
-
-                obiettivitextview.setText(obiettivi);
-                sbocchitextview.setText(sbocchi);
-
-                final ScrollView scrollview = (ScrollView) findViewById(R.id.scrollviewtab4);
-
-
-                obiettivibtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if((obiettivitextview.getLineCount())==8){
-                            obiettivitextview.setMaxLines(500);
-                            obiettivitextview.setEllipsize(null);
-                            obiettivibtn.setText("Visualizza meno");
-                        }
-                        else if (obiettivitextview.getLineCount()<8){
-                            Toast.makeText(getApplicationContext(),"Non c'è altro da visualizzare",Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            obiettivitextview.setMaxLines(8);
-                            obiettivitextview.setEllipsize(TextUtils.TruncateAt.END);
-                            obiettivibtn.setText("Visualizza tutto");
-                            scrollview.fullScroll(ScrollView.FOCUS_UP);
-
-                        }
-                    }
-                });
-
-                sbocchibtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if((sbocchitextview.getLineCount())==8){
-                            sbocchitextview.setMaxLines(500);
-                            sbocchitextview.setEllipsize(null);
-                            sbocchibtn.setText("Visualizza meno");
-
-                        }
-
-                        else if (sbocchitextview.getLineCount()<8){
-                            Toast.makeText(getApplicationContext(),"Non c'è altro da visualizzare",Toast.LENGTH_SHORT).show();
-                        }
-
-                        else{
-                            sbocchitextview.setMaxLines(8);
-                            sbocchitextview.setEllipsize(TextUtils.TruncateAt.END);
-                            sbocchibtn.setText("Visualizza tutto");
-                            scrollview.fullScroll(ScrollView.FOCUS_UP);
-
-                        }
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onCancelled (DatabaseError databaseError){
-                if (databaseError != null) {
-
-
-                }
-
-            }
-
-
-        });
 
     }
 
@@ -663,5 +524,24 @@ public class DettagliCorsoActivity extends BaseActivity implements ThreeLevelExp
         Intent browser = new Intent(this, EmbedBrowser.class);
         browser.putExtra("url", url);
         this.startActivity(browser);
+    }
+
+    @Override
+    public void openMaps(Long scuolaId, String text) {
+        Intent maps = new Intent(this, MapsActivity.class);
+        maps.putExtra("idscuola", scuolaId);
+        maps.putExtra("codcorso", mSpinneridcorso2);
+        maps.putExtra("CallingActivity", text);
+        startActivity(maps);
+    }
+
+    @Override
+    public void openStats(String scuola1, String scuola2, int corso1, int corso2) {
+        Intent statistiche = new Intent(this, VersusActivity.class);
+        statistiche.putExtra("scuola1", scuola1);
+        statistiche.putExtra("scuola2", scuola2);
+        statistiche.putExtra("pos1", corso1);
+        statistiche.putExtra("pos2", corso2);
+        startActivity(statistiche);
     }
 }

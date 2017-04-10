@@ -223,6 +223,8 @@ public class ThreeLevelExpandableListView extends BaseExpandableListAdapter {
 
     public interface  Listener{
         void openBrowser(String url);
+        void openMaps(Long scuolaId, String text );
+        void openStats(String scuola, String s, int a, int i);
     }
 
 }
