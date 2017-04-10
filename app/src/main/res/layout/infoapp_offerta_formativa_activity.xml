@@ -1,90 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="60dp">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:text="L'elenco delle Scuole, dei corsi e delle materie, è l'elemento più importante su cui farai affidamento nella scelta del tuo percorso.\nPer facilitare la comprensione e l'attività di ricerca, abbiamo implementato un servizio di ricerca intuitivo ed esaustivo:" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/gifImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/offerta_formativa" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_marginBottom="60dp">
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/textView23"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingTop="5dp">
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="Naviga per ottenere tutte le informazioni riguardo ai corsi offerti dall'Unibo"
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="right"
-                    android:layout_toEndOf="@+id/imageView6"
-                    android:layout_toRightOf="@+id/imageView6"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
-                    android:text="In questa schermata puoi selezionare la tipologia di laurea che vorrai perseguire ed eventualmente il campus di riferimento. (Tipologia di laurea e campus sono spiegati nella sezione 'Come funziona UNIBO').\nIn questo esempio abbiamo optato per una laurea breve nel campus di Forli'." />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    app:srcCompat="@drawable/ic_elencoscuolescreenshot1" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
+            <TextView
+                android:id="@+id/textView24"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView23"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Scegli Scuola e Corso così da poter prendere visione degli esami che ti aspetteranno!"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textView29"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView6"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="left"
-                    android:layout_toLeftOf="@+id/imageView7"
-                    android:layout_toStartOf="@+id/imageView7"
-                    android:paddingLeft="10dp"
-                    android:text="A questo punto cliccando su una delle Scuole disponibili sarà possibile visualizzare i relativi corsi attivati presso il campus selezionato. \nCliccando sul nome di un corso comparirà una nuova pagina con le informazioni ad esso relative (codice, durata, sede ecc…) ed anche il piano didattico." />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView28"
-                    android:layout_gravity="right"
-                    app:srcCompat="@drawable/ic_elencoscuolescreenshot2" />
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
