@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.almaorient.ferno92.almaorienteering">
+    package="com.almaorient.unibo.almaorienteering">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.almaorient.unibo.almaorienteering.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
@@ -23,113 +23,113 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChooseActivity"
+            android:name="com.almaorient.unibo.almaorienteering.ChooseActivity"
             android:label="Scegli"
             android:theme="@style/NoTitleTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.almaorient.unibo.almaorienteering.login.LoginActivity"
             android:label="Login"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".login.SignUpActivity"
+            android:name="com.almaorient.unibo.almaorienteering.login.SignUpActivity"
             android:label="Registrazione"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".login.SettingsActivity"
+            android:name="com.almaorient.unibo.almaorienteering.login.SettingsActivity"
             android:label="Settings"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.almaorient.unibo.almaorienteering.MainActivity"
             android:label="Homepage"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".homepage.NewMainActivity"
+            android:name="com.almaorient.unibo.almaorienteering.homepage.NewMainActivity"
             android:label="Homepage"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".MapsActivity"
+            android:name="com.almaorient.unibo.almaorienteering.MapsActivity"
             android:label="Map"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".calendar.CalendarActivity"
+            android:name="com.almaorient.unibo.almaorienteering.calendar.CalendarActivity"
             android:label="Eventi AlmaOrienta"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".versus.VersusSelectorActivity"
+            android:name="com.almaorient.unibo.almaorienteering.versus.VersusSelectorActivity"
             android:label="Statistiche"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".versus.VersusCorsoActivity"
+            android:name="com.almaorient.unibo.almaorienteering.versus.VersusCorsoActivity"
             android:label="Statistiche"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".versus.VersusActivity"
+            android:name="com.almaorient.unibo.almaorienteering.versus.VersusActivity"
             android:label="Statistiche"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".recensioni.RecensioniActivity"
+            android:name="com.almaorient.unibo.almaorienteering.recensioni.RecensioniActivity"
             android:label="Recensioni"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".recensioni.ListaRecensioniActivity"
+            android:name="com.almaorient.unibo.almaorienteering.recensioni.ListaRecensioniActivity"
             android:label="Recensioni"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".ModusActivity"
+            android:name="com.almaorient.unibo.almaorienteering.ModusActivity"
             android:label="Modus"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name="com.almaorient.unibo.almaorienteering.tutorial.TutorialActivity"
             android:theme="@style/NoTitleTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".InfoAppActivity"
+            android:name="com.almaorient.unibo.almaorienteering.InfoAppActivity"
             android:label="InfoApp"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".InfoGeneraliActivity"
+        <activity android:name="com.almaorient.unibo.almaorienteering.InfoGeneraliActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".ElencoScuoleActivity"
+        <activity android:name="com.almaorient.unibo.almaorienteering.ElencoScuoleActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".DettagliCorsoActivity"
+        <activity android:name="com.almaorient.unibo.almaorienteering.DettagliCorsoActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
         <activity
-            android:name=".EmbedBrowser"
+            android:name="com.almaorient.unibo.almaorienteering.EmbedBrowser"
             android:theme="@style/AppTheme.Browser" />
-        <activity android:name=".FilterCorsoActivity"
+        <activity android:name="com.almaorient.unibo.almaorienteering.FilterCorsoActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
 
