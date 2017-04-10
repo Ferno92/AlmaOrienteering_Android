@@ -61,7 +61,19 @@ public class EmbedBrowser extends AppCompatActivity implements PopupMenu.OnMenuI
         Pbar = (ProgressBar) findViewById(R.id.progressBar2);
         //Pbar.getProgressDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.SRC_IN);
         final LinearLayout progressbarlayout = (LinearLayout) findViewById(R.id.layoutprogressbar);
-        Pbar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+//        Pbar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+
+//        embeddedwebview.getSettings().setSupportZoom(true);
+//
+//        embeddedwebview.setWebViewClient(new WebViewClient() {
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                String javascript="javascript:document.getElementsByName('viewport')[0].setAttribute('content', 'initial-scale=1.0,maximum-scale=10.0');";
+//                view.loadUrl(javascript);
+//            }
+//        });
+
 
 
         embeddedwebview.setWebChromeClient(new WebChromeClient() {

@@ -130,7 +130,9 @@ public class VersusActivity extends BaseActivity {
                         String key=(String)corsoIterator.next();
                         String value=String.valueOf(meMap.get(key));
                         value = value.replace("*", "N/D");
-                        value = value.replace("-", "N/D");
+                        if (!key.equals(StatCorsoModel.CORSO)) {
+                            value = value.replace("-", "N/D");
+                        }
                         //Switch loop
                         switch(key){
                             case StatCorsoModel.CORSO:
