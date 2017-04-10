@@ -12,7 +12,7 @@
         <ExpandableListView
             android:id="@+id/pianistudioExpListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="top|start"
             android:groupIndicator="@drawable/arrow_up"
             android:scrollbars="none"
