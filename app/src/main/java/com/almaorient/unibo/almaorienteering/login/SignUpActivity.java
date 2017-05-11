@@ -134,7 +134,7 @@ public class SignUpActivity extends BaseActivity {
                 new Scuola("medicina", "Medicina e Chirurgia"),
                 new Scuola("psicologia", "Psicologia e Scienze della formazione"),
                 new Scuola("scienze", "Scienze"),
-                new Scuola("politiche", "Scienze politiche")
+                new Scuola("scienze_politiche", "Scienze politiche")
         });
         mScuolaSpinner.setAdapter(spinnerScuolaArrayAdapter);
         mScuolaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
